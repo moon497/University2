@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="Comments">
+
+	<!-- 						CREATE 						-->
+	<!-- 댓글 입력 -->
+	<insert id="insertComment" parameterType="CommentDto" useGeneratedKeys="false">
+		INSERT INTO COMMENTS(
+			BBS_SEQ,COMMENT_GROUP_NO,COMMENT_SEQ,USER_ID,COMMENT_CONTENT
+		)
+		VALUES(
+			#{bbsSeq}, COMMENTS_SEQ.NEXTVAL, COMMENTS_SEQ.NEXTVAL, #{userId}, #{commentContent}
+		)
+	</insert>
+	<!-- 대댓글 입력 -->
+	<insert id="insertReply" parameterType="CommentDto" useGeneratedKeys="false">
+		INSERT INTO COMMENTS(
+			BBS_SEQ,COMMENT_GROUP_NO,COMMENT_SHAPE,COMMENT_SEQ,USER_ID,COMMENT_CONTENT
+		)
+		VALUES(
+			#{bbsSeq}, #{commentGroupNo}, #{commentShape}, COMMENTS_SEQ.NEXTVAL, #{userId}, #{commentContent}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getComment" resultType="CommentDto" parameterType="Integer">
+		SELECT 
+			BBS_SEQ as bbsSeq, 
+			COMMENT_GROUP_NO as commentGroupNo,
+			COMMENT_SHAPE as commentShape,
+			COMMENT_SEQ as commentSeq,
+			COMMENT_STATUS as commentStatus,
+			USER_ID as userId, 
+			COMMENT_CONTENT as commentContent, 
+			COMMENT_CREATE_AT as commentCreateAt
+		FROM COMMENTS
+		WHERE COMMENT_SEQ = #{commentSeq}
+	</select>
+	
+	<!-- 게시물들 가져오기 -->
+	<select id="getCommentList" resultType="CommentDto" parameterType="QueryComment">
+		SELECT 
+			BBS_SEQ as bbsSeq, 
+			COMMENT_GROUP_NO as commentGroupNo,
+			COMMENT_SHAPE as commentShape,
+			COMMENT_SEQ as commentSeq,
+			COMMENT_STATUS as commentStatus,
+			USER_ID as userId, 
+			COMMENT_CONTENT as commentContent, 
+			COMMENT_CREATE_AT as commentCreateAt
+		FROM (
+				SELECT BBS_SEQ,COMMENT_GROUP_NO,COMMENT_SHAPE,COMMENT_SEQ,COMMENT_STATUS,USER_ID,COMMENT_CONTENT,COMMENT_CREATE_AT,
+					ROW_NUMBER() OVER (ORDER BY COMMENT_GROUP_NO DESC, COMMENT_SHAPE DESC) R
+				FROM COMMENTS
+				WHERE BBS_SEQ = #{bbsSeq}
+				AND COMMENT_STATUS = 1
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+		
+	<!-- 대댓글용 가져오기 -->
+	<select id="getCommentReplyList" resultType="CommentDto" parameterType="QueryComment">
+		SELECT 
+			BBS_SEQ as bbsSeq, 
+			COMMENT_GROUP_NO as commentGroupNo,
+			COMMENT_SHAPE as commentShape,
+			COMMENT_SEQ as commentSeq,
+			COMMENT_STATUS as commentStatus,
+			USER_ID as userId, 
+			COMMENT_CONTENT as commentContent, 
+			COMMENT_CREATE_AT as commentCreateAt
+		FROM COMMENTS
+		WHERE COMMENT_GROUP_NO = #{commentGroupNo}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalComment" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(COMMENT_SEQ), 0)
+		FROM COMMENTS
+		WHERE BBS_SEQ = #{bbsSeq}
+		AND COMMENT_STATUS = 1
+	</select>
+	
+	<!-- 						Update 						-->
+	<update id="updateComment" parameterType="CommentDto">
+		UPDATE COMMENTS
+		SET COMMENT_CONTENT = #{commentContent}
+		WHERE BBS_SEQ = #{bbsSeq}
+		AND COMMENT_SEQ = #{commentSeq}
+	</update>
+	
+	<!-- 						DELETE 						-->
+	<update id="deleteComment" parameterType="Integer">
+		UPDATE COMMENTS
+		SET COMMENT_STATUS = 0
+		WHERE COMMENT_SEQ = #{commentSeq}
+	</update>
+</mapper>

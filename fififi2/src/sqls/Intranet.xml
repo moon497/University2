@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Intranet">
+
+<!-- 강의평가 : 교수&과목 및 모든 정보 불러오기 -->
+<select id="SelectSubNames" parameterType="kh.com.model.ProfEvaluationDTO" 
+							resultType="kh.com.model.ProfEvaluationDTO">
+	SELECT SB.SUB_SEQ, SB.SUB_CATEGORY, SB.MAJOR_NUMBER, SB.SUB_SEMESTER, 
+		   SB.SUB_NAME, SB.PROFESSOR_ID, SB.PROFESSOR_NAME, SB.SUB_INFO, 
+		   A.STUDENT_ID, ST.STUDENT_NAME
+	  FROM SUBJECT SB, STUDENT ST, ASSESSMENT A
+ 	 WHERE SB.SUB_SEQ = A.SUB_SEQ_NUM
+	   AND A.STUDENT_ID = #{student_id}
+	   AND A.STUDENT_ID = ST.STUDENT_ID
+  	   AND A.PROFESSOR_GRADE = 0
+</select>
+
+<!-- 강의평가 완료 -->
+<update id="addAssessment" parameterType="kh.com.model.ProfEvaluationDTO">
+	UPDATE ASSESSMENT SET PROFESSOR_GRADE = #{critic}
+	 WHERE SUB_SEQ_NUM = #{sub_seq}
+</update>
+
+</mapper>

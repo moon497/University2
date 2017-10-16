@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+
+<!-- ※ 메인과 서브를 나눈 이유 : 메인과 서브페이지 레이아웃 구조가 달라서 이렇게 나누어놓았어요. -->
+
+<!-- 메인영역  : 메인안에서 이루어지는 영역은 main.tiles를 extends 하시면되요 -->
+<definition name="main.tiles" template="/WEB-INF/views/main_layouts-tiles.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="main" value="/WEB-INF/views/common/main.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+<!-- 서브영역 : 서브 안에서 이루어지는 영역응ㄴ sub.tiles를 extends 하시면되요 -->
+<definition name="sub.tiles" template="/WEB-INF/views/sub_layouts-tiles.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/common/sub_section.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/common/sub_right_menu.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+
+
+
+
+<!--*************** 정혜  *************** -->
+
+<!-- 1.로그인 -->
+<definition name="login.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/login.jsp"/>
+</definition>
+
+<!-- 2.아이디,비밀번호찾기 -->
+<definition name="findId.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findId.jsp"/>
+</definition>
+<definition name="findPw.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findPw.jsp"/>
+</definition>
+<definition name="findIdPwAf.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/findIdPwAf.jsp"/>
+</definition>
+
+<!-- 3.회원가입 -->
+<definition name="regi.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<definition name="regiview.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiview.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_s.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_s.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_p.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_p.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="regi_a.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_a.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<definition name="regiAf.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiAf.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<!-- 성적입력 -->
+<definition name="gradeinputlist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInputList.jsp"/>
+</definition>
+
+
+<!-- *************** 지윤  ***************-->
+<!-- 인트라넷 -->
+<definition name="intranet.tiles" extends="sub.tiles">
+</definition>
+
+<!-- 교수평가 -->
+<definition name="assessment.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/professor_assessment.jsp"/>
+</definition>
+
+
+<!--  *****************성환 ***************	-->
+<!-- ****** 메인 ****** -->
+<definition name="index.tiles" template="/WEB-INF/views/index-layouts-tiles.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="cover" value="/WEB-INF/views/main/cover.jsp"/>
+	<put-attribute name="posts" value="/WEB-INF/views/main/posts.jsp"/>
+	<put-attribute name="service" value="/WEB-INF/views/main/service.jsp"/>
+	<put-attribute name="home" value="/WEB-INF/views/main/home.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+<!-- ********BBS********  -->
+<!-- 글 목록 -->
+<definition name="bbsList.tiles" template="/WEB-INF/views/bbs-layouts-tiles.jsp">
+	<put-attribute name="head" value="/WEB-INF/views/common/header.jsp"/>
+	<put-attribute name="navbar" value="/WEB-INF/views/common/top.jsp"/>
+	<put-attribute name="footer" value="/WEB-INF/views/common/bottom.jsp"/>
+	<put-attribute name="sidebar" value="/WEB-INF/views/bbs/common/bbsRightMenu.jsp"/>
+	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsList.jsp"/>
+</definition>
+<!-- 글쓰기 -->
+<definition name="bbsWrite.tiles" extends="bbsList.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsWrite.jsp"/>
+</definition>
+<!-- 디테일 -->
+<definition name="bbsDetail.tiles" extends="bbsList.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
+</definition>
+
+<!--********************
+
+	체크 처리 페이지
+
+************************-->
+<definition name="checkLogin.tiles" extends="main.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/check/checkLogin.jsp"/>
+</definition>
+<definition name="checkStudent.tiles" extends="main.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/check/checkStudent.jsp"/>
+</definition>
+
+
+<!--  ***************** 재현 ***************	-->
+<definition name="enrolment.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/enrolment.jsp"/>
+</definition>
+<definition name="registration.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registration.jsp"/>
+</definition>
+<definition name="registrationlist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registrationlist.jsp"/>
+</definition>
+<definition name="addReg.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/addReg.jsp"/>
+</definition>
+
+
+<!--  ***************** 종희  ***************	-->
+
+<!-- 과제 목록 -->
+<definition name="E_Pdslist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdslist.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+</definition>
+<definition name="E_Pdswrite.tiles" extends="main.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/eclass/E_Pdswrite.jsp"/>
+</definition>
+
+<!-- 공지 목록 -->
+<definition name="E_main.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_BbsList.jsp"/>
+</definition>
+<definition name="E_Bbswrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbswrite.jsp"/>
+</definition>
+<definition name="E_Bbsdetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsdetail.jsp"/>
+</definition>
+<definition name="E_Bbsupdate.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsupdate.jsp"/>
+</definition>
+
+
+</tiles-definitions>

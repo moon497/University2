@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="MainBbs">
+
+	<!-- 						CREATE 						-->
+	<!-- 게시물 입력 -->
+	<insert id="insertBbs" parameterType="MainBBS" useGeneratedKeys="false">
+		INSERT INTO MAIN_BBS(
+			BOARD_URL, BBS_REF, BBS_SEQ, USER_ID, BBS_TITLE, 
+			BBS_CONTENT, BBS_STORED_FILENAME, BBS_ORG_FILENAME
+		)
+		VALUES(
+			#{boardUrl}, MAIN_BBS_SEQ.NEXTVAL, MAIN_BBS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
+			#{bbsContent}, #{bbsStoredFileName}, #{bbsOrgFileName}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<!-- 게시물들 가져오기 -->
+	<select id="getBbsList" resultType="MainBBS" parameterType="QueryBbs">
+		SELECT 
+			BBS_REF as bbsRef, 
+			BBS_REPLY as bbsReply, 
+			BBS_SEQ as bbsSeq, 
+			USER_ID as userId, 
+			BBS_TITLE as bbsTitle, 
+			BBS_CONTENT as bbsContent, 
+			BBS_READCOUNT as bbsReadCount, 
+			BBS_STORED_FILENAME as bbsStoredFileName, 
+			BBS_ORG_FILENAME as bbsOrgFileName, 
+			BBS_STATUS as bbsStatus, 
+			BBS_WDATE as bbsWdate
+		FROM (
+				SELECT BBS_REF, BBS_REPLY, BBS_SEQ, USER_ID, BBS_TITLE, BBS_CONTENT, BBS_READCOUNT, BBS_STORED_FILENAME, BBS_ORG_FILENAME, BBS_STATUS, BBS_WDATE, 
+				ROW_NUMBER() OVER (ORDER BY BBS_REF desc, BBS_REPLY ASC) R
+				FROM MAIN_BBS
+				WHERE BOARD_URL = #{boardUrl}
+				AND BBS_STATUS = 1
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getBbs" resultType="MainBBS" parameterType="Integer">
+		SELECT 
+			BBS_REF as bbsRef, 
+			BBS_REPLY as bbsReply, 
+			BBS_SEQ as bbsSeq, 
+			USER_ID as userId, 
+			BBS_TITLE as bbsTitle, 
+			BBS_CONTENT as bbsContent, 
+			BBS_READCOUNT as bbsReadCount, 
+			BBS_STORED_FILENAME as bbsStoredFileName, 
+			BBS_ORG_FILENAME as bbsOrgFileName, 
+			BBS_STATUS as bbsStatus, 
+			BBS_WDATE as bbsWdate
+		FROM MAIN_BBS
+		WHERE BBS_SEQ = #{bbsSeq}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalBbs" parameterType="String" resultType="Integer">
+		SELECT NVL(COUNT(BBS_SEQ), 0)
+		FROM MAIN_BBS
+		WHERE BOARD_URL = #{boardUrl}
+		AND BBS_STATUS = 1
+	</select>
+	
+	<!-- Update -->
+	<update id="updateBbs" parameterType="MainBBS">
+		UPDATE MAIN_BBS
+		SET BBS_TITLE = #{bbsTitle},
+			BBS_CONTENT = #{bbsContent}
+		WHERE BOARD_URL = #{boardUrl}
+		AND BBS_SEQ = #{bbsSeq}
+	</update>
+	
+	<!-- 						DELETE 						-->
+	<update id="deleteBbs" parameterType="Integer">
+		UPDATE MAIN_BBS
+		SET BBS_STATUS = 0
+		WHERE BBS_SEQ = #{bbsSeq}
+	</update>
+</mapper>
