@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kh.com.model.AssessmentDto;
+import kh.com.model.MemberDto;
+import kh.com.model.StudentGradeDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
+import kh.com.service.EnrolmentService;
 
 @Controller
 public class AssessmentController {
@@ -23,15 +27,44 @@ public class AssessmentController {
 	@Autowired
 	AssessmentService assessmentService;
 	
+	@Autowired
+	EnrolmentService enrolmentService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@RequestMapping(value="", method= {RequestMethod.GET, RequestMethod.POST,})
-	public String ee(HttpServletRequest req, Model model)throws Exception {
+	// 수강신청 
+	@RequestMapping(value="addSub.do", method= {RequestMethod.GET, RequestMethod.POST,})
+	public @ResponseBody String addSub(HttpServletRequest req)throws Exception {
 		
+		int seq = Integer.parseInt(req.getParameter("sub_seq"));		
+		System.out.println("sub_seq : " + req.getParameter("sub_seq"));
+		
+		MemberDto mem = ((MemberDto)req.getSession().getAttribute("login"));
+		System.out.println("mem : " + mem.toString());
+
+		SubjectDto sub = enrolmentService.getReg(seq);
+
+		System.out.println("sub : " + sub.toString());
+
+		AssessmentDto as = new AssessmentDto();
+		as.setSub_seq_num(sub.getSub_seq());
+		as.setStudent_id(mem.getUser_id());
+		as.setStudent_name(mem.getUser_name());
+		as.setProfessor_id(sub.getProfessor_id());
+		as.setProfessor_name(sub.getProfessor_name());
+
+		System.out.println(as.toString());
 				
-		return "ee";
+		assessmentService.addSub(as);
+		assessmentService.addnowStudent(sub.getSub_seq());
+						
+		System.out.println("end mem : " + mem.toString());
+
+				
+		return "추가 성공";		
 	}
 	
+	// 나의 수강 목록 보기
 	@RequestMapping(value="asList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody List<SubjectDto> enrolmentList(HttpServletRequest req, Model model)throws Exception {
 		List<SubjectDto> list = new ArrayList<>();
@@ -51,17 +84,58 @@ public class AssessmentController {
 		return list;
 	}
 	
-	@RequestMapping(value="asDelete.do", method= {RequestMethod.GET})
-	public String enrollDelete(HttpServletRequest req, Model model) throws Exception {
+	// 수강 삭제
+	@RequestMapping(value="asDelete.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody String enrollDelete(HttpServletRequest req, Model model) throws Exception {
 		logger.info("진입");
 		int sub_seq;
 		
-		sub_seq = Integer.parseInt(req.getParameter("seq"));
+		sub_seq = Integer.parseInt(req.getParameter("sub_seq"));	
 		
 		assessmentService.deleteAs(sub_seq);
+		assessmentService.minusNowStudent(sub_seq);
 		
-		return "enrolment.tiles";
+		return "삭제 성공";
 	}
 	
+	// 학점 계산
+	@RequestMapping(value="sumpoint.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody StudentGradeDTO sumpoint(HttpServletRequest req, Model model) throws Exception {
+		
+		String student_id = req.getParameter("student_id");
+		System.out.println("student_id : " + student_id);
+		
+		StudentGradeDTO student = assessmentService.getStudent(student_id);
+		List<AssessmentDto>list = assessmentService.sumPoint(student_id);
+		SubjectDto sub = new SubjectDto();
+		
+		int totalPoint = 0;
+		int seq = 0;
+		int point = 0;
+		
+		for (int i = 0; i < list.size(); i++) {
+			seq = list.get(i).getSub_seq_num();
+			sub = enrolmentService.getReg(seq);
+			point = sub.getSub_point();
+			totalPoint += point;
+		}
+		
+		if(student.getStudent_term() % 2 == 1) {
+			student.setStudent_term(1);
+		}if(student.getStudent_term() % 2 == 0) {
+			student.setStudent_term(2);
+		}   
+		
+		student.setTotalPoint(totalPoint);		// 이번학기 총 수강 학점
+		
+		System.out.println("@@@@@ student : " + student);
+		
+		return student;
+	}
 	
 }
+
+
+
+
+

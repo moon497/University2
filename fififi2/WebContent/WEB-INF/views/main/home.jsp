@@ -40,7 +40,9 @@
                         <li class="col-md-3 col-sm-6 col-xs-12">
                             <div class="thumbnail">
                             	<div class="col-sm-12 centered" style="height: 180px;overflow: hidden;">
-                                <img class="img-responsive" src="${pageContext.request.contextPath }/upload/file/${today.bbsStoredFileName}" alt="Post">
+                                <a href="${pageContext.request.contextPath }/today/detail.do?seq=${today.bbsSeq}">
+                                	<img class="img-responsive" src="${pageContext.request.contextPath }/upload/file/${today.bbsStoredFileName}" alt="Post">
+                                </a>
                                 </div>
                                 <div class="caption">
                                     <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/today/detail.do?seq=${today.bbsSeq}">${today.bbsTitle }</a></h3>
@@ -58,91 +60,41 @@
                 </div>
                 
                 <div class="col-sm-9 home_bottom">
-                    <h2 class="sub_title">REFERENCES</h2>
+                    <h2 class="sub_title">협력업체</h2>
                     <div class="clearfix"></div>
                     <div class="row">
                         <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="6000" id="myCarousel">
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="col-md-2 col-sm-6 col-xs-12 p10">
-                                        <a href="#"><img src="img/l1.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12 p10">
-                                        <a href="#"><img src="img/l2.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="https://docs.oracle.com/javase/tutorial/"><img src="img/java.png" class="img-responsive" alt="Reference"></a>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l3.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="https://spring.io/docs"><img src="img/spring.jpg" class="img-responsive" alt="Reference"></a>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l4.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="http://maven.apache.org/guides/"><img src="img/maven.jpg" class="img-responsive" alt="Reference"></a>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l5.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="https://docs.oracle.com/en/"><img src="img/oracle.jpg" class="img-responsive" alt="Reference"></a>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l6.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="https://help.github.com/"><img src="img/github.jpg" class="img-responsive" alt="Reference"></a>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l7.jpg" class="img-responsive" alt="Reference"></a>
+                                        <a href="https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp"><img src="img/bootstrap.jpg" class="img-responsive" alt="Reference"></a>
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l8.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12 p10">
-                                        <a href="#"><img src="img/l1.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12 p10">
-                                        <a href="#"><img src="img/l2.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l3.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l4.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l5.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l6.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l7.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <a href="#"><img src="img/l8.jpg" class="img-responsive" alt="Reference"></a>
-                                    </div>
-                                </div>                                        
+                                </div>                               
                             </div>
                             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
                             <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -159,14 +111,14 @@
                                 <div class="login-group">
                                     <div class="form-group">
                                         <label for="ad" class="sr-only">Name</label>
-                                        <input type="text" class="form-control" id="ad" name="ad" placeholder="Name">
+                                        <input type="text" class="form-control" id="ad" name="ad" placeholder="Name" value="상담 센터" readonly="readonly">
                                     </div>
                                     <div class="form-group">
                                         <label for="tel" class="sr-only">Phone Number</label>
-                                        <input type="text" class="form-control" id="tel" name="tel" placeholder="Phone Number">
+                                        <input type="text" class="form-control" id="tel" name="tel" placeholder="Phone Number" value="국번없이 114" readonly="readonly">
                                     </div>
                                 </div>
-                                <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                                <button type="submit" class="login-button" style="    display: none;"><i class="fa fa-chevron-right"></i></button>
                             </div>
                         </form>
                     </div>                            

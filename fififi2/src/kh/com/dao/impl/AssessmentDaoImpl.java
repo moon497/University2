@@ -10,11 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.AssessmentDao;
 import kh.com.model.AssessmentDto;
+import kh.com.model.MemberDto;
+import kh.com.model.StudentGradeDTO;
 import kh.com.model.SubjectDto;
 
 @Repository
 public class AssessmentDaoImpl implements AssessmentDao {
-	private static final Logger logger = LoggerFactory.getLogger(AssessmentDaoImpl.class);
+private static final Logger logger = LoggerFactory.getLogger(AssessmentDaoImpl.class);
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -37,6 +39,33 @@ public class AssessmentDaoImpl implements AssessmentDao {
 	public boolean deleteAs(int sub_seq) {
 		int n = sqlSession.insert(ns + "deleteAs", sub_seq);
 		return n>0?true:false;
+	}
+
+	@Override
+	public boolean addnowStudent(int sub_seq) throws Exception {
+		int n = sqlSession.update(ns+"addnowStudent", sub_seq);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean minusNowStudent(int sub_seq) throws Exception {
+		int n = sqlSession.update(ns+"minusNowStudent", sub_seq);
+		return n>0?true:false;
+	}
+
+	@Override
+	public List<AssessmentDto> sumPoint(String student_id) throws Exception {
+		return sqlSession.selectList(ns+"sumPoint", student_id);
+	}
+
+	@Override
+	public StudentGradeDTO getStudent(String student_id) throws Exception {
+		return sqlSession.selectOne(ns+"getStudent", student_id);
+	}
+
+	@Override
+	public MemberDto getProf(String prof_id) throws Exception {		
+		return sqlSession.selectOne(ns+"getProf", prof_id);
 	}
 
 	

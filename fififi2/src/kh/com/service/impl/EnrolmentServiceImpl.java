@@ -2,18 +2,15 @@ package kh.com.service.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.com.dao.EnrolmentDao;
-import kh.com.model.EnrollDto;
+import kh.com.model.QuerySubjectDto;
 import kh.com.model.SubjectDto;
 import kh.com.service.EnrolmentService;
 @Service
 public class EnrolmentServiceImpl implements EnrolmentService {
-	private static final Logger logger = LoggerFactory.getLogger(EnrolmentServiceImpl.class);
 	
 	@Autowired
 	EnrolmentDao enrolmentDao;
@@ -44,20 +41,10 @@ public class EnrolmentServiceImpl implements EnrolmentService {
 	}
 
 	@Override
-	public List<SubjectDto> getEnrollist(String major) throws Exception {
-		return enrolmentDao.getEnrollist(major);
+	public List<SubjectDto> getEnrollist(QuerySubjectDto query) throws Exception {
+		return enrolmentDao.getEnrollist(query); 
 	}
 
-	@Override
-	public List<SubjectDto> getEnrollListFromUser(String user_id) {
-		logger.info("진입");
-		return enrolmentDao.getEnrollListFromUser(user_id);
-	}
-
-	@Override
-	public boolean deleteEnroll(int sub_seq) {
-		return enrolmentDao.deleteEnroll(sub_seq);
-	}
 	
 	
 	

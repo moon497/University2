@@ -42,8 +42,8 @@ td, th {
 
 
 <!-- 2.사진일괄등록 -->
-<!-- 사진등록 파일명은 아이디(학번)과 일치해야 대량등록 가능합니다. -->
 <form action="photoUpdate.do" name="regiexcel" id="_regiexcel_photo"  method="POST" enctype="multipart/form-data" style="display: none;">
+		<div> ** 사진명은 아이디(학번)과 일치해야 대량 등록 가능합니다 ** </div><br><br>
 		<input type="file" name="file" style=" width : 400px;" id="file" multiple required="required">
 		<button id="_btnRegi_photo">사진일괄등록</button>
 </form> 
@@ -79,7 +79,7 @@ td, th {
 		</tr>
 		<tr>
 			<td>학번 </td>
-			<td><input type="text" name="user_id" required="required" pattern="\d{8}"></td>
+			<td><input type="text" name="user_id" required="required" pattern="\d{8}">(학번8자리입력)</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>

@@ -87,7 +87,7 @@
 					<li><a href="${pageContext.request.contextPath }/enrolment.do" title="수강신청">수강신청</a></li>
 					</c:if>
 					<!-- 교직원용 메뉴 -->
-					<c:if test="${login != null && login.user_auth == '200' }">
+			        <c:if test="${login != null && login.user_auth == '200' || login.user_auth =='300'}">
 					<li class="dropdown">
 						<a href="#" title="" class="dropdown-toggle" data-toggle="dropdown" role="button"
 						aria-haspopup="true" aria-expanded="false">교직원

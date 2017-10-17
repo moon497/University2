@@ -2,6 +2,9 @@ package kh.com.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Student")
 public class StudentGradeDTO implements Serializable {
 
 	private String student_id; 			// USER_ID
@@ -12,11 +15,15 @@ public class StudentGradeDTO implements Serializable {
 	private int student_total_credit; 	// 총 학점
 	private int student_term_grade; 	// 학기 별 성적
 	private int student_total_grade; 	// 총 성적
+	private int totalPoint;				// 수강신청시 총학점
+	private String student_major;		// 전공
+	private String first_major;			// 학부
 
 	public StudentGradeDTO() {	}
 
 	public StudentGradeDTO(String student_id, String student_name, String student_regidate, int student_term,
-			int student_year, int student_total_credit, int student_term_grade, int student_total_grade) {
+			int student_year, int student_total_credit, int student_term_grade, int student_total_grade, int totalPoint,
+			String student_major, String first_major) {
 		super();
 		this.student_id = student_id;
 		this.student_name = student_name;
@@ -26,6 +33,9 @@ public class StudentGradeDTO implements Serializable {
 		this.student_total_credit = student_total_credit;
 		this.student_term_grade = student_term_grade;
 		this.student_total_grade = student_total_grade;
+		this.totalPoint = totalPoint;
+		this.student_major = student_major;
+		this.first_major = first_major;
 	}
 
 	public String getStudent_id() {
@@ -92,12 +102,39 @@ public class StudentGradeDTO implements Serializable {
 		this.student_total_grade = student_total_grade;
 	}
 
+	public int getTotalPoint() {
+		return totalPoint;
+	}
+
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
+	}
+
+	public String getStudent_major() {
+		return student_major;
+	}
+
+	public void setStudent_major(String student_major) {
+		this.student_major = student_major;
+	}
+
+	public String getFirst_major() {
+		return first_major;
+	}
+
+	public void setFirst_major(String first_major) {
+		this.first_major = first_major;
+	}
+
 	@Override
 	public String toString() {
 		return "StudentGradeDTO [student_id=" + student_id + ", student_name=" + student_name + ", student_regidate="
 				+ student_regidate + ", student_term=" + student_term + ", student_year=" + student_year
 				+ ", student_total_credit=" + student_total_credit + ", student_term_grade=" + student_term_grade
-				+ ", student_total_grade=" + student_total_grade + "]";
+				+ ", student_total_grade=" + student_total_grade + ", totalPoint=" + totalPoint + ", student_major="
+				+ student_major + ", first_major=" + first_major + "]";
 	}
 
+	
+	
 }

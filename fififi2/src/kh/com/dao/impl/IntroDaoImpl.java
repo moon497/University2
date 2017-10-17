@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,7 @@ import kh.com.model.IntroBbsDto;
 
 @Repository
 public class IntroDaoImpl implements IntroDao {
+	private static final Logger logger = LoggerFactory.getLogger(IntroDaoImpl.class);
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -20,11 +23,10 @@ public class IntroDaoImpl implements IntroDao {
 	
 	@Override
 	public boolean IntroBbsWrite(IntroBbsDto dto) throws Exception{
-		System.out.println("IntroBbsWrite 다오임플 :  " + dto.toString());
-		int n = 0;
-		n = sqlSession.insert(ns + "IntroBbsWrite", dto);
-		System.out.println(n);
-		return n>0?true:false;
+		logger.info("진입");
+		logger.info("dto: {}",dto.toString());
+		
+		return sqlSession.insert(ns + "IntroBbsWrite", dto) > 0 ? true : false;
 	}
 
 	@Override

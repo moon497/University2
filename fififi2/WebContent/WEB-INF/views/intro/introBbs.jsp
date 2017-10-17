@@ -25,8 +25,15 @@
 	        <li class="media">
 	            <div class="media-left">
 	                <a href="introBbsDetail.do?seq=${list.intro_bbs_seq }" title="Post">
-	                	<img src="${pageContext.request.contextPath }/upload/intro/${list.filename}"  
-	                	class="media-object" alt="Post" style="width: 262px; height: 200px; "> </a>
+	                	<c:if test="${list.filename == '-1'}">
+	                		<img src="https://placehold.it/262x200?text=Not Image" 
+	                		class="media-object" alt="Post">
+	                	</c:if>
+	                	<c:if test="${list.filename != '-1'}">
+	                		<img src="${pageContext.request.contextPath }/upload/intro/${list.filename}"  
+	                		class="media-object" alt="Post" style="width: 262px; height: 200px; "> 
+	                	</c:if>
+                	</a>
 	            </div>
 	            <div class="media-body">
 	                <h3 class="media-heading"><a href="introBbsDetail.do?seq=${list.intro_bbs_seq }" title="Post Title">${list.title}</a></h3>

@@ -7,47 +7,72 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
+<style>
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+table, th{
+    text-align: left;
+}
+
+td{
+	text-align: left;
+}
+
+
+</style>
+
 <%
 int s_class = 0;
 int e_class = 0;
 %>
-
-<form action="addRegAf.do" method="post">
-<table class="table table-bordered table-hover">
+<form action="registrationAf.do" method="post">
+<table style="width:60%; text-align: center; border: 1px solid black; margin: auto">
+<colgroup>
+<col width="100"/><col width="400"/>	
+</colgroup>
 <tr>
 	<th>교수명</th>
 	<td>
-		<input type="hidden" id="sub_seq" name="sub_seq" value="${sub.sub_seq }">
-		<input type="hidden" id="major_number" name="major_number" value="${sub.major_number }">
-		<input type="hidden" id="professor_id" name="professor_id" value="${sub.professor_id }">
-		<input type="hidden" id="sub_parent" name="sub_parent" value="${sub.sub_seq }">
-		<input type="hidden" id="sub_ref" name="sub_ref" value="${sub.sub_ref }">
-		
-		<input type="text" size="50" id="professor_name" name="professor_name" value="${sub.professor_name }" readonly="readonly">
+		<input type="hidden" value="${user.user_id }" id="professor_id" name="professor_id">
+		<input type="text" size="50" id="professor_name" name="professor_name" value="${user.user_name }" readonly="readonly">
 	</td>
 </tr>
 <tr>
 	<th>전공</th>
 	<td>
-		<input type="text" size="50" id="sub_category" name="sub_category" value="${sub.sub_category }" readonly="readonly">
+		<select name="sub_category" id="sub_category">
+			<option value="100">전공</option>
+			<option value="200">교양</option>			
+		</select>
 	</td>
 </tr>
 <tr>
 	<th>과목명</th>
 	<td>
-		<input type="text" size="50" id="sub_name" name="sub_name" value="${sub.sub_name }" readonly="readonly">
+		<input type="text" size="50" id="sub_name" name="sub_name">
 	</td>
 </tr>
 <tr>
 	<th>학년</th>
 	<td>
-		<input type="text" size="50" id="sub_grade" name="sub_grade" value="${sub.sub_grade }" readonly="readonly">	
+		<select name="sub_grade" id="sub_grade">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
 	</td>
 </tr>
 <tr>
 	<th>학기</th>
 	<td>
-		<input type="text" size="50" id="sub_semester" name="sub_semester" value="${sub.sub_semester }" readonly="readonly">
+		<select name="sub_semester" id="sub_semester">
+			<option value="1">1</option>
+			<option value="2">2</option>			
+		</select>
 	</td>
 </tr>
 <tr>
@@ -95,25 +120,35 @@ int e_class = 0;
 <tr>
 	<th>인원수</th>
 	<td>
-		<input type="text" size="50" id="sub_max_student" name="sub_max_student" value="${sub.sub_max_student }" readonly="readonly">
+		<select name="sub_max_student" id="sub_max_student">
+			<option value="0">0</option>
+			<option value="40">40</option>
+			<option value="50">50</option>	
+			<option value="60">60</option>				
+			<option value="70">70</option>	
+			<option value="80">80</option>	
+		</select>
 	</td>
 </tr>
 <tr>
 	<th>학점</th>
 	<td>
-		<input type="text" size="50" id="sub_point" name="sub_point" value="${sub.sub_point }" readonly="readonly">
+		<select name="sub_point" id="sub_point">
+			<option value="2">2</option>
+			<option value="3">3</option>						
+		</select>
 	</td>
 </tr>
 <tr>
 	<th>강의실</th>
 	<td>
-		<input type="text" size="50" id="sub_room" name="sub_room" value="${sub.sub_room }" readonly="readonly">
+		<input type="text" size="50" id="sub_room" name="sub_room">
 	</td>
 </tr>
 <tr>
 	<th>강의소개</th>
 	<td>
-		<textarea rows="10" cols="50" id="sub_info" name="sub_info" readonly="readonly">${sub.sub_info }</textarea>
+		<textarea rows="10" cols="40" id="sub_info" name="sub_info"></textarea>
 	</td>
 </tr>
 <td colspan="2">
@@ -136,9 +171,6 @@ function startclass(me){
 	$("#sub_e_class").val(num);
 	
 }
-$("#addBtn").click(function(){
-	alert("시간표 추가");
-});
 
 </script>
 

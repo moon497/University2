@@ -5,11 +5,12 @@
   
 <mapper namespace="Assessment">
 
+
 <insert id="addSub" parameterType="Assessment" useGeneratedKeys="false">
 	INSERT INTO ASSESSMENT(SUB_SEQ_NUM, STUDENT_ID, STUDENT_NAME,
-						PROFESSOR_ID, PROFESSOR_NAME, PROFESSOR_GRADE, STUDENT_SCORE)
+						PROFESSOR_ID, PROFESSOR_NAME, PROFESSOR_GRADE, STUDENT_SCORE, SEMESTER)
 	VALUES(#{sub_seq_num}, #{student_id}, #{student_name}, 
-			#{professor_id},#{professor_name}, 0, 0)
+			#{professor_id},#{professor_name}, 0, 0, 1)
 </insert>
 
 <select id="getAsListFromUser" parameterType="String" resultType="SubjectDto">
@@ -18,14 +19,42 @@
 						S.SUB_S_CLASS, S.SUB_E_CLASS, S.SUB_MAX_STUDENT, S.SUB_NOW_STUDENT, S.SUB_POINT,
 						S.SUB_REF, S.SUB_PARENT
 	FROM ASSESSMENT A, SUBJECT S
-	WHERE A.SUB_SEQ_NUM = S.SUB_SEQ
+	WHERE A.SUB_SEQ_NUM = S.SUB_REF
 	AND A.STUDENT_ID=#{user_id}
+	ORDER BY SUB_REF ASC, SUB_MAX_STUDENT DESC	
 </select>
 
 <delete id="deleteAs" parameterType="java.lang.Integer">
 	DELETE FROM ASSESSMENT
 	WHERE SUB_SEQ_NUM=#{sub_seq}
 </delete>
+
+<update id="addnowStudent" parameterType="java.lang.Integer">
+	UPDATE SUBJECT 
+	SET SUB_NOW_STUDENT = SUB_NOW_STUDENT + 1
+	WHERE SUB_SEQ=#{sub_seq}
+</update>
+
+<update id="minusNowStudent" parameterType="java.lang.Integer">
+	UPDATE SUBJECT 
+	SET SUB_NOW_STUDENT = SUB_NOW_STUDENT - 1
+	WHERE SUB_SEQ=#{sub_seq}
+</update>
+
+<select id="sumPoint" parameterType="java.lang.String" resultType="Assessment">
+	SELECT * FROM ASSESSMENT
+	WHERE STUDENT_ID=#{student_id}
+</select>
+
+<select id="getStudent" parameterType="java.lang.String" resultType="Student">
+	SELECT * FROM STUDENT
+	WHERE STUDENT_ID=#{student_id}
+</select>
+
+<select id="getProf" parameterType="java.lang.String" resultType="kh.com.model.MemberDto">
+	SELECT * FROM PROFESSOR
+	WHERE PROF_ID=#{prof_id}
+</select>
 
 
 

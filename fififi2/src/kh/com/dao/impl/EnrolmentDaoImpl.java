@@ -8,14 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.com.controller.MemberController;
 import kh.com.dao.EnrolmentDao;
-import kh.com.model.EnrollDto;
+import kh.com.model.QuerySubjectDto;
 import kh.com.model.SubjectDto;
-import kh.com.service.impl.EnrolmentServiceImpl;
 
 @Repository
 public class EnrolmentDaoImpl implements EnrolmentDao {
 	private static final Logger logger = LoggerFactory.getLogger(EnrolmentDaoImpl.class);
+	
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -50,21 +51,14 @@ public class EnrolmentDaoImpl implements EnrolmentDao {
 	}
 
 	@Override
-	public List<SubjectDto> getEnrollist(String major) throws Exception {		
-		return sqlSession.selectList(ns+"getEnrollist", major);
-	}
-
-	@Override
-	public List<SubjectDto> getEnrollListFromUser(String user_id) {
+	public List<SubjectDto> getEnrollist(QuerySubjectDto query) throws Exception {	
 		logger.info("진입");
-		return sqlSession.selectList(ns+"getEnrollListFromUser", user_id);
+		
+		logger.info("query: {}",query.toString());
+		
+		return sqlSession.selectList(ns+"getEnrollist", query);
 	}
 
-	@Override
-	public boolean deleteEnroll(int sub_seq) {
-		int n = sqlSession.insert(ns + "deleteEnroll", sub_seq);
-		return n>0?true:false;
-	}
 	
 	
 	
