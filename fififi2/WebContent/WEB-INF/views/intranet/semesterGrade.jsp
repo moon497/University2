@@ -252,7 +252,6 @@ function getTotalStudentScore(totalStudentScore) {
 	<c:forEach var="grade" items="${gradelist }" varStatus="gds">
 		<tr>
 			<td>
-				${gds.count }
 				<!-- 학년 -->
 				<c:if test="${grade.student_term >= 1 && grade.student_term <= 2}">
 					1

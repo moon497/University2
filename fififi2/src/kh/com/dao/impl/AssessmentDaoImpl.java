@@ -39,16 +39,19 @@ public class AssessmentDaoImpl implements AssessmentDao {
 		return n>0?true:false;
 	}
 
+	
+	
+	//정혜
 	@Override
-	public List<AssessmentDto> scoreList(AssessmentDto dto) {
+	public List<AssessmentDto> gradeList(AssessmentDto dto) {
 		logger.info("진입");
-		return sqlSession.selectList(ns+"scoreList", dto);
+		return sqlSession.selectList(ns+"gradeList", dto);
 	}
 
 	@Override
-	public boolean updateScore(AssessmentDto dto) {
+	public boolean gradeUpdate(AssessmentDto dto) {
 		logger.info("진입");
-		return sqlSession.update(ns+"updateScore", dto) > 0 ? true:false;
+		return sqlSession.update(ns+"gradeUpdate", dto) > 0 ? true:false;
 	}
 
 	

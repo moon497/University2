@@ -30,6 +30,8 @@
 
 <!--*************** 정혜  *************** -->
 
+
+
 <!-- 1.로그인 -->
 <definition name="login.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/login/login.jsp"/>
@@ -51,32 +53,38 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
-
 <definition name="regiview.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiview.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiview.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
-<definition name="regi_s.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_s.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
-</definition>
-<definition name="regi_p.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_p.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
-</definition>
-<definition name="regi_a.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi_a.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
-</definition>
-
 <definition name="regiAf.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regiAf.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiAf.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 
 <!-- 성적입력 -->
+<definition name="pwcheck.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInput_pwCheck.jsp"/>
+</definition>
 <definition name="gradeinputlist.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInputList.jsp"/>
+</definition>
+
+<!-- 소개 -->
+<definition name="introBbs.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introBbs.jsp"/>
+</definition>
+<definition name="introBbswrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introwrite.jsp"/>
+</definition>
+<definition name="introBbsDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introDetail.jsp"/>
+</definition>
+<definition name="introBbsUpdate.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introUpdate.jsp"/>
+</definition>
+<definition name="introLocation.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
 </definition>
 
 
@@ -138,6 +146,11 @@
 <!-- 디테일 -->
 <definition name="bbsDetail.tiles" extends="bbsList.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
+</definition>
+
+<!-- 장터 -->
+<definition name="bbsGrid.tiles" extends="bbsList.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsGrid.jsp"/>
 </definition>
 
 <!--********************

@@ -43,7 +43,6 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	public boolean addProfessorGrade(I_ProfEvaluationDTO pdfo) throws Exception {
 		int i = 0;
 		i = sqlsession.update(intra+"addAssessment", pdfo);
-		System.out.println("IntraDaoImpl : " + i);
 		return i!=0?true:false;
 	}
 	
@@ -63,6 +62,16 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	public I_StudentBasicInfoDTO studentBasicInfo(String id) throws Exception {
 		I_StudentBasicInfoDTO basicInfo = sqlsession.selectOne(intra+"studentBasicInfo", id);
 		return basicInfo;
+	}
+
+	/**
+	 * 내정보 수정(학생) : 기본학생정보
+	 */
+	@Override
+	public boolean updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception {
+		int i = 0;
+		i = sqlsession.update(intra + "updateStudentInfo", info);
+		return i!=0?true:false;
 	}
 	
 	/**

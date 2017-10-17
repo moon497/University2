@@ -36,24 +36,28 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return assessmentDao.deleteAs(sub_seq);
 	}
 
+	
+	
+	//정혜
 	@Override
-	public List<AssessmentDto> scoreList(AssessmentDto dto) {
-		return assessmentDao.scoreList(dto);
+	public List<AssessmentDto> gradeList(AssessmentDto dto) {
+		return assessmentDao.gradeList(dto);
 	}
 
 	@Override
-	public boolean massUpdateScore(List<AssessmentDto> list) {
+	public boolean gradeUpdate(List<AssessmentDto> list) {
 		logger.info("진입");
 		boolean b = false;
 		
 		for (AssessmentDto assessmentDto : list) {
 			logger.info(assessmentDto.toString());
 			
-			b = assessmentDao.updateScore(assessmentDto);
+			b = assessmentDao.gradeUpdate(assessmentDto);
 		}
 		
 		return b;
 	}
+
 
 	
 	

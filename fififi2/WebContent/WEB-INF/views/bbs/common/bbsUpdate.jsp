@@ -48,6 +48,8 @@ function postUpdate() {
 <form id="postUpdate" action="./update.do" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="bbsSeq" value="${param.seq }" />
 <input type="hidden" id="bbsContent" name="bbsContent" value="" />
+<input type="hidden" id="bbsContent" name="bbsOrgFileName" value="${bbs.bbsOrgFileName }" />
+<input type="hidden" id="bbsContent" name="bbsStoredFileName" value="${bbs.bbsStoredFileName }" />
 
 <div class="col-md-12">
 	<div class="form-group"> <!-- userId field -->

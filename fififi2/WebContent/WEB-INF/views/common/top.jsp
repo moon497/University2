@@ -55,8 +55,8 @@
 						aria-haspopup="true" aria-expanded="false">소개 
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="sub_test.do" title="">학교소개</a></li>
-							<li><a href="sub_test.do" title="">식단</a></li>
+					     <li><a href="${pageContext.request.contextPath }/introBbs.do" title="">학교소개</a></li>
+                     <li><a href="${pageContext.request.contextPath }/introLocation.do" title="">오시는길</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -81,7 +81,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="${pageContext.request.contextPath }/assessment.do" title="">교수평가</a></li>
 							<li><a href="${pageContext.request.contextPath }/student_grade.do" title="">성적확인</a></li>
-							<li><a href="${pageContext.request.contextPath }/update_info.do" title="">정보수정</a></li>
+							<li><a href="${pageContext.request.contextPath }/updateInfo.do" title="">정보수정</a></li>
 						</ul>
 					</li>
 					<li><a href="${pageContext.request.contextPath }/enrolment.do" title="수강신청">수강신청</a></li>

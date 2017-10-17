@@ -20,6 +20,9 @@ public interface I_IntraService {
 	
 	// 내정보(학생) : 기본학생정보
 	public I_StudentBasicInfoDTO studentBasicInfo(String id) throws Exception;
+
+	// 내정보 수정(학생) : 기본학생정보
+	public boolean updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception;
 	
 	// 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음)
 	public boolean studentTotalsemester(String id) throws Exception;

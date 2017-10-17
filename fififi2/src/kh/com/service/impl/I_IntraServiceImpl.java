@@ -52,6 +52,14 @@ public class I_IntraServiceImpl implements I_IntraService {
 		I_StudentBasicInfoDTO basicInfo = khIntraDao.studentBasicInfo(id);
 		return basicInfo;
 	}
+
+	/**
+	 * 내정보 수정(학생) : 기본학생정보
+	 */
+	@Override
+	public boolean updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception {
+		return khIntraDao.updateStudentInfo(info);
+	}
 	
 	/**
 	 * 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음)

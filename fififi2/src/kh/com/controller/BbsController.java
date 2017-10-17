@@ -131,7 +131,7 @@ public class BbsController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("boardUrl", boardUrl);
+		model.addAttribute("boardName", getBoardName(boardUrl));
 		
 		return "bbsList.tiles";
 		
@@ -171,7 +171,7 @@ public class BbsController {
 		//요소 추가
 		model.addAttribute("bbsList", bbsList);
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("boardUrl", boardUrl);
+		model.addAttribute("boardName", getBoardName(boardUrl));
 		model.addAttribute("bbs", bbs);
 		model.addAttribute("isImg", isImg);
 		
@@ -200,8 +200,32 @@ public class BbsController {
 	
 	//글 수정하기
 	@RequestMapping(value="/{boardUrl}/update.do",method=RequestMethod.POST)
-	public String updateAf(@PathVariable String boardUrl, MainBbs bbs, Model model) {
+	public String updateAf(@PathVariable String boardUrl, MultipartHttpServletRequest req, MultipartFile uploadFile, MainBbs bbs, Model model) {
 		logger.info("진입");
+		//init
+		String path = "";
+        String bbsStoredFileName;
+        String bbsOrgFileName;
+        
+        //init
+        path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
+        logger.info(path);
+        FileUpload fileUpload = new FileUpload(uploadFile, path);
+        
+        //listen	
+		bbsStoredFileName = fileUpload.getStoredFileName();
+		bbsOrgFileName = fileUpload.getOrgFileName();
+		
+		//setup
+        bbs.setBoardUrl(boardUrl);
+        
+        if (bbsOrgFileName == null || bbsOrgFileName.equals("-1") ) {
+            bbs.setBbsStoredFileName(req.getParameter("bbsStoredFileName"));
+            bbs.setBbsOrgFileName(req.getParameter("bbsOrgFileName"));
+         } else {
+             bbs.setBbsStoredFileName(bbsStoredFileName);
+             bbs.setBbsOrgFileName(bbsOrgFileName);	
+         }
 		
 		//query Set
 		bbs.setBoardUrl(boardUrl);
@@ -295,6 +319,23 @@ public class BbsController {
 			return bbs.getBbsOrgFileName().substring(bbs.getBbsOrgFileName().lastIndexOf('.'));
 			
 		}
+	}
+	
+	//게시판 이름 설정
+	private String getBoardName(String boardUrl) {
+		switch (boardUrl) {
+		case "free":
+			return "자유 게시판";
+		case "today":
+			return "오늘의 KH";
+		case "notice":
+			return "공지사항";
+
+		default:
+			break;
+		}
+		
+		return null;
 	}
 
 }

@@ -41,30 +41,22 @@
   <button type="button" id="find_pw" class="buttoncss">비밀번호찾기</button>
   <br><br>
 
+  
 <form action="findIdAf.do" id="findId" method="post"> 
     <table class="tablecss">
     <tr>
     	<td>성명</td>
-    	<td><input type="text" name="user_name" id="user_name" data-msg="이름" class="inputtextcss"></td>
+    	<td><input type="text" name="user_name" id="user_name" class="inputtextcss"></td>
     </tr>
-    <tr>
-    	<td>학과(소속)</td>
-    	<td>
-    	<select name="major_number" id="major_number" data-msg="학과" style="width: 200px;">
-			<option value="">학과선택</option>
-			<option value="100">기계공학과</option>
-			<option value="200" >간호학과</option>
-			<option value="300">컴퓨터공학과</option>
-			<option value="400">경영학과</option>
-			<option value="500">시각디자인학과</option>
-			<option value="600">국어교육과</option>
-			<option value="700">사회복지학과</option>
-		</select>
+	<tr>
+		<td>핸드폰번호</td>
+		<td>
+		 <input type="text" name="user_phone" id="user_phone" class="inputtextcss" onkeyup="phone(this)" maxlength="13">
 		</td>
     </tr>
     <tr>
     	<td>이메일</td>
-    	<td><input type="text" name="user_email" id="user_email" data-msg="이메일" class="inputtextcss"></td>
+    	<td><input type="text" name="user_email" id="user_email"  class="inputtextcss"></td>
     </tr>
     </table>
     
@@ -72,9 +64,10 @@
 </form>
      
 </section>   
-<script type="text/javascript">
 
- 
+
+
+<script type="text/javascript">
  $("#find").click(function() {
 		if($("#user_name").val() == ""){
 			alert($("#user_name").attr("data-msg") + " 입력해 주십시오" );
@@ -105,28 +98,47 @@
 $("#find_pw").click(function() {
 	location.href="findPw.do";
  });   
- $("#find_id").click(function() {
-	//location.href="findId.do";
-	var data = {
-			user_name:$("#user_name").val(),
-			major_number:$("#major_number").val(),
-			user_email:$("#user_email").val(),
-	};
-	
-	$.ajax({
-		dataType:'json',
-		url:"findId.do",
-		data: data,
-		type: 'POST',
-		async:true,
-		error:function(req,status,error){
-			alert("에러");
-		}
-	})
-});    
+ 
  
 
+//핸드폰 
+function phone(obj) {
+	var val = obj.value.trim();
+	val = phonecheck(val) ;
+	document.getElementById('user_phone').value = val;
+}
+function phonecheck(val) {
+	val = val.replace(/[^0-9]/g, '');
+	var tmp = '';
+	if( val.length < 4){
+		return str;
+	}else if(val.length < 7){
+		tmp += val.substr(0, 3);
+		tmp += '-';
+		tmp += val.substr(3);
+		return tmp;
+	}else if(val.length < 11){
+		tmp += val.substr(0, 3);
+		tmp += '-';
+		tmp += val.substr(3, 3);
+		tmp += '-';
+		tmp += val.substr(6);
+		return tmp;
+	}else{				
+		tmp += val.substr(0, 3);
+		tmp += '-';
+		tmp += val.substr(3, 4);
+		tmp += '-';
+		tmp += val.substr(7);
+		return tmp;
+	}
+	return tmp;
+}
+
+
+
 </script>
+
 
 </body>
 </html>

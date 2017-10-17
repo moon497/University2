@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <h4 class="pull-right">
-                                <small><em>${bbs.bbsWdate }</em></small>
+                                <small><em>${fn:substring(bbs.bbsWdate,0,10) }</em></small>
                                 </h4>
                             </div>
                         </div>

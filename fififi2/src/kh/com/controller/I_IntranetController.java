@@ -192,6 +192,9 @@ public class I_IntranetController {
 		}
 	}
 	
+	/**
+	 * 학기별 성적확인 
+	 */
 	@ResponseBody
 	@RequestMapping(value="semesterGradechoice.do", 
 					method={RequestMethod.GET, RequestMethod.POST})
@@ -209,4 +212,33 @@ public class I_IntranetController {
 		return semelist;
 	}
 	
+	/**
+	 * 학생 내정보 변경 updateStudentInfo.do
+	 */
+	@ResponseBody
+	@RequestMapping(value="updateStudentInfo.do", 
+					produces="application/String; charset=utf-8",
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception {
+		logger.info("KhIntranetController updateStudentInfo");
+		System.out.println("KhIntranetController I_StudentBasicInfoDTO : " + info.toString());
+		boolean b = khIntraService.updateStudentInfo(info);
+		System.out.println("b : " + b);
+		if(b == true) {
+			return "수정이 완료되었습니다.";
+		}else {
+			return "수정이 실패되었습니다.";
+		}	
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+

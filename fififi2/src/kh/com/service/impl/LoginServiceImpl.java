@@ -63,6 +63,12 @@ public class LoginServiceImpl implements LoginService {
 	public MemberDto findpw(MemberDto dto) throws Exception {
 		return logindao.findpw(dto);
 	}
+
+	@Override
+	public void updatePhoto_student(MemberDto dto) throws Exception {
+		logindao.updatePhoto_student(dto);
+	}
+	
 	
 	
 	

@@ -15,7 +15,7 @@ public class CommentReply {
 		System.out.println("replyBase : "+replyBase);
 		
 		//init
-		if (replyBase == null || replyBase.equals("-1")) {
+		if (replyBase == null || replyBase.equals("0")) {
 			replyBase = "";
 		}
 		System.out.println("변경된 replyBase : "+replyBase);

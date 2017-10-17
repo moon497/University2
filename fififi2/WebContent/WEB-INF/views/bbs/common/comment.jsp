@@ -148,7 +148,7 @@ function commentReply(groupNo, i, shape) {
 	</div><!-- /comment -->
 </div><!-- /row -->
 
-
+<c:if test="${login != null }">
 <!-- 댓글 등록 -->
 <div class="row">
 	<div class="col-md-3">
@@ -176,3 +176,4 @@ function commentReply(groupNo, i, shape) {
 		</form>
 	</div>       
 </div>
+</c:if>

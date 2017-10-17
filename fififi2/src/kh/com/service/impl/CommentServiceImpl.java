@@ -33,14 +33,18 @@ public class CommentServiceImpl implements CommentService {
 		logger.info("진입");
 		//init
         QueryComment query;
-        //init
+        List<CommentDto> list;
+        CommentReply reply;
+        
+        //query
         query = new QueryComment();
-
 		query.setCommentGroupNo(comment.getCommentGroupNo());
         
-		List<CommentDto> list = dao.getCommentReplyList(query);
+		//관련 댓글 리스트 가져오기
+		list = dao.getCommentReplyList(query);
 
-		CommentReply reply = new CommentReply(list, comment.getCommentShape());
+		//reply 세팅
+		reply = new CommentReply(list, comment.getCommentShape());
 		
 		comment.setCommentShape(reply.getCommentShape());
 		

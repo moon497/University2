@@ -52,7 +52,6 @@ public class LoginDaoImpl implements LoginDao {
 		System.out.println("addMember_admin 다오 임플 1/2" + dto.toString());
 		sqlsession.insert(ns+"addMember_admin", dto);
 		System.out.println("addMember_admin 다오임플 2/2");
-		
 	}
 
 
@@ -68,6 +67,7 @@ public class LoginDaoImpl implements LoginDao {
 		System.out.println("findpw 다오임플 1/1" +  dto.toString());
 		return sqlsession.selectOne(ns+"findpw", dto);
 	}
+	
 
 
 	@Override
@@ -86,5 +86,20 @@ public class LoginDaoImpl implements LoginDao {
 	public MemberDto adminLogin(MemberDto dto) {
 		return sqlsession.selectOne(ns+"adminLogin", dto);
 	}
+
+
+	@Override
+	public void updatePhoto_student(MemberDto dto) throws Exception {
+		System.out.println("updatePhoto_student 다오임플 1");
+		sqlsession.update(ns+"updatePhoto_student", dto);
+		System.out.println("updatePhoto_student 다오임플 1");
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

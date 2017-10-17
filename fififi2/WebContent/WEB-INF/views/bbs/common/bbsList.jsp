@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 
 <!-- body -->
-<h2 class="category-title">${boardUrl }</h2>
+<h2 class="category-title">${boardName }</h2>
 
 <div class="row">
 <div class="col-sm-12">
@@ -36,8 +36,9 @@
       <tr>
         <td>${bbs.bbsSeq }</td>
         <td>
-        	<a href="./detail.do?seq=${bbs.bbsSeq }&page=${pagination.currPage}">${bbs.bbsTitle }</a> 
-        	<c:if test="${bbs.bbsStoredFileName != '-1' }"><i class="fa fa-file"></i></c:if>
+        	<a href="./detail.do?seq=${bbs.bbsSeq }&page=${pagination.currPage}">${bbs.bbsTitle } </a> 
+        	<c:if test="${bbs.bbsStoredFileName != '-1' }"><i class="fa fa-file"></i> </c:if>
+        	<c:if test="${bbs.totalComment != 0 }"><i class="fa fa-comment"></i> ${bbs.totalComment }</c:if>
         </td>
         <td>${bbs.userId }</td>
         <td>${fn:substring(bbs.bbsWdate,0,10) }</td>

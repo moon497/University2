@@ -6,9 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/jquery-1.11.1.min.js"></script>
+
 <style type="text/css">
 .inputtextcss{
     width: 300px;
@@ -120,6 +122,13 @@ $("#user_id").keypress(function(event) {
 	}
 });
 
+$("#user_pw").keypress(function() {
+	if(event.which == "13"){
+		event.preventDefault();
+		$("#_btnLogin").click();
+	}
+});
+
 
 $(function() {
     $("input").focus(function () {
@@ -131,12 +140,6 @@ $(function() {
 });
 
 
-$("#user_pw").keypress(function() {
-	if(event.which == "13"){
-		event.preventDefault();
-		$("#_btnLogin").click();
-	}
-});
 
 </script>
 </body>

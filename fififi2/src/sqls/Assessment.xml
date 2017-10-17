@@ -27,20 +27,24 @@
 	WHERE SUB_SEQ_NUM=#{sub_seq}
 </delete>
 
+
+
 <!-- 성적 입력창 -->
-<select id="scoreList" parameterType="Assessment" resultType="Assessment">
-SELECT A.SUB_SEQ_NUM, S.SUB_NAME, A.STUDENT_ID, A.STUDENT_NAME, A.PROFESSOR_ID, A.PROFESSOR_NAME, A.PROFESSOR_GRADE, A.STUDENT_SCORE
-		FROM ASSESSMENT A, SUBJECT S
-		WHERE A.SUB_SEQ_NUM = S.SUB_SEQ
-		AND A.PROFESSOR_ID=#{professor_id}
-		AND A.SUB_SEQ_NUM=#{sub_seq_num}
+<select id="gradeList" parameterType="Assessment" resultType="Assessment">
+	SELECT A.SUB_SEQ_NUM, S.SUB_NAME, A.STUDENT_ID, A.STUDENT_NAME, A.PROFESSOR_ID, A.PROFESSOR_NAME, A.STUDENT_SCORE,
+			   S.SUB_ROOM, S.SUB_WEEK, S.SUB_S_CLASS, S.SUB_E_CLASS
+	FROM ASSESSMENT A, SUBJECT S
+	WHERE A.SUB_SEQ_NUM = S.SUB_SEQ  AND A.PROFESSOR_ID=#{professor_id}   AND A.SUB_SEQ_NUM=#{sub_seq_num}
+	ORDER BY STUDENT_ID ASC	 
+	
+	
+			
 </select>
 
-<update id="updateScore" parameterType="Assessment">
+<update id="gradeUpdate" parameterType="Assessment">
 	UPDATE ASSESSMENT
 	SET STUDENT_SCORE = #{student_score}
-	WHERE SUB_SEQ_NUM = #{sub_seq_num}
-	AND STUDENT_ID = #{student_id}
+	WHERE SUB_SEQ_NUM = #{sub_seq_num} AND STUDENT_ID = #{student_id}
 </update>
 
 </mapper>

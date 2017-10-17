@@ -51,22 +51,7 @@
     	<td>성명</td>
     	<td><input type="text" name="user_name" id="user_name" data-msg="이름" class="inputtextcss"></td>
     </tr>
-    <tr>
-    	<td>학과(소속)</td>
-    	<td>
-    	<select name="major_number" id="major_number" data-msg="학과" style="width: 200px;">
-			<option value="">학과선택</option>
-			<option value="100">기계공학과</option>
-			<option value="200" >간호학과</option>
-			<option value="300">컴퓨터공학과</option>
-			<option value="400">경영학과</option>
-			<option value="500">시각디자인학과</option>
-			<option value="600">국어교육과</option>
-			<option value="700">사회복지학과</option>
-		</select>
-		</td>
-    </tr>
-	 <tr>
+	<tr>
     	<td>이메일</td>
     	<td><input type="text" name="user_email" id="user_email" data-msg="이메일" class="inputtextcss"></td>
     </tr>
@@ -113,7 +98,34 @@ $(function() {
 	    });
 });
 
- 
+function categoryChange(e) {
+	  var student_major_a = ["국어국문학과", "유아교육학과", "영어영문학과", "중문학과", "사학과"];
+	  var student_major_b = ["정치외교학과","언론정보학과","경제학과","소비자학과","사회복지학과"];
+	  var student_major_c = ["수학과","통계학과","물리학과","화학과","생명과학과","해양과학과","식품영양학과"];
+	  var student_major_d = ["컴퓨터공학과","정보통신공학과","전자공학과","전기공학과","전자정보공학과"];
+	  var student_major_e = ["보건행정경영학과","의료생명공학과","의료IT공학과","의예과","간호학과"];
+	  
+
+	  var target = document.getElementById("student_major");
+	 
+	  if(e.value == "인문과학대학") var d = student_major_a;
+	  else if(e.value == "사회과학대학") var d = student_major_b;
+	  else if(e.value == "자연과학대학") var d = student_major_c;
+	  else if(e.value == "공과대학") var d = student_major_d;
+	  else if(e.value == "의료과학대학") var d = student_major_e;
+	 
+	  target.options.length = 0;
+	 
+	  for (x in d) {
+	    var opt = document.createElement("option");
+	    opt.value = d[x];
+	    opt.innerHTML = d[x];
+	    target.appendChild(opt);
+	  } 
+	}
+
+</script>
+
 </script>
 
 

@@ -51,6 +51,14 @@
 	   AND ST.STUDENT_ID = #{student_id}
 </select>
 
+<update id="updateStudentInfo" parameterType="kh.com.model.I_StudentBasicInfoDTO">
+	UPDATE USERS SET
+					USER_PHONE = #{user_phone},
+					USER_EMAIL = #{user_email},
+					USER_ADDRESS = #{user_address}
+	WHERE USER_ID = #{student_id}
+</update>
+
 <!-- 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음) : 교수평가가 끝나면 확인가능(한 학기가 끝나면 하는걸로 ..) -->
 <update id="updateTotalsemester" parameterType="java.lang.String">
 	UPDATE ASSESSMENT 

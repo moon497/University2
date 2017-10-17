@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
 import kh.com.model.SubjectDto;
@@ -26,59 +28,50 @@ public class GradeInputController {
 	private static final Logger logger = LoggerFactory.getLogger(GradeInputController.class);
 		
 	@Autowired
-	GradeInputService gradeinputService;	
+	GradeInputService gradeinputService;	 
 
 	@Autowired
 	AssessmentService assessmentService;
 	
 	@Autowired
 	SubjectService subjectService;
+
 	
 	//성적등록화면
 	@RequestMapping(value="gradeinput.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String classList(HttpServletRequest req, Model model) throws Exception{
-		logger.info("진입");
+		model.addAttribute("doc_title", "교직원");	
+		model.addAttribute("doc_title_sub", "성적입력");
 
-		//init
-		MemberDto login;
-		List<AssessmentDto> list;
-		List<SubjectDto> subList;
-		AssessmentDto as = new AssessmentDto();
-		int sub_seq_num;
 		
-		//변수받기
-		login = ((MemberDto)req.getSession().getAttribute("login"));
-		sub_seq_num = getSeq(req);
+		MemberDto login = ((MemberDto)req.getSession().getAttribute("login"));
 		
-		//입력용 변수 준비
-		as.setProfessor_id(login.getUser_id());
-		as.setSub_seq_num(sub_seq_num);
-		
-		//데이터 받아오기
-		subList = subjectService.getSubjectList(login.getUser_id());
-		list = assessmentService.scoreList(as);
+		List<SubjectDto> subList = subjectService.getSubjectList(login.getUser_id());
+	
+		AssessmentDto dto = new AssessmentDto();
+		dto.setProfessor_id(login.getUser_id());
+		dto.setSub_seq_num(getSeq(req));
+		List<AssessmentDto> list = assessmentService.gradeList(dto);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("subList", subList);
-		
+
 		logger.info("처리완료");
 		
 		return "gradeinputlist.tiles";
 	}
 	
-	//성적등록처리
-	@RequestMapping(value="scoreMassUpdate.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String test(HttpServletRequest req, Model model){
+
+	@RequestMapping(value="gradeUpdate.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String gradeUpdate(HttpServletRequest req, Model model){
 		logger.info("진입");
 		
 		//init
-		int sub_seq_num;
 		int value;
-		AssessmentDto as;
+		AssessmentDto dto;
 		List<AssessmentDto> list = new ArrayList<>();
 		
 		Enumeration<String> names = req.getParameterNames();
-		sub_seq_num = getSeq(req);
 		
 		//입력쿼리 세팅
 		while (names.hasMoreElements()) {
@@ -86,22 +79,21 @@ public class GradeInputController {
 			if (key.equals("seq")) {
 				//seq는 통과
 			} else {	
-				as = new AssessmentDto();
+				dto = new AssessmentDto();
 				logger.info("key값: {}",key);
 				value = getValue(req, key);
 				
-				as.setSub_seq_num(sub_seq_num);
-				as.setStudent_id(key);
-				as.setStudent_score(value);
+				dto.setSub_seq_num(getSeq(req));
+				dto.setStudent_id(key);
+				dto.setStudent_score(value);
 				
-				logger.info(as.toString());
+				logger.info(dto.toString());
 
-				list.add(as);
+				list.add(dto);
 			}
-			
 		}
 		
-		assessmentService.massUpdateScore(list);
+		assessmentService.gradeUpdate(list);
 		
 		return "main.tiles";
 	}
@@ -118,7 +110,6 @@ public class GradeInputController {
 		} else {
 			seq = Integer.parseInt(req.getParameter("seq"));
 		}
-		
 		return seq;
 	}
 	
@@ -130,8 +121,10 @@ public class GradeInputController {
 		} else {
 			value = Integer.parseInt(req.getParameter(key));
 		}
-		
 		return value;
 	}
+	
+	
+	
 	
 }

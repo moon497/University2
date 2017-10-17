@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="regiview.do?t=1">학생등록</a>
-<a href="regiview.do?t=2">교수등록</a>
-<a href="regiview.do?t=3">교직원등록</a>
 
 </body>
 </html>

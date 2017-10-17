@@ -4,46 +4,62 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.dao.BbsDao;
+import kh.com.dao.CommentDao;
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
 import kh.com.service.BbsService;
 
 @Service
+@Transactional
 public class BbsServiceImpl implements BbsService {
 
 	@Autowired
-	BbsDao dao;
+	BbsDao bbsDao;
+	
+	@Autowired
+	CommentDao commentDao;
 	
 	@Override
 	public boolean insertBbs(MainBbs dto) {
-		return dao.insertBbs(dto);
+		return bbsDao.insertBbs(dto);
 	}
 
 	@Override
 	public MainBbs getBbs(int seq) {
-		return dao.getBbs(seq);
+		return bbsDao.getBbs(seq);
 	}
 
 	@Override
 	public List<MainBbs> getBbsList(QueryBbs query) {
-		return dao.getBbsList(query);
+		List<MainBbs> list;
+		
+		list = bbsDao.getBbsList(query);
+		
+		//댓글 갯수 가져오기
+		for (MainBbs mainBbs : list) {
+			int totalComment = commentDao.getTotalComment(mainBbs.getBbsSeq());
+			mainBbs.setTotalComment(totalComment);
+		}
+		
+		return list;
 	}
 
 	@Override
 	public int getTotalBbs(String boardName) {
-		return dao.getTotalBbs(boardName);
+		return bbsDao.getTotalBbs(boardName);
 	}
 
 	@Override
 	public boolean updateBbs(MainBbs bbs) {
-		return dao.updateBbs(bbs);
+		return bbsDao.updateBbs(bbs);
 	}
 
 	@Override
 	public boolean deleteBbs(int seq) {
-		return dao.deleteBbs(seq);
+		return bbsDao.deleteBbs(seq);
 	}
 
 }

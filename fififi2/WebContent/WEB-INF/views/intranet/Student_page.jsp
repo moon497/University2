@@ -15,41 +15,38 @@
 #studentGrade_table * {
 	font-size: 12px;
 }
-
 #studentGrade_table th, td {
 	color: #404040;
 	border-collapse: collapse;
 	border: 1px solid #e7e7e7;
 	text-align: center;
 }
-
 #studentGrade_table th {
 	font-size: 13px;
 	text-align: left;
 	width:20%;
 	padding-left: 11px;
 }
-
 #studentGrade_table tr {
 	height: 35px;
 }
-
 #studentGrade_table td {
 	width: 80%;
 	text-align: left;
 	padding-left: 11px;
 }
-
 .question {
 	text-align: left;
 }
-
 .removeInputStyle {
 	border: none;
 	border-right: 0px;
 	border-top: 0px;
 	text-align: center;
 	width: 100%;
+}
+input {
+	border: 0px;
 }
 </style>
 <section class="category-content col-sm-9">
@@ -68,7 +65,7 @@
 </c:if>
 
 <c:if test="${not empty login.user_id}">
-
+<form id="updateStudentInfo">
 <table id="studentGrade_table">
 	<colgroup>
 		<col width="100">
@@ -79,20 +76,27 @@
 		<img src="${pageContext.request.contextPath }/upload/reg/${basicinfo.user_photo }" style="width:100%;">
 	</th>
 	<th>학번</th>
-	<td>${basicinfo.student_id       }</td>
+	<td>
+		<input type="text" name="student_id" readonly value="${basicinfo.student_id }">
+	</td>
 </tr>
 <tr>
 	<th>학생이름</th>
-	<td>${basicinfo.student_name     }</td>
+	<td>
+		<input type="text" name="student_name" readonly value="${basicinfo.student_name }">
+	</td>
 </tr>
-
 <tr>
 	<th>전화번호</th>
-	<td>${basicinfo.user_phone       }</td>
+	<td>
+		<input type="text" name="user_phone" readonly value="${basicinfo.user_phone }">
+	</td>
 </tr>
 <tr>
 	<th>이메일</th>
-	<td>${basicinfo.user_email       }</td>
+	<td>
+		<input type="text" name="user_email" readonly value="${basicinfo.user_email }">
+	</td>
 </tr>
 </table>
 
@@ -105,17 +109,69 @@
 	</colgroup>
 <tr>
 	<th>입학년도</th>
-	<td>${basicinfo.student_regidate }</td>
+	<td>
+		<input type="text" name="student_regidate" readonly value="${basicinfo.student_regidate }">
+	</td>
 </tr>
 <tr>
 	<th>집주소</th>
-	<td>${basicinfo.user_address     }</td>
+	<td>
+		<input type="text" name="user_address" readonly value="${basicinfo.user_address }">
+	</td>
 </tr>
 <tr>
 	<th>졸업여부</th>
-	<td>${basicinfo.user_status      }</td>
+	<td>
+		<input type="text" name="user_status" readonly value="${basicinfo.user_status }">
+	</td>
 </tr>
 </table>
+</form>
+<button id="updateStudentInfoBtn">정보수정</button>
+<button id="successStudentInfoBtn">수정완료</button>
+
+<script>
+$('#successStudentInfoBtn').hide();
+$('#updateStudentInfoBtn').click(function () {
+	// 전화번호
+	$('input[name=user_phone]').removeAttr("readonly");
+	$('input[name=user_phone]').css({"border":"1px solid #e7e7e7", 
+										   "padding-left":"3px"});
+	// 이메일
+	$('input[name=user_email]').removeAttr("readonly");
+	$('input[name=user_email]').css({"border":"1px solid #e7e7e7", 
+										   "padding-left":"3px"});
+	// 주소
+	$('input[name=user_address]').removeAttr("readonly");
+	$('input[name=user_address]').css({"border":"1px solid #e7e7e7", 
+										   "padding-left":"3px"});
+	// 정보수정 최종버튼 보여주기
+	$('#successStudentInfoBtn').show();
+});
+
+$('#successStudentInfoBtn').click(function () {
+	// action="updateStudentInfo.do"
+	// 클릭 후 이벤트
+	$.ajax({
+	       type : "POST",
+	       data : { 
+	          "student_id"   : $('input[name=student_id]').val() ,
+	          "user_phone"   : $('input[name=user_phone]').val() ,
+	          "user_email"   : $('input[name=user_email]').val() ,
+	          "user_address" : $('input[name=user_address]').val()
+	       },
+	       url : "./updateStudentInfo.do",
+	       success : function(data) {
+	    	   alert(data);
+	    	   window.location.reload();
+	       },
+	       error : function(xhr, status, error) {
+	          alert("통신불가");
+	       }
+    });
+});
+
+</script>
 
 </c:if>
 
