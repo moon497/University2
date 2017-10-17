@@ -36,27 +36,16 @@ $(document).ready(function() {
 	});
 });
 
-//write/update상관말고 쓸 수 있게 해주는 자바스크립트
-$(document).ready(function() {
-	var html = location.href;
-	var splitUrl = html.split('/');
-	var targetUrl = splitUrl[splitUrl.length - 1].split('?');	
-	
-	console.log(targetUrl[0]);
-	
-	$('#write').attr('action','./' + targetUrl[0]);
-});
-
-function bbsWrite(bbsSeq) {
+function postUpdate() {
 	var content = $('#summernote').summernote("code");
 	
 	$('#bbsContent').val(content);
  
-	$('#bbsWrite').submit();
+	$('#postUpdate').submit();
 	
 }
 </script>
-<form id="bbsWrite" action="./write.do" method="POST" enctype="multipart/form-data">
+<form id="postUpdate" action="./update.do" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="bbsSeq" value="${param.seq }" />
 <input type="hidden" id="bbsContent" name="bbsContent" value="" />
 
@@ -87,7 +76,7 @@ function bbsWrite(bbsSeq) {
 	</div>
 	
 	<div class="form-group pull-right">
-		<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">글쓰기</button>
+		<button class="btn btn-warning " name="button" type="button" onclick="postUpdate();">수정하기</button>
 	</div>
 	
 </div>

@@ -184,7 +184,7 @@ public class BbsController {
 	 * ***********************************************/
 	//글 수정하기
 	@RequestMapping(value="/{boardUrl}/update.do",method=RequestMethod.GET)
-	public String updateArticle(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
+	public String updatePost(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
 		logger.info("bbs/update");
 		//init
 		MainBbs bbs;
@@ -195,7 +195,7 @@ public class BbsController {
 		//요소 추가
 		model.addAttribute("bbs", bbs);
 		
-		return "bbsWrite.tiles";
+		return "bbsUpdate.tiles";
 	}
 	
 	//글 수정하기

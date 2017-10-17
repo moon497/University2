@@ -16,7 +16,7 @@
     line-height: 1.3em;
     height: 2.4em;
 }
-#news > div.home_list > ul > li > div > div > p {
+#news > div.home_list > ul > li > div > div > div {
 	overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="caption">
                                     <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/today/detail.do?seq=${today.bbsSeq}">${today.bbsTitle }</a></h3>
-                                    <p class="col-sm-12">${today.bbsContent }</p>
+                                    <div class="col-sm-12">${today.bbsContent }</div>
                                     <a href="${pageContext.request.contextPath }/today/detail.do?seq=${today.bbsSeq}" class="btn btn-link" role="button">More</a>
                                 </div>
                             </div>

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kh.com.model.MainBbs;
 import kh.com.model.QueryBbs;
 import kh.com.service.BbsService;
-import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
 
 @Controller
@@ -59,13 +58,12 @@ public class MemberController {
 		
 		//엔터처리
 		for (MainBbs mainBbs : noticeList) {
-			mainBbs.setBbsContent(mainBbs.getBbsContent().replace("\r\n","<br>"));
+			mainBbs.setBbsContent(mainBbs.getBbsContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 		}
 		for (MainBbs mainBbs : todayList) {
-			mainBbs.setBbsContent(mainBbs.getBbsContent().replace("\r\n","<br>"));
+			mainBbs.setBbsContent(mainBbs.getBbsContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 			logger.info(mainBbs.toString());
-		}
-		
+		}		
 				
 		//요소 추가
 		model.addAttribute("notice1", noticeList.get(0));

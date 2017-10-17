@@ -117,6 +117,10 @@
 <definition name="bbsWrite.tiles" extends="bbsList.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsWrite.jsp"/>
 </definition>
+<!-- 글수정 -->
+<definition name="bbsUpdate.tiles" extends="bbsList.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsUpdate.jsp"/>
+</definition>
 <!-- 디테일 -->
 <definition name="bbsDetail.tiles" extends="bbsList.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
