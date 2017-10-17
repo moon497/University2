@@ -5,8 +5,13 @@
 <mapper namespace="studentGrade">
 
 <!-- 학생 성적 불러오기 -->
-<select id="studentGrade" parameterType="kh.com.model.ProfEvaluationDTO" resultType="kh.com.model.StudentGradeDTO">
-	
+<select id="studentGrade" parameterType="kh.com.model.I_StudentGradeDTO" resultType="kh.com.model.I_StudentGradeDTO">
+	SELECT AT.STUDENT_NAME, SB.SUB_SEQ, SB.SUB_SEMESTER, SUB_CATEGORY, 
+		   SB.PROFESSOR_NAME, SB.SUB_INFO, SB.SUB_POINT, AT.STUDENT_SCORE, AT.PROFESSOR_GRADE 
+  FROM ASSESSMENT AT, SUBJECT SB
+ WHERE AT.SUB_SEQ_NUM = SB.SUB_SEQ
+   AND AT.STUDENT_ID = #{student_id}
+   AND AT.PROFESSOR_GRADE > 0
 </select>
 
 

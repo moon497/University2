@@ -1,0 +1,82 @@
+package kh.com.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kh.com.dao.I_IntraDao;
+import kh.com.model.I_ProfEvaluationDTO;
+import kh.com.model.I_StudentBasicInfoDTO;
+import kh.com.model.I_StudentGradeDTO;
+import kh.com.model.I_semesterGradeDTO;
+import kh.com.service.I_IntraService;
+
+@Service
+public class I_IntraServiceImpl implements I_IntraService {
+	
+	@Autowired
+	I_IntraDao khIntraDao;
+	
+	/**
+	 * 해당학생이 평가해야할 강의목록 불러오기
+	 */
+	@Override
+	public List<I_ProfEvaluationDTO> ProfEvaluation(I_ProfEvaluationDTO info) throws Exception {
+		List<I_ProfEvaluationDTO> list = khIntraDao.ProfEvaluation(info);
+		return list;
+	}
+	
+	/**
+	 * 교수평가 점수넣기
+	 */
+	@Override
+	public boolean addProfessorGrade(I_ProfEvaluationDTO pdfo) throws Exception {
+		return khIntraDao.addProfessorGrade(pdfo);
+	}
+	
+	/**
+	 * 성적확인
+	 */
+	@Override
+	public List<I_StudentGradeDTO> StudentGradeCheck(I_ProfEvaluationDTO Sgrade) throws Exception {
+		List<I_StudentGradeDTO> list = khIntraDao.StudentGradeCheck(Sgrade); 
+		return list;
+	}
+	
+	/**
+	 * 내정보(학생) : 기본학생정보
+	 */
+	@Override
+	public I_StudentBasicInfoDTO studentBasicInfo(String id) throws Exception {
+		I_StudentBasicInfoDTO basicInfo = khIntraDao.studentBasicInfo(id);
+		return basicInfo;
+	}
+	
+	/**
+	 * 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음)
+	 */
+	@Override
+	public boolean studentTotalsemester(String id) throws Exception {
+		return khIntraDao.studentTotalsemester(id);
+	}
+	
+	/**
+	 * 학년 / 학기별 성적 검색
+	 */
+	@Override
+	public List<I_semesterGradeDTO> semesterGrade(I_semesterGradeDTO grade) {
+		List<I_semesterGradeDTO> list = khIntraDao.semesterGrade(grade);
+		return list;
+	}
+	
+	/**
+	 * 학년 / 학기별 성정검색
+	 */
+	@Override
+	public List<I_semesterGradeDTO> semesterGradechoice(I_semesterGradeDTO grade) {
+		List<I_semesterGradeDTO> list = khIntraDao.semesterGradechoice(grade);
+		return list;
+	}
+
+}

@@ -1,4 +1,4 @@
-<%@page import="kh.com.model.ProfEvaluationDTO"%>
+<%@page import="kh.com.model.I_ProfEvaluationDTO"%>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -41,18 +41,29 @@
 	width: 100%;
 }
 </style>
-<%--
-	List<ProfEvaluationDTO> list = (List<ProfEvaluationDTO>)request.getAttribute("assessmentList");
---%>
 
 <section class="category-content col-sm-9">
     <h2 class="category-title">교수평가</h2> 
+    
+<!-- 로그아웃 -->
+<c:if test="${empty login.user_id}">
+<table id="assesment_table" style="width: 100%;">
+	<colgroup>
+		<col width="100">
+	</colgroup>
+	<tr>
+		<td>로그인 해주세요.</td>
+	</tr>
+</table>
+</c:if>
 
+<!-- 로그인 -->
+<c:if test="${not empty login.user_id}">
 <c:if test="${empty assessmentList}">
 <table id="assesment_table" style="width: 100%;">
-<colgroup>
-	<col width="100">
-</colgroup>
+	<colgroup>
+		<col width="100">
+	</colgroup>
 	<tr>
 		<td>평가가능한 과목이 없습니다.</td>
 	</tr>
@@ -151,10 +162,8 @@
 <button type="reset">처음부터</button>
 </form>
 </c:if>
-
-
+</c:if>
 <script>
-
 //교수 및 과목선택시
 var sub_names = ""; // 과목이름
 var professor_names =""; // 교수이름
@@ -190,7 +199,6 @@ $('#choiceProfessor').change(function(){
 		}
 	} 
 });
-
 
 // 제출하기 버튼 클릭
 $("#submitBtn").click(function () {
@@ -271,5 +279,16 @@ $('#othersThings').focusout(function () {
 });
 
 </script>
-           
+<!-- F5막는 코드 -->
+<script language=JavaScript1.2> 
+function noEvent() {
+	if (event.keyCode == 116) {
+		event.keyCode= 2;
+		return false;
+	}else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82)){
+		return false;
+	}
+}
+document.onkeydown = noEvent;
+</script> 
 </section> <!-- layout.xml 상 꼭 있어야함 지우지마세요! -->

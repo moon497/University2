@@ -81,14 +81,28 @@
 
 
 <!-- *************** 지윤  ***************-->
-<!-- 인트라넷 -->
-<definition name="intranet.tiles" extends="sub.tiles">
-</definition>
-
 <!-- 교수평가 -->
 <definition name="assessment.tiles" extends="sub.tiles">
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
 	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/professor_assessment.jsp"/>
+</definition>
+
+<!-- 학생 : 성적확인 -->
+<definition name="studentGrade.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_grade.jsp"/>
+</definition>
+
+<!-- 내정보(학생) -->
+<definition name="updateInfo.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_page.jsp"/>
+</definition>
+
+<!-- 내정보(학생) -->
+<definition name="semesterGrade.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/semesterGrade.jsp"/>
 </definition>
 
 

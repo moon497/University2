@@ -6,27 +6,27 @@ import org.apache.ibatis.type.Alias;
 
 // 교수평가 DTO
 @Alias("ProfEvaluationDTO")
-public class ProfEvaluationDTO implements Serializable {
-	
-	private int sub_seq; 		// 과목 Seq
-	private String sub_category;// 전공:100,교양:200
-	private int major_number; 	// 없음:0,기계공학과:100,전기공학과:200,컴퓨터공학과:300...
-	private int sub_semester; 	// 전공여부()
-	private String sub_name; 	// 과목명
-	private String professor_id;// 교수아이디 외래키
-	private String professor_name;// 교수 이름
-	private String sub_info; 	// 강의 소개
-	private String student_id; 	// 학생아이디
-	private String student_name;// 학생이름
-	private int critic;			// 교수평가 점수
+public class I_ProfEvaluationDTO implements Serializable {
 
-	public ProfEvaluationDTO() {
-		
+	private int sub_seq; 			// 과목 Seq
+	private String sub_category;	// 전공:100,교양:200
+	private int major_number; 		// 없음:0,기계공학과:100,전기공학과:200,컴퓨터공학과:300...
+	private int sub_semester; 		// 전공여부()
+	private String sub_name; 		// 과목명
+	private String professor_id;	// 교수아이디 외래키
+	private String professor_name;	// 교수 이름
+	private String sub_info; 		// 강의 소개
+	private String student_id; 		// 학생아이디
+	private String student_name;	// 학생이름
+	private int student_year; 		// 학생학년
+	private int critic; 			// 교수평가 점수
+
+	public I_ProfEvaluationDTO() {
+
 	}
 
-	public ProfEvaluationDTO(int sub_seq, String sub_category, int major_number, int sub_semester, String sub_name,
-			String professor_id, String professor_name, String sub_info, String student_id, String student_name,
-			int critic) {
+	public I_ProfEvaluationDTO(int sub_seq, String sub_category, int major_number, int sub_semester, String sub_name,
+			String professor_id, String professor_name, String sub_info, String student_id, String student_name) {
 		super();
 		this.sub_seq = sub_seq;
 		this.sub_category = sub_category;
@@ -38,7 +38,6 @@ public class ProfEvaluationDTO implements Serializable {
 		this.sub_info = sub_info;
 		this.student_id = student_id;
 		this.student_name = student_name;
-		this.critic = critic;
 	}
 
 	public int getSub_seq() {
@@ -121,6 +120,14 @@ public class ProfEvaluationDTO implements Serializable {
 		this.student_name = student_name;
 	}
 
+	public int getStudent_year() {
+		return student_year;
+	}
+
+	public void setStudent_year(int student_year) {
+		this.student_year = student_year;
+	}
+
 	public int getCritic() {
 		return critic;
 	}
@@ -134,7 +141,8 @@ public class ProfEvaluationDTO implements Serializable {
 		return "ProfEvaluationDTO [sub_seq=" + sub_seq + ", sub_category=" + sub_category + ", major_number="
 				+ major_number + ", sub_semester=" + sub_semester + ", sub_name=" + sub_name + ", professor_id="
 				+ professor_id + ", professor_name=" + professor_name + ", sub_info=" + sub_info + ", student_id="
-				+ student_id + ", student_name=" + student_name + ", critic=" + critic + "]";
+				+ student_id + ", student_name=" + student_name + ", student_year=" + student_year + ", critic="
+				+ critic + "]";
 	}
-	
+
 }
