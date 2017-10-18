@@ -171,6 +171,15 @@
 	<put-attribute name="main" value="/WEB-INF/views/check/checkStudent.jsp"/>
 </definition>
 
+<!--********************
+
+	장터 페이지
+
+************************-->
+<definition name="marketWrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/market/write.jsp"/>
+</definition>
+
 
 <!--  ***************** 재현 ***************	-->
 <definition name="enrolment.tiles" extends="sub.tiles">
