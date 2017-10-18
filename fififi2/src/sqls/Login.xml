@@ -48,7 +48,7 @@
    <insert id="addMember_student" parameterType="kh.com.model.MemberDto" useGeneratedKeys="false">
 		INSERT INTO STUDENT(STUDENT_ID, STUDENT_NAME, 
 								STUDENT_REGIDATE, STUDENT_TERM, STUDENT_YEAR, STUDENT_TOTAL_CREDIT, STUDENT_TERM_GRADE, STUDENT_TOTAL_GRADE, STUDENT_MAJOR, STUDENT_FIRST_MAJOR)
-		VALUES(#{user_id}, #{user_name}, #{student_regidate}, 0,#{student_year},0,0,0, #{student_major} , #{student_first_major}) 
+		VALUES(#{user_id}, #{user_name}, #{student_regidate}, 1,#{student_year},0,0,0, #{student_major} , #{student_first_major}) 
    </insert>		
    
     <insert id="addMember_prof" parameterType="kh.com.model.MemberDto" useGeneratedKeys="false">

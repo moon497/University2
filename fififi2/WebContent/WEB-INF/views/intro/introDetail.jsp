@@ -33,16 +33,17 @@
                 <span>${dto.content }</span>
             </div>
           <div class="panel-footer">
-          
-                <span class="label label-default"><a href="introBbs.do">돌아가기</a></span>
-               <c:if test="${login.user_auth ==300 }">
-     			<span class="label label-default"> <a href="introBbsUpdate.do?seq=${dto.intro_bbs_seq}">수정</a></span>
-     			<span class="label label-default"> <a href="introBbsDelete.do?seq=${dto.intro_bbs_seq}">삭제</a></span>
-               </c:if> 
+				<button type="button" class="btn btn-info btn-xs" onclick="location.href='introBbs.do'">돌아가기</button>
                
-            </div>  
-        </div>
-    </div> 
+               <c:if test="${login.user_auth ==300 }">
+               <div style="    float: right;    padding-right: 1em;">   	
+				<button type="button" class="btn btn-warning btn-xs" onclick="location.href='introBbsUpdate.do?seq=${dto.intro_bbs_seq}'">수정</button>
+                <button type="button" class="btn btn-danger btn-xs" onclick="location.href='introBbsDelete.do?seq=${dto.intro_bbs_seq}'">삭제</button>
+               </div>
+               </c:if> 
+          </div>
+       </div>  
+   </div>
     
 
     

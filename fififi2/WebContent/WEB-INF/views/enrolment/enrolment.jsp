@@ -4,16 +4,9 @@
 <%@ taglib prefix="c"    uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <fmt:requestEncoding value="UTF-8"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<section class="category-content col-sm-9">
-    <h2 class="category-title">교수평가</h2> 
+<section class="category-content col-sm-12">
+    <h2 class="category-title">수강신청</h2> 
 
 <%
 String major = (String)request.getAttribute("major");	// 검색

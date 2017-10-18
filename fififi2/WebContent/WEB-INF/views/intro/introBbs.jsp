@@ -6,19 +6,22 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/> 
+
+<style>
+body > main > div > div > section > ul > li > div.media-body > p {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.8em;
+    height: 9em;
+}
+</style>
+
 <section class="category-content col-sm-9">
-    <h2 class="category-title">학교소개</h2>
-        <!-- 버튼 목록 -->
-        
-    <c:if test="${login.user_auth == 300}">
-			<div class="button-group" align="right">
-				<div class="arc-comment">
-					<a href="./introBbswrite.do" title="Comment"><i class="fa fa-comments">글쓰기</i> </a>
-				</div>
-			</div>
-	</c:if> <br><br>
-	
-		    
+    <h2 class="category-title">학교소개</h2>		    
     <ul class="media-list">
     	
 		<c:forEach items="${list }" var="list" varStatus="vs">
@@ -50,5 +53,18 @@
         </c:forEach>
         
                         
-    </ul>                    
+    </ul>
+    
+    <!-- 버튼 목록 -->
+    <c:if test="${login.user_auth == 300}">
+    <div class="row" style="text-align: right;">
+		<div class="col-sm-12">
+			<div class="button-group" align="right">
+				<div class="arc-comment">	
+					<button type="button" class="btn btn-primary" onclick="location.href='./introBbswrite.do'"><i class="fa fa-comments"></i> 글쓰기</button>	
+				</div>
+			</div>
+		</div>
+	</div>
+	</c:if>
 </section>

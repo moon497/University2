@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/> 
 
-<aside class="sidebar col-sm-3">
+<aside class="sidebar col-sm-3" style="    display: none;">
 	<div class="widget">
 		<h4>SERVICES</h4>
 		<ul>
