@@ -27,8 +27,7 @@ td, th {
 </head>
 <body>
 
-<section class="category-content col-sm-9">
-    <h2 class="category-title">Student Registration</h2> 
+<div class="category-content col-sm-9" style="margin-top: 1em;">
 
 <button onclick="content(1)" class="buttoncss">정보일괄등록</button> <button onclick="content(2)" class="buttoncss">사진일괄등록</button>
   <button onclick="content(3)" class="buttoncss">상세회원가입</button> <br><br>
@@ -62,7 +61,7 @@ td, th {
 			<td>사진</td>
 			<td required="required">
 				<input type="file" name="file">
-			<td>
+			</td>
 		</tr>
 		<tr>
 			<td>학과</td>
@@ -157,7 +156,7 @@ td, th {
 		</tr>
 		</table>
 </form>        
-</section>
+</div>
 
 <script type="text/javascript">
 

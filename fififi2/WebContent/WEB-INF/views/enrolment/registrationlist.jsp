@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 
+<section class="category-content col-sm-9">
 
 <form action="#.do" method="post" id="form">
 <table class="table table-bordered table-hover">
@@ -31,7 +32,7 @@
 			<c:if test="${reg.sub_category eq '100' }">전공</c:if>
 			<c:if test="${reg.sub_category eq '200' }">교양</c:if>
 		</td>
-		<td>${reg.sub_name }</td>
+		<td><a href="E_Bbslist.do?sub_seq=${reg.sub_seq }">${reg.sub_name }</a></td>
 		<td>${reg.sub_room }</td>
 		<td>${reg.sub_week } / ${reg.sub_s_class }교시 ~ ${reg.sub_e_class }교시</td>
 		<td>${reg.sub_max_student }</td>		
@@ -60,9 +61,4 @@ function deleteReg(seq){
 	
 }
 </script>
-
-
-
-
-
-
+</section>

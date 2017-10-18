@@ -18,7 +18,7 @@ int e_class = 0;
 %>
 <input type="hidden" value="${user.user_id }" id="professor_id" name="professor_id">
 <input type="hidden" id="professor_name" name="professor_name" value="${user.user_name }" readonly="readonly">
-<section class="col-sm-8">
+<section class="category-content col-sm-9">
       <form action="registrationAf.do" method="post">
       <div class="table-responsive">
          <table class="table table-bordered table-hover">

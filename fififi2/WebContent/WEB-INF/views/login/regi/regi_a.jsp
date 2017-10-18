@@ -22,8 +22,7 @@ td, th {
 <body>
 
 
-<section class="category-content col-sm-9">
-    <h2 class="category-title">Staff Registration</h2> 
+<div class="category-content col-sm-9" style="margin-top: 1em;">
 
 <form action="regiAf.do" id ="regiform"  method="POST" enctype="multipart/form-data"> 
 			<input type="hidden" value="100" name="user_status">
@@ -33,7 +32,7 @@ td, th {
 			<td>사진</td>
 			<td>
 				<input type="file" name="file" required="required">
-			<td>
+			</td>
 		</tr>
 		<tr>
 		<td>부서</td>
@@ -128,8 +127,8 @@ td, th {
 			</td>
 		</tr>
 		</table>
-</form>        
-</section>
+</form> 
+</div>
 
 <script type="text/javascript">
 //생년월일 
