@@ -71,7 +71,7 @@
 					</li>
 					<!-- 학생용 메뉴 -->
 					<c:if test="${login == null || login.user_auth == '100' }">					
-					<li><a href="${pageContext.request.contextPath }/E_Bbslist.do" title="">e-class</a></li>
+					<li><a href="${pageContext.request.contextPath }/E_Classlist.do" title="">e-class</a></li>
 					<li class="dropdown">
 						<a href="${pageContext.request.contextPath }/intranet.do" title="학사인트라넷" class="dropdown-toggle" 
 																data-toggle="dropdown" role="button"

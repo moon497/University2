@@ -54,7 +54,7 @@ $(document).ready(function(){
 						<option value="0" selected="selected">----------</option>
 						<option value="100">기계공학</option>
 						<option value="200">전기공학</option>
-						<option value="300">컴퓨터공학</option>
+						<option value="컴퓨터공학과">컴퓨터공학</option>
 					</select>	
 				</td>
 				

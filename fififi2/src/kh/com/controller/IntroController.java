@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.model.IntroBbsDto;
 import kh.com.model.MemberDto;
@@ -48,6 +47,8 @@ public class IntroController implements Serializable {
 	@RequestMapping(value="introBbswrite.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String introBbswrite(Model model) throws Exception{
 		logger.info("introBbswrite.do");
+		model.addAttribute("doc_title", "소개");
+		model.addAttribute("doc_title_sub", "학교소개");	
 		return "introBbswrite.tiles";
 	}
 	
@@ -78,7 +79,8 @@ public class IntroController implements Serializable {
 	@RequestMapping(value="introBbsDetail.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String introBbsDetail(Model model, int seq) throws Exception {
 		logger.info("introBbsDetail.do :" + seq);
-		
+		model.addAttribute("doc_title", "소개");
+		model.addAttribute("doc_title_sub", "학교소개");	
 		introService.introReadCount(seq);
 		IntroBbsDto dto = introService.introBbsDetail(seq);
 		model.addAttribute("dto", dto);
@@ -89,7 +91,9 @@ public class IntroController implements Serializable {
 	@RequestMapping(value="introBbsUpdate.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String introBbsUpdate(Model model, int seq) throws Exception {
 		logger.info("introBbsUpdate.do" + seq);
-
+		model.addAttribute("doc_title", "소개");
+		model.addAttribute("doc_title_sub", "학교소개");	
+		
 		IntroBbsDto dto = introService.introBbsDetail(seq);
 		model.addAttribute("dto", dto);
 		
@@ -128,6 +132,7 @@ public class IntroController implements Serializable {
 	public String introBbsDelete(Model model, int seq ) throws Exception {
 		logger.info("introBbsDelete : " + seq);
 		introService.introBbsDelete(seq);
+	
 		
 		return "redirect:/introBbs.do";
 	}

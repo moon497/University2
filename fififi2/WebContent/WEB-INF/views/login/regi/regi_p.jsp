@@ -29,7 +29,7 @@ td, th {
 			<input type="hidden" value="100" name="user_status">
 			<input type="hidden" value="200" name="user_auth">
 			
-		<table>
+		<table class="table table-bordered table-hover">
 		<tr>
 			<td>사진</td>
 			<td>
@@ -51,7 +51,7 @@ td, th {
 		</tr>
 		<tr>
 			<td>사번 </td>
-			<td><input type="text" name="user_id" required="required" pattern="\d{8}"></td>
+			<td><input type="text" name="user_id" required="required" pattern="\d{8}">(학번8자리입력)</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
@@ -131,7 +131,7 @@ td, th {
 			<td><input type="text" name="prof_room"> </td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 			<input type="submit" value="회원가입">
 			</td>
 		</tr>

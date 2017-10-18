@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.com.dao.E_BbsDao;
 import kh.com.model.E_BbsDto;
+import kh.com.model.ProfEvaluationDTO;
 import kh.com.service.E_BbsService;
 import kh.com.util.Pagination;
 
@@ -32,8 +33,8 @@ public class E_BbsServiceImpl implements E_BbsService{
 	}
 
 	@Override
-	public void uploadPds(E_BbsDto edto) {
-		e_BbsDao.uploadPds(edto);
+	public void uploadBbs(E_BbsDto edto) {
+		e_BbsDao.uploadBbs(edto);
 	}
 
 	@Override
@@ -44,6 +45,17 @@ public class E_BbsServiceImpl implements E_BbsService{
 	@Override
 	public boolean updateEBbs(E_BbsDto edto) throws Exception{
 		return e_BbsDao.updateEBbs(edto);
+	}
+
+	@Override
+	public List<ProfEvaluationDTO> ProfEvaluation(ProfEvaluationDTO info) throws Exception {
+		List<ProfEvaluationDTO> eclist = e_BbsDao.ProfEvaluation(info);
+		return eclist;
+	}
+
+	@Override
+	public int deleteEBbs(int seq) throws Exception{
+		return e_BbsDao.deleteEBbs(seq);
 	}
 
 }

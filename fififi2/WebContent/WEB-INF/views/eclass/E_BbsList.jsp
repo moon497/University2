@@ -7,9 +7,6 @@
 
 <!-- 개별 CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/NoticeBbsList.css" />
-
 <section class="category-content col-sm-9">
-    
-    <%@ include file="./parts/E_BbslistView.jsp" %>
-    
+		<%@ include file="./parts/E_BbslistView.jsp" %> 
 </section>

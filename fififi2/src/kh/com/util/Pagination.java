@@ -11,6 +11,9 @@ public class Pagination {
 	private int finalEndPage;					//최종 페이지 번호
 	private final int articleLimit = 10;		//한 페이지 당 게시물 제한
 	private final int pageLimit = 5;			//한 리스트 당 페이지 수 제한
+	
+	//종희
+	private int sub_seq;						//??
 
 	@SuppressWarnings("unused")
 	private Pagination() {}
@@ -110,12 +113,23 @@ public class Pagination {
 		this.finalEndPage = finalEndPage;
 	}
 
+	public int getSub_seq() {
+		return sub_seq;
+	}
+
+	public void setSub_seq(int sub_seq) {
+		this.sub_seq = sub_seq;
+	}
+
 	@Override
 	public String toString() {
 		return "Pagination [totalArticle=" + totalArticle + ", currPage=" + currPage + ", startArticle=" + startArticle
 				+ ", endArticle=" + endArticle + ", startPage=" + startPage + ", endPage=" + endPage + ", finalEndPage="
-				+ finalEndPage + ", articleLimit=" + articleLimit + ", pageLimit=" + pageLimit + "]";
+				+ finalEndPage + ", articleLimit=" + articleLimit + ", pageLimit=" + pageLimit + ", sub_seq=" + sub_seq
+				+ "]";
 	}
+	
+	
 	
 	
 	

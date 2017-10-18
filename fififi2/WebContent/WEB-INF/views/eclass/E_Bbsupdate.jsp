@@ -6,6 +6,8 @@
 <form name="frmForm" id="_frmForm" action="./E_BbsupdateAf.do" method="post" 
 enctype="multipart/form-data">
 <input type="hidden" name="eclass_notice_bbs_seq" value="${edto.eclass_notice_bbs_seq }" />
+<input type="hidden" name="sub_seq" value="${param.sub_seq }" />
+
 <table class="list_table" style="width:85%;">
 <colgroup>
 <col style="width:200px;" />
@@ -31,15 +33,8 @@ value="${login.user_id}" size="50"/></td>
 <tr>
 <td colspan="2" style="height:50px; text-align:center;">
 	<input type="submit" value="전송">
-	<span><a href="#none" id="_btnUpdate" title="글수정"><img src="image/bupdate.png" alt="글수정" /></a>
 </span>
 </td>
 </tr>
 </table>
 </form>
-<script type="text/javascript">
-$("#_btnUpdate").click(function() {	
-	$("#_frmForm").submit();
-});
-
-</script>

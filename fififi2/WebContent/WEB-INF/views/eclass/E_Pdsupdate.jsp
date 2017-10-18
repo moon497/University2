@@ -16,17 +16,18 @@ int tmonth = cal.get(Calendar.MONTH);
 int tday = cal.get(Calendar.DATE);
 %>
 
-<form action="./E_PdswriteAf.do" method="post" enctype="multipart/form-data">
- <input type="hidden" name="sub_seq" value="${param.sub_seq }"> 
-  
+<form action="E_PdsupdateAf.do" method="post" enctype="multipart/form-data">
+ <input type="hidden" name="sub_seq" value="${edto.sub_seq }"> 
+ <input type="hidden" name="eclass_pds_bbs_seq" value="${edto.eclass_pds_bbs_seq}">
+ 
 <div class="col-md-9">
 <div class="form-group"> <!-- userId field -->
-		<label class="control-label " for="user_id">글쓴이</label>
-		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id}" readonly="readonly"/>
+		<label class="control-label " for="user_id">아이디</label>
+		<input class="form-control" id="user_id" name="user_id" type="text" value="${edto.user_id }" readonly="readonly"/>
 </div>
 <div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text"/>
+		<input class="form-control" id="title" name="title" type="text" value="${edto.title }"/>
 </div>
 <div class="form-group"> <!-- "date" field -->
 <label class="control-label " for="user_id">과제 기한</label>
@@ -100,7 +101,7 @@ int tday = cal.get(Calendar.DATE);
 </div>
 <div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
-		<textarea class="form-control" cols="40" id="content" name="content" rows="10"></textarea>
+		<textarea class="form-control" cols="40" id="content" name="content" rows="10">${edto.content }</textarea>
 </div>
 
 <div class="form-group">

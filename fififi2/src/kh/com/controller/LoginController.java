@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -64,20 +65,21 @@ public class LoginController {
 		return "login.tiles";
 	}
 
-	@RequestMapping(value="loginAf.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String loginAf(Model model, MemberDto dto, HttpServletRequest req) throws Exception{
+	@ResponseBody
+	@RequestMapping(value="loginAf.do", 
+					produces="application/String; charset=utf-8",
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String loginAf(MemberDto dto, HttpServletRequest req) throws Exception{
 		logger.info("loginAf.do");
-		MemberDto login = null;
+		MemberDto login = new MemberDto();
 		login = loginservice.login(dto);
-	
-		if(login != null && !login.getUser_id().equals("")) {
-			req.getSession().setAttribute("login", login);			
-			System.out.println("loginAf.do의 로그인 된 id : " +login.getUser_id());
-			return "redirect:/main.do";
+		
+		if (login != null && !login.getUser_id().equals("")) {
+			req.getSession().setAttribute("login", login);
+			return "로그인 성공";
 		}else {
-			System.out.println("여기");
-			return "redirect:/login.do";
-		}	
+			return "로그인실패!!";
+		}
 	}
 	
 	@RequestMapping(value="logout.do", method={RequestMethod.GET, RequestMethod.POST})

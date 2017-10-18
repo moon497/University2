@@ -1,14 +1,10 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="kh.com.util.DateUtil"%>
-<%@page import="kh.com.model.E_PdsDto"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
 <fmt:requestEncoding value="utf-8"/>
 <style>
 .th{
@@ -16,67 +12,129 @@
 	}
 </style>
 
-<%
-List<E_PdsDto> epds_list = new ArrayList<E_PdsDto>();
-Object oflist = request.getAttribute("epdslist");
-if(oflist != null){
-	epds_list = (List<E_PdsDto>)oflist;
-}
-%>
 
+<!-- list-style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 
-<table border="1" style="text-align: center; width:95%;">
-<col width="50" /><col width="50" /><col width="200" />
-<col width="100" /><col width="100" /><col width="100" />
-<tr>
-	<th class="th">번호</th><th class="th">아이디</th><th class="th">제목</th>
-	<th class="th">시작일</th><th class="th">끝나는 날</th><th class="th">등록일</th>
-</tr>
-<%
-if(epds_list == null || epds_list.size() == 0){
-	%>
-	<tr>
-		<td colspan="5">작성된 글이 없습니다</td>
-	</tr>
-<%}%>
-<%
-for(int i=0; i<epds_list.size(); i++){ 
-	E_PdsDto epds = epds_list.get(i);
-	%>
-	<tr bgcolor="#aabbcc">
-		<td><%=i+1 %></td>
-		<td><%=epds.getUser_id() %></td>
-		<td><%=epds.getTitle() %></td>
-		<td><%=epds.getSdate() %></td>
-		<td><%=DateUtil.pollState(epds.getEdate()) %><%=epds.getEdate() %></td>
-		<td><%=epds.getWdate() %></td>
-	</tr>
-	<%
-}
-%>
+<section class="category-content col-sm-9">
+<!-- body -->
+<h2 class="category-title">과제</h2>
 
-</table>
-
-<!-- 글 쓰기 -->
-<form name="PfrmForm" id="_PfrmForm" method="get" action=""></form>
-
-<div>
-	<span>
-		<button type="button" onclick="btnAdd()">글쓰기</button>
-	</span>
+<div class="row">
+<div class="col-sm-11">
+<div class="table-responsive">
+<form action="E_PdswriteAf.do" id=""></form> 
+  <table class="table table-hover table-bordered">
+  	<colgroup>
+  		<col class="col-sm-1" />
+  		<col class="col-sm-7" />
+  		<col class="col-sm-2" />
+  		<col class="col-sm-2" />
+  	</colgroup>
+    <thead>
+      <tr class="active">
+        <th>번호</th>
+        <th>제목</th>
+        <th>제출 기한</th>
+        <th>글쓴이</th>
+      </tr>
+    </thead>
+    <tbody>
+ 	<!-- 				게시물 불러오기				 -->
+ 	<c:if test="${empty epdslist}">
+ 		<tr style="text-align: center;">
+ 			<td colspan="5">작성된 글이 없습니다.</td>
+ 		</tr>
+ 	</c:if>
+ 	
+ 	<c:forEach items="${epdslist }" var="pds" varStatus="epdsS">
+      <tr>
+        <td>${epdsS.count}</td>
+	    <c:choose>
+		    	<c:when test="${DateUtil.isEnd(pds.edate) }">
+					<td>[마감]  ${pds.title }</td>
+		    	</c:when>
+	    	<c:otherwise>
+		        <td>
+				<a href="./E_Pdsdetail.do?seq=${pds.eclass_pds_bbs_seq }&sub_seq=${pds.sub_seq }&page=${pagination.currPage}">
+				${pds.title }
+				</a>
+				<c:if test="${pds.filename != '-1' }"><i class="fa fa-file"></i></c:if>
+				</td>
+	    	</c:otherwise>
+	    	
+		</c:choose>
+	
+        <td style="font-size: 12px;">${DateUtil.pollState(pds.edate)}${fn:substring(pds.sdate,0,10)} ~ ${fn:substring(pds.edate,0,10)}</td>
+        <td>${pds.user_name }</td>
+      </tr>
+   	</c:forEach>      
+    </tbody>
+  </table>
+  </div>
+</div>
 </div>
 
-<script>
-function filedowns(filename, seq) {
-	var doc = document.delfileup;
-	doc.filename.value = filename;
-	doc.seq.value = seq;
-	doc.submit();
-	$("#down_count"+seq).text(Number($("#down_count"+seq).text())+1);
-}
-
-function btnAdd() {
-	alert("글쓰기");
-	$("#_PfrmForm").attr({"target":"_self", "action":"E_Pdswrite.do"}).submit();	
-}
-</script>
+<!-- 버튼 목록 -->
+	<div class="button-group">
+		<div class="arc-comment">
+		 <c:if test="${login.user_auth eq 200 }">
+				<a href="E_Pdswrite.do?sub_seq=${param.sub_seq }"><i class="fa fa-comments"></i> 글쓰기</a>
+		 </c:if>
+		</div>
+	</div>
+<!-- 페이징 -->
+    <div style="text-align: center;">
+    <ul class="pagination pagination-lg">
+    	<!-- 10페이지 이전 -->
+    	<c:choose>
+	  	<c:when test="${pagination.currPage <= pagination.pageLimit }">
+	  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>	  	
+	  	</c:when>
+	  	<c:otherwise>
+	  		<li><a href="./E_Pdslist.do?page=${pagination.currPage - pagination.pageLimit }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-double-left"></i></a></li>	 	  	
+	  	</c:otherwise>
+	  </c:choose> 
+	  <!-- 1페이지 이전 -->
+	  <c:choose>
+	  	<c:when test="${pagination.currPage == 1 }">
+	  		<li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>	  	
+	  	</c:when>
+	  	<c:otherwise>
+	  		<li><a href="./E_Pdslist.do?page=${pagination.currPage - 1 }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-left"></i></a></li>	 	  	
+	  	</c:otherwise>
+	  </c:choose>
+	  <!-- 페이징 설정만큼 돌리기 -->
+	  <c:forEach var="i" begin="${pagination.startPage }" end="${pagination.endPage }" step="1">
+	  	<c:choose>
+	  		<c:when test="${i == pagination.currPage }">
+	 			<li class="active">
+	 				<a href="./E_Pdslist.do?page=${i }&sub_seq=${param.sub_seq}">${i }</a>
+	 			</li>	  		
+	  		</c:when>
+	  		<c:otherwise>
+	  			<li><a href="./E_Pdslist.do?page=${i }&sub_seq=${param.sub_seq}">${i }</a></li>	  		
+	  		</c:otherwise>
+	  	</c:choose>
+	  </c:forEach>
+	  <!-- 1페이지 이후 -->
+	  <c:choose>
+	  	<c:when test="${pagination.currPage == pagination.finalEndPage }">
+	  		<li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>	  	
+	  	</c:when>
+	  	<c:otherwise>
+	  		<li><a href="./E_Pdslist.do?page=${pagination.currPage + 1 }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-right"></i></a></li>	 	  	
+	  	</c:otherwise>
+	  </c:choose>
+	  <!-- 10페이지 이후 -->
+	  <c:choose>
+	  	<c:when test="${pagination.currPage + pagination.pageLimit > pagination.finalEndPage }">
+	  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>	  	
+	  	</c:when>
+	  	<c:otherwise>
+	  		<li><a href="./E_Pdslist.do?page=${pagination.currPage + pagination.pageLimit }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-double-right"></i></a></li>	 	  	
+	  	</c:otherwise>
+	  </c:choose>
+	</ul>
+</div>
+</section>

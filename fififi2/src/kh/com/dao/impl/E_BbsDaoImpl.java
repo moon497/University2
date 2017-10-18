@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.E_BbsDao;
 import kh.com.model.E_BbsDto;
+import kh.com.model.ProfEvaluationDTO;
 import kh.com.util.Pagination;
 
 @Repository
@@ -18,7 +19,7 @@ public class E_BbsDaoImpl implements E_BbsDao{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	private String ns = "EBbs.";
+	private String ns = "Eclass.";
 	
 	@Override
 	public List<E_BbsDto> getEBbsList(Pagination pagination) throws Exception {
@@ -39,8 +40,8 @@ public class E_BbsDaoImpl implements E_BbsDao{
 	}
 
 	@Override
-	public void uploadPds(E_BbsDto edto) {
-		sqlSession.insert(ns+"uploadPds", edto);
+	public void uploadBbs(E_BbsDto edto) {
+		sqlSession.insert(ns+"uploadBbs",edto);
 	}
 
 
@@ -54,6 +55,19 @@ public class E_BbsDaoImpl implements E_BbsDao{
 	public boolean updateEBbs(E_BbsDto edto) {
 		int n = sqlSession.update(ns+"updateEBbs",edto);
 		return n>0;
+	}
+
+
+	@Override
+	public List<ProfEvaluationDTO> ProfEvaluation(ProfEvaluationDTO info) throws Exception {
+		List<ProfEvaluationDTO> elist = sqlSession.selectList(ns + "SelectSubNames", info);
+		return elist;
+	}
+
+
+	@Override
+	public int deleteEBbs(int seq) {
+		return sqlSession.delete(ns+"deleteEBbs",seq);
 	}
 
 	

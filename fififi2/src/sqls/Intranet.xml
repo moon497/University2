@@ -5,8 +5,8 @@
 <mapper namespace="Intranet">
 
 <!-- 강의평가 : 교수&과목 및 모든 정보 불러오기 -->
-<select id="SelectSubNames" parameterType="kh.com.model.I_ProfEvaluationDTO" 
-							   resultType="kh.com.model.I_ProfEvaluationDTO">
+<select id="SelectSubNames" parameterType="ProfEvaluationDTO" 
+							   resultType="ProfEvaluationDTO">
 	SELECT SB.SUB_SEQ       , 
 		   SB.SUB_CATEGORY  , 
 		   SB.MAJOR_NUMBER  , 
@@ -29,7 +29,7 @@
 </select>
 
 <!-- 강의평가 완료 -->
-<update id="addAssessment" parameterType="kh.com.model.I_ProfEvaluationDTO">
+<update id="addAssessment" parameterType="ProfEvaluationDTO">
 	UPDATE ASSESSMENT SET PROFESSOR_GRADE = #{critic}
 	 WHERE SUB_SEQ_NUM = #{sub_seq}
 </update>

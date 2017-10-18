@@ -10,8 +10,8 @@
 	<div class="widget">
 		<h4>SERVICES</h4>
 		<ul>
-			<li><a href="E_Bbslist.do" title="">공지</a></li>
-			<li><a href="E_Pdslist.do" title="">과제</a></li>
+			<li><a href="E_Bbslist.do?sub_seq=${param.sub_seq }" title="">공지</a></li>
+			<li><a href="E_Pdslist.do?sub_seq=${param.sub_seq }"" title="">과제</a></li>
 			<!-- <li><a href="#" title="">3</a></li>
 			<li><a href="#" title="">4</a></li> -->
 		</ul>

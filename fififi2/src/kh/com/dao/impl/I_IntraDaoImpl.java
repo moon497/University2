@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.com.dao.I_IntraDao;
-import kh.com.model.I_ProfEvaluationDTO;
+import kh.com.model.ProfEvaluationDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -31,8 +31,8 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	 * 해당학생이 평가해야할 강의목록 불러오기
 	 */
 	@Override
-	public List<I_ProfEvaluationDTO> ProfEvaluation(I_ProfEvaluationDTO info) throws Exception {
-		List<I_ProfEvaluationDTO> list = sqlsession.selectList(intra + "SelectSubNames", info);
+	public List<ProfEvaluationDTO> ProfEvaluation(ProfEvaluationDTO info) throws Exception {
+		List<ProfEvaluationDTO> list = sqlsession.selectList(intra + "SelectSubNames", info);
 		return list;
 	}
 	
@@ -40,7 +40,7 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	 * 교수평가 점수넣기
 	 */
 	@Override
-	public boolean addProfessorGrade(I_ProfEvaluationDTO pdfo) throws Exception {
+	public boolean addProfessorGrade(ProfEvaluationDTO pdfo) throws Exception {
 		int i = 0;
 		i = sqlsession.update(intra+"addAssessment", pdfo);
 		return i!=0?true:false;
@@ -50,7 +50,7 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	 * 성적확인
 	 */
 	@Override
-	public List<I_StudentGradeDTO> StudentGradeCheck(I_ProfEvaluationDTO Sgrade) throws Exception {
+	public List<I_StudentGradeDTO> StudentGradeCheck(ProfEvaluationDTO Sgrade) throws Exception {
 		List<I_StudentGradeDTO> PSdto = sqlsession.selectList(studentGrade+"studentGrade", Sgrade);
 		return PSdto;
 	}

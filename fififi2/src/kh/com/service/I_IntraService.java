@@ -2,7 +2,7 @@ package kh.com.service;
 
 import java.util.List;
 
-import kh.com.model.I_ProfEvaluationDTO;
+import kh.com.model.ProfEvaluationDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -10,13 +10,13 @@ import kh.com.model.I_semesterGradeDTO;
 public interface I_IntraService {
 	
 	// 해당학생이 평가해야할 강의목록 불러오기
-	public List<I_ProfEvaluationDTO> ProfEvaluation(I_ProfEvaluationDTO info) throws Exception;
+	public List<ProfEvaluationDTO> ProfEvaluation(ProfEvaluationDTO info) throws Exception;
 	
 	// 교수평가 점수넣기
-	public boolean addProfessorGrade(I_ProfEvaluationDTO pdfo) throws Exception;
+	public boolean addProfessorGrade(ProfEvaluationDTO pdfo) throws Exception;
 	
 	// 성적확인
-	public List<I_StudentGradeDTO> StudentGradeCheck(I_ProfEvaluationDTO Sgrade) throws Exception;
+	public List<I_StudentGradeDTO> StudentGradeCheck(ProfEvaluationDTO Sgrade) throws Exception;
 	
 	// 내정보(학생) : 기본학생정보
 	public I_StudentBasicInfoDTO studentBasicInfo(String id) throws Exception;

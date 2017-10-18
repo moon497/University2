@@ -5,11 +5,19 @@ import java.io.Serializable;
 import kh.com.util.DateUtil;
 
 public class E_PdsBean implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int eclass_pds_bbs_seq;	
 	private String user_id;
+	private String user_name;
 	private String title;
 	private String content;
 	private String filename;
 	private String org_filename;
+	
 	private int syear;
 	private int smonth;
 	private int sday;
@@ -17,13 +25,31 @@ public class E_PdsBean implements Serializable {
 	private int eyear;
 	private int emonth;
 	private int eday;
+	private int sub_seq;
 	
 	public E_PdsBean() {}
 	
 	public java.sql.Date getSdate() {return DateUtil.toDate(getSyear(), getSmonth(), getSday());}
 	public java.sql.Date getEdate() {return DateUtil.toDate(getEyear(), getEmonth(), getEday());}
-
 	
+	
+	
+	public int getEclass_pds_bbs_seq() {
+		return eclass_pds_bbs_seq;
+	}
+
+	public void setEclass_pds_bbs_seq(int eclass_pds_bbs_seq) {
+		this.eclass_pds_bbs_seq = eclass_pds_bbs_seq;
+	}
+
+	public int getSub_seq() {
+		return sub_seq;
+	}
+
+	public void setSub_seq(int sub_seq) {
+		this.sub_seq = sub_seq;
+	}
+
 	public String getFilename() {
 		return filename;
 	}
@@ -111,6 +137,24 @@ public class E_PdsBean implements Serializable {
 	public void setEday(int eday) {
 		this.eday = eday;
 	}
+
+	
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	@Override
+	public String toString() {
+		return "E_PdsBean [eclass_pds_bbs_seq=" + eclass_pds_bbs_seq + ", user_id=" + user_id + ", user_name="
+				+ user_name + ", title=" + title + ", content=" + content + ", filename=" + filename + ", org_filename="
+				+ org_filename + ", syear=" + syear + ", smonth=" + smonth + ", sday=" + sday + ", eyear=" + eyear
+				+ ", emonth=" + emonth + ", eday=" + eday + ", sub_seq=" + sub_seq + "]";
+	}
+	
 	
 	
 }

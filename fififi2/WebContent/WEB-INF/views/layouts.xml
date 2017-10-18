@@ -181,19 +181,17 @@
 </definition>
 
 
+
+
 <!--  ***************** 종희  ***************	-->
 
-<!-- 과제 목록 -->
-<definition name="E_Pdslist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdslist.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-</definition>
-<definition name="E_Pdswrite.tiles" extends="main.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/eclass/E_Pdswrite.jsp"/>
+<!-- 수강 eclass 목록 -->
+<definition name="E_Classlist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Classlist.jsp"/>
 </definition>
 
 <!-- 공지 목록 -->
-<definition name="E_main.tiles" extends="sub.tiles">
+<definition name="E_Bbslist.tiles" extends="sub.tiles">
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_BbsList.jsp"/>
 </definition>
@@ -209,6 +207,30 @@
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsupdate.jsp"/>
 </definition>
+
+<!-- 과제 목록 -->
+<definition name="E_Pdslist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdslist.jsp"/>
+	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+</definition>
+
+<definition name="E_Pdsdetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsdetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+</definition>
+
+<definition name="E_Pdswrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdswrite.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+</definition>
+
+<definition name="E_Pdsupdate.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsupdate.jsp"/>
+</definition>
+
+
 
 
 </tiles-definitions>

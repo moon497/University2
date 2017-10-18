@@ -6,10 +6,14 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("E_BBS_DTO")
 public class E_BbsDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int eclass_notice_bbs_seq;
 	private int sub_seq;	
 	private String user_id;
-	
+	private String user_name;
 	private String title;
 	private String content;
 	private String wdate;
@@ -21,6 +25,30 @@ public class E_BbsDto implements Serializable{
 	
 	public E_BbsDto() {}
 	
+	public E_BbsDto(int eclass_notice_bbs_seq, int sub_seq, String user_id, String user_name, String title,
+			String content, String wdate, String filename, String org_filename, int readcount, int del) {
+		super();
+		this.eclass_notice_bbs_seq = eclass_notice_bbs_seq;
+		this.sub_seq = sub_seq;
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.title = title;
+		this.content = content;
+		this.wdate = wdate;
+		this.filename = filename;
+		this.org_filename = org_filename;
+		this.readcount = readcount;
+		this.del = del;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	public E_BbsDto(int eclass_notice_bbs_seq, int sub_seq, String user_id, String title, String content, String wdate, String filename,
 			 int readcount, int del,String org_filename) {
 		super();
@@ -58,8 +86,9 @@ public class E_BbsDto implements Serializable{
 	@Override
 	public String toString() {
 		return "E_BbsDto [eclass_notice_bbs_seq=" + eclass_notice_bbs_seq + ", sub_seq=" + sub_seq + ", user_id="
-				+ user_id + ", title=" + title + ", content=" + content + ", wdate=" + wdate + ", filename=" + filename
-				+ ", org_filename=" + org_filename + ", readcount=" + readcount + ", del=" + del + "]";
+				+ user_id + ", user_name=" + user_name + ", title=" + title + ", content=" + content + ", wdate="
+				+ wdate + ", filename=" + filename + ", org_filename=" + org_filename + ", readcount=" + readcount
+				+ ", del=" + del + "]";
 	}
 
 	public int getEclass_notice_bbs_seq() {

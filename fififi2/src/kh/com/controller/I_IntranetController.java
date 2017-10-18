@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.com.model.MemberDto;
-import kh.com.model.I_ProfEvaluationDTO;
+import kh.com.model.ProfEvaluationDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -40,7 +40,7 @@ public class I_IntranetController {
 		
 		//init
 		MemberDto login;
-		I_ProfEvaluationDTO info = new I_ProfEvaluationDTO();
+		ProfEvaluationDTO info = new ProfEvaluationDTO();
 		String id = "";
 		
 		// 로그아웃
@@ -55,7 +55,7 @@ public class I_IntranetController {
 			info.setStudent_id(id);
 			info.setSub_semester(2);
 			info.setStudent_year(1);
-			List<I_ProfEvaluationDTO> list =  khIntraService.ProfEvaluation(info);
+			List<ProfEvaluationDTO> list =  khIntraService.ProfEvaluation(info);
 			model.addAttribute("assessmentList", list);
 			
 			if(list.size() == 0) {
@@ -75,7 +75,7 @@ public class I_IntranetController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="assessmentAf.do", produces="application/String; charset=utf-8", method={RequestMethod.GET, RequestMethod.POST})
-	public String assessmentAf(I_ProfEvaluationDTO pdfo) throws Exception {
+	public String assessmentAf(ProfEvaluationDTO pdfo) throws Exception {
 		logger.info("KhIntranetController assessmentAf");
 		boolean b = khIntraService.addProfessorGrade(pdfo);
 		if(b == true) {
@@ -98,7 +98,7 @@ public class I_IntranetController {
 		//init
 		MemberDto login;
 		
-		I_ProfEvaluationDTO info = new I_ProfEvaluationDTO();
+		ProfEvaluationDTO info = new ProfEvaluationDTO();
 		String id = "";
 		
 		// 로그아웃

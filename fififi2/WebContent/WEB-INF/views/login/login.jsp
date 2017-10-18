@@ -48,12 +48,10 @@
 <body>
 <section class="category-content col-sm-9">
     <h2 class="category-title">Login</h2> 
-    
 
 <form action="loginAf.do" id="_loginForm" method="post" class="formcss"> 
 	<table>
 	<tr style="height: 97px;">
-		
 		<td style="width: 90px;">아이디</td>
 		<td><input type="text" name="user_id" id="user_id" data-msg="아이디" class="inputtextcss"></td>
 	</tr>
@@ -69,9 +67,9 @@
 		<button type="button" id="_btnLogin" class="buttoncss">로그인</button>
 	</div>
 	
-	<br>
+	<br><br>
 
-	<table class="tablecss">
+	<table class="table table-bordered table-hover">
 		<tr>
 		<td colspan="2">로그인별 대상 서비스 </td>
 		</tr>
@@ -79,27 +77,28 @@
 		<td style="width: 150px">학부재학생</td>
 		<td>
 		 	홈페이지 인증 서비스 모두 이용 가능<br>
-		 	포털(인트라넷) 이용 가능 신상/주소 확인, 지도교수, 성적확인, 수강신청확인등<br>
+		 	포털(인트라넷) 이용 가능 신상/주소 확인, 성적확인, 수강신청확인등<br>
 		 	로그인 아이디는 별도의 신청없이 학번 사용</td>
 		</tr>
 		<tr>
 		<td>교직원</td>
 		<td>
-		 	 홈페이지 인증 서비스 모두 이용 가능. 인하포털(인트라넷) 이용 가능<br>
+		 	 홈페이지 인증 서비스 모두 이용 가능. 인트라넷 이용 가능<br>
 			 로그인 아이디는 신청 후 사용 가능 
 	    </td>
 	    </tr>
 	    <tr>
 	    <td>졸업생</td>
 		<td>
-			홈페이지 인증 서비스 모두 이용 가능. 인하포털(인트라넷) 이용 가능<br>
-			성적확인(학부), 학적확인(대학원)<br>
+			홈페이지 인증 서비스 모두 이용 가능.인트라넷 이용 가능<br>
+			성적학인, 정보확인<br>
 			로그인 아이디는 별도의 신청없이 학번 사용, 아이디/비밀번호 조회
 	    </td>
 		</tr>
 	</table>  
 	
 </section>
+
 
 <script type="text/javascript">
 $("#_btnLogin").click(function() {
@@ -109,9 +108,29 @@ $("#_btnLogin").click(function() {
 	} else if($("#user_pw").val() == ""){
 		alert($("#user_pw").attr("data-msg") + " 입력해 주십시오" );
 		$("#user_pw").focus();
-	} else{
-		$("#_loginForm").attr("target", "_self").submit();
-	}	
+	}else{  
+	
+	
+	$.ajax({
+	    type : "POST",
+	    data : { 
+	       "user_id"   : $("#user_id").val() ,
+	       "user_pw"   : $("#user_pw").val()
+	    },
+	    url : "./loginAf.do",
+	    success : function(data) {
+	       if(data == "로그인 성공"){
+	    	   location.href="./main.do";
+	       }else {
+	    	   location.href="./login.do";
+	       }
+	    },
+	    error : function(xhr, status, error) {
+	       alert("아이디 또는 비밀번호를 다시 확인하세요");
+	    }
+	});
+	
+	}
 });
 
 
@@ -138,6 +157,7 @@ $(function() {
         $(this).css("border", "1px solid #e2e2e2");
     });
 });
+
 
 
 

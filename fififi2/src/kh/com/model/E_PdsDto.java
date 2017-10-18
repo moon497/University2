@@ -10,12 +10,14 @@ import kh.com.util.DateUtil;
 @Alias("E_PDS_DTO")
 public class E_PdsDto implements Serializable{
 	
-	private int ECLASS_PDS_BBS_SEQ;
-	private int ref;
-	private int step;
-	private int depth;
-	private String user_id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int eclass_pds_bbs_seq;
 	
+	private String user_id;
+	private String user_name;
 	private String title;
 	private String content;
 	private int readcount;
@@ -30,77 +32,22 @@ public class E_PdsDto implements Serializable{
 	
 	public E_PdsDto() {}
 
-	public E_PdsDto(int eCLASS_PDS_BBS_SEQ, int ref, int step, int depth, String user_id, String title, String content,
-			int readcount, String filename, String org_filename, int status, Date wdate, Date sdate, Date edate,
-			int sub_seq) {
-		super();
-		ECLASS_PDS_BBS_SEQ = eCLASS_PDS_BBS_SEQ;
-		this.ref = ref;
-		this.step = step;
-		this.depth = depth;
-		this.user_id = user_id;
-		this.title = title;
-		this.content = content;
-		this.readcount = readcount;
-		this.filename = filename;
-		this.org_filename = org_filename;
-		this.status = status;
-		this.wdate = wdate;
-		this.sdate = sdate;
-		this.edate = edate;
-		this.sub_seq = sub_seq;
-	}
-
-	public E_PdsDto(String user_id, String title, String content, String filename, String org_filename) {
-		super();
-		this.user_id = user_id;
-		this.title = title;
-		this.content = content;
-		this.filename = filename;
-		this.org_filename = org_filename;
-	}
 	
-	public E_PdsDto(String user_id, String title, String content, String filename, String org_filename, Date sdate,
-			Date edate) {
-		super();
-		this.user_id = user_id;
-		this.title = title;
-		this.content = content;
-		this.filename = filename;
-		this.org_filename = org_filename;
-		this.sdate = sdate;
-		this.edate = edate;
+	
+	public String getUser_name() {
+		return user_name;
 	}
 
-	public E_PdsDto(String filename, String org_filename) {
-		super();
-		this.filename = filename;
-		this.org_filename = org_filename;
+
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
-	public E_PdsDto(String user_id, String title, String content, Date sdate, Date edate) {
-		super();
-		this.user_id = user_id;
-		this.title = title;
-		this.content = content;
-		this.sdate = sdate;
-		this.edate = edate;
-	}
 
-	public int getECLASS_PDS_BBS_SEQ() {
-		return ECLASS_PDS_BBS_SEQ;
-	}
 
-	public int getRef() {
-		return ref;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public int getDepth() {
-		return depth;
+	public int getEclass_pds_bbs_seq() {
+		return eclass_pds_bbs_seq;
 	}
 
 	public String getUser_id() {
@@ -147,20 +94,8 @@ public class E_PdsDto implements Serializable{
 		return sub_seq;
 	}
 
-	public void setECLASS_PDS_BBS_SEQ(int eCLASS_PDS_BBS_SEQ) {
-		ECLASS_PDS_BBS_SEQ = eCLASS_PDS_BBS_SEQ;
-	}
-
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
+	public void setEclass_pds_bbs_seq(int eclass_pds_bbs_seq) {
+		this.eclass_pds_bbs_seq = eclass_pds_bbs_seq;
 	}
 
 	public void setUser_id(String user_id) {
@@ -207,14 +142,42 @@ public class E_PdsDto implements Serializable{
 		this.sub_seq = sub_seq;
 	}
 
-	@Override
-	public String toString() {
-		return "E_PdsDto [ECLASS_PDS_BBS_SEQ=" + ECLASS_PDS_BBS_SEQ + ", ref=" + ref + ", step=" + step + ", depth="
-				+ depth + ", user_id=" + user_id + ", title=" + title + ", content=" + content + ", readcount="
-				+ readcount + ", filename=" + filename + ", org_filename=" + org_filename + ", status=" + status
-				+ ", wdate=" + wdate + ", sdate=" + sdate + ", edate=" + edate + ", sub_seq=" + sub_seq + "]";
+	public E_PdsDto(String user_id, String title, String content, String filename, String org_filename,
+			Date sdate, Date edate, int sub_seq) {
+		super();
+		this.user_id = user_id;
+		this.title = title;
+		this.content = content;
+		this.filename = filename;
+		this.org_filename = org_filename;
+		this.sdate = sdate;
+		this.edate = edate;
+		this.sub_seq = sub_seq;
 	}
 	
+	
+	public E_PdsDto(int eclass_pds_bbs_seq, String title, String content, String filename, String org_filename,
+			Date sdate, Date edate) {
+		super();
+		this.eclass_pds_bbs_seq = eclass_pds_bbs_seq;
+		this.title = title;
+		this.content = content;
+		this.filename = filename;
+		this.org_filename = org_filename;
+		this.sdate = sdate;
+		this.edate = edate;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "E_PdsDto [eclass_pds_bbs_seq=" + eclass_pds_bbs_seq + ", user_id=" + user_id + ", user_name="
+				+ user_name + ", title=" + title + ", content=" + content + ", readcount=" + readcount + ", filename="
+				+ filename + ", org_filename=" + org_filename + ", status=" + status + ", wdate=" + wdate + ", sdate="
+				+ sdate + ", edate=" + edate + ", sub_seq=" + sub_seq + "]";
+	}
+
 	
 	
 	

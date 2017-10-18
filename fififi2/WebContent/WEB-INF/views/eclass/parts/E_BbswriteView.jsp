@@ -4,6 +4,7 @@
 <%@taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
 <fmt:requestEncoding value="UTF-8"/>
 <form>
+<input type="hidden" id="sub_seq" name="sub_seq" value="${param.sub_seq }"> 
 <div class="col-md-9">
 <div class="form-group"> <!-- userId field -->
 		<label class="control-label " for="user_id">아이디</label>
@@ -11,7 +12,7 @@
 </div>
 <div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text" value="${edto.title }"/>
+		<input class="form-control" id="title" name="title" type="text"/>
 </div>
 	
 <div class="form-group"> <!-- content field -->
@@ -19,7 +20,7 @@
 		<textarea class="form-control" cols="40" id="content" name="content" rows="10"></textarea>
 </div>
 
-<div class="form-group"> File field
+<div class="form-group"> <!-- File field -->
 	   <input type="file" id="fileload" name="fileload" class="file" style="visibility: hidden; position: absolute;">
 	<div class="input-group col-xs-12">
 	     <span class="input-group-addon"><i class="fa fa-file"></i></span>

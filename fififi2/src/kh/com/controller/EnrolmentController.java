@@ -99,6 +99,8 @@ public class EnrolmentController {
 		System.out.println(prof.toString());
 		
 		sub.setMajor_number(prof.getProf_major());
+		sub.setProfessor_id(user.getUser_id());
+		sub.setProfessor_name(user.getUser_name());
 		
 		
 		System.out.println("결과 prof : " + prof.toString());		
