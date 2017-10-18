@@ -74,23 +74,23 @@
 <!-- 소개 -->
 <definition name="introBbs.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introBbs.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbswrite.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introwrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbsDetail.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbsUpdate.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introLocation.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 
 

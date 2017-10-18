@@ -52,7 +52,7 @@
 <select id="getEnrollist" parameterType="querysub" resultType="SubjectDto">	
 	SELECT *
 	FROM SUBJECT S, (SELECT * FROM ASSESSMENT WHERE STUDENT_ID=#{user_id})A
-	WHERE S.SUB_REF = A.SUB_SEQ_NUM(+)
+	WHERE S.SUB_SEQ = A.SUB_SEQ_NUM(+)
 	AND MAJOR_NUMBER=#{major}
 	AND A.SUB_SEQ_NUM IS NULL
 	ORDER BY SUB_REF ASC, SUB_MAX_STUDENT DESC
