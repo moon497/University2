@@ -1,5 +1,5 @@
 <%@page import="kh.com.model.I_StudentGradeDTO"%>
-<%@page import="kh.com.model.I_ProfEvaluationDTO"%>
+<%@page import="kh.com.model.ProfEvaluationDTO"%>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

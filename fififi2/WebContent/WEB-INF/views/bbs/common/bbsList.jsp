@@ -110,11 +110,11 @@
     
     <!-- 버튼 목록 -->
 <div class="row" style="text-align: right;">
-<div class="col-sm-12">
-	<div class="button-group">
-		<div class="arc-comment">
-			<button type="button" class="btn btn-primary" onclick="location.href='./write.do'"><i class="fa fa-comments"></i> 글쓰기</button>	
+	<div class="col-sm-12">
+		<div class="button-group">
+			<div class="arc-comment">
+				<button type="button" class="btn btn-primary" onclick="location.href='./write.do'"><i class="fa fa-comments"></i> 글쓰기</button>	
+			</div>
 		</div>
 	</div>
-</div>
 </div>

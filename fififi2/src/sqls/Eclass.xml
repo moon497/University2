@@ -5,89 +5,89 @@
 
 <!-- 내 수강신청 목록 -->
 <select id="SelectSubNames" parameterType="ProfEvaluationDTO" resultType="ProfEvaluationDTO">
-	SELECT SB.SUB_SEQ, SB.SUB_CATEGORY, SB.MAJOR_NUMBER, SB.SUB_SEMESTER, 
-		   SB.SUB_NAME, SB.PROFESSOR_ID, SB.PROFESSOR_NAME, SB.SUB_INFO, 
-		   A.STUDENT_ID, ST.STUDENT_NAME, SB.SUB_S_CLASS, SB.SUB_E_CLASS,SB.SUB_GRADE, SB.SUB_POINT 
-	FROM SUBJECT SB, STUDENT ST, ASSESSMENT A
- 	WHERE SB.SUB_SEQ = A.SUB_SEQ_NUM
-	AND A.STUDENT_ID = #{student_id}
-	AND A.STUDENT_ID = ST.STUDENT_ID
-  	AND A.PROFESSOR_GRADE = 0
-  	ORDER BY SB.SUB_S_CLASS ASC, SB.SUB_E_CLASS ASC
+   SELECT SB.SUB_SEQ, SB.SUB_CATEGORY, SB.MAJOR_NUMBER, SB.SUB_SEMESTER, 
+         SB.SUB_NAME, SB.PROFESSOR_ID, SB.PROFESSOR_NAME, SB.SUB_INFO, 
+         A.STUDENT_ID, ST.STUDENT_NAME, SB.SUB_S_CLASS, SB.SUB_E_CLASS,SB.SUB_GRADE, SB.SUB_POINT 
+   FROM SUBJECT SB, STUDENT ST, ASSESSMENT A
+    WHERE SB.SUB_SEQ = A.SUB_SEQ_NUM
+   AND A.STUDENT_ID = #{student_id}
+   AND A.STUDENT_ID = ST.STUDENT_ID
+     AND A.PROFESSOR_GRADE = 0
+     ORDER BY SB.SUB_S_CLASS ASC, SB.SUB_E_CLASS ASC
 </select>
 
 <!-- 공지 게시판 -->
 <select id="getBbsCount" parameterType="E_BBS_DTO" resultType="java.lang.Integer">
-	SELECT NVL(COUNT(*), 0) AS CNT
-	FROM ECLASS_NOTICE_BBS
-	WHERE SUB_SEQ=#{sub_seq}
+   SELECT NVL(COUNT(*), 0) AS CNT
+   FROM ECLASS_NOTICE_BBS
+   WHERE SUB_SEQ=#{sub_seq}
 </select>
 
-<select id="getEBbsList" resultType="E_BBS_DTO" parameterType="kh.com.util.Pagination" >	
-	SELECT 
+<select id="getEBbsList" resultType="E_BBS_DTO" parameterType="kh.com.util.Pagination" >   
+   SELECT 
          E.ECLASS_NOTICE_BBS_SEQ, E.USER_ID, U.USER_NAME, E.TITLE , E.CONTENT , E.READCOUNT,
-		 E.FILENAME,ORG_FILENAME, E.WDATE, E.SUB_SEQ
+       E.FILENAME,ORG_FILENAME, E.WDATE, E.SUB_SEQ
     FROM (
-      		SELECT  ECLASS_NOTICE_BBS_SEQ, USER_ID, TITLE , CONTENT , READCOUNT,
-		   			FILENAME,ORG_FILENAME, WDATE, SUB_SEQ, 
-		   			ROW_NUMBER() OVER (ORDER BY ECLASS_NOTICE_BBS_SEQ desc) R
+            SELECT  ECLASS_NOTICE_BBS_SEQ, USER_ID, TITLE , CONTENT , READCOUNT,
+                  FILENAME,ORG_FILENAME, WDATE, SUB_SEQ, 
+                  ROW_NUMBER() OVER (ORDER BY ECLASS_NOTICE_BBS_SEQ desc) R
             FROM ECLASS_NOTICE_BBS
       ) E,USERS U
     WHERE SUB_SEQ=#{sub_seq} AND E.USER_ID = U.USER_ID
     AND R BETWEEN #{startArticle} and #{endArticle}
     ORDER BY ECLASS_NOTICE_BBS_SEQ DESC
 </select>
-	
+   
 <insert id="uploadBbs" parameterType="E_BBS_DTO" useGeneratedKeys="false">
-	INSERT INTO ECLASS_NOTICE_BBS
-	(ECLASS_NOTICE_BBS_SEQ, USER_ID, TITLE , CONTENT , READCOUNT,
-	 FILENAME,WDATE, SUB_SEQ, ORG_FILENAME)
-	VALUES(ECLASS_NOTICE_BBS_SEQ.NEXTVAL, #{user_id}, #{title},#{content},0,#{filename},
-		   SYSDATE,#{sub_seq},#{org_filename})
+   INSERT INTO ECLASS_NOTICE_BBS
+   (ECLASS_NOTICE_BBS_SEQ, USER_ID, TITLE , CONTENT , READCOUNT,
+    FILENAME,WDATE, SUB_SEQ, ORG_FILENAME)
+   VALUES(ECLASS_NOTICE_BBS_SEQ.NEXTVAL, #{user_id}, #{title},#{content},0,#{filename},
+         SYSDATE,#{sub_seq},#{org_filename})
 </insert>
 
 <!-- 디테일 -->
 <select id="getEbbs" resultType="E_BBS_DTO" parameterType="java.lang.Integer">
-	SELECT ECLASS_NOTICE_BBS_SEQ, USER_ID,TITLE , CONTENT , READCOUNT,
-		   FILENAME, ORG_FILENAME, WDATE, SUB_SEQ
-	FROM ECLASS_NOTICE_BBS
-	WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
+   SELECT ECLASS_NOTICE_BBS_SEQ, USER_ID,TITLE , CONTENT , READCOUNT,
+         FILENAME, ORG_FILENAME, WDATE, SUB_SEQ
+   FROM ECLASS_NOTICE_BBS
+   WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
 </select>
 
 <update id="addReadcount" parameterType="java.lang.Integer">
-	UPDATE ECLASS_NOTICE_BBS
-	SET READCOUNT=READCOUNT+1
-	WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
+   UPDATE ECLASS_NOTICE_BBS
+   SET READCOUNT=READCOUNT+1
+   WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
 </update>
 
 <update id="updateEBbs" parameterType="E_BBS_DTO" >
-	UPDATE ECLASS_NOTICE_BBS 
-	SET TITLE=#{title}, 
-		CONTENT=#{content},
-		FILENAME=#{filename},
-		ORG_FILENAME=#{org_filename}
-	WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
+   UPDATE ECLASS_NOTICE_BBS 
+   SET TITLE=#{title}, 
+      CONTENT=#{content},
+      FILENAME=#{filename},
+      ORG_FILENAME=#{org_filename}
+   WHERE ECLASS_NOTICE_BBS_SEQ=#{eclass_notice_bbs_seq}
 </update>
 
 <delete id="deleteEBbs" parameterType="E_BBS_DTO" >
-	DELETE FROM ECLASS_NOTICE_BBS
-	WHERE ECLASS_NOTICE_BBS_SEQ = #{eclass_notice_bbs_seq}
+   DELETE FROM ECLASS_NOTICE_BBS
+   WHERE ECLASS_NOTICE_BBS_SEQ = #{eclass_notice_bbs_seq}
 </delete>
 
 
 
 <!-- ************************************************************
-	 * 							과제 게시판  
-	 * **********************************************************/ -->
-	 
+    *                      과제 게시판  
+    * **********************************************************/ -->
+    
 <select id="getEPdsList" resultType="E_PDS_DTO" parameterType="kh.com.util.Pagination">
-	SELECT 
+   SELECT 
          E.ECLASS_PDS_BBS_SEQ, E.USER_ID, E.TITLE , E.CONTENT ,E.READCOUNT,
          E.FILENAME,E.ORG_FILENAME, E.STATUS, E.WDATE, E.SDATE, E.EDATE, E.SUB_SEQ, U.USER_NAME
     FROM (
-      		SELECT ECLASS_PDS_BBS_SEQ, USER_ID,TITLE , CONTENT , READCOUNT,
-		   			FILENAME,ORG_FILENAME, STATUS, WDATE, SDATE, EDATE, SUB_SEQ, 
-		   			ROW_NUMBER() OVER (ORDER BY ECLASS_PDS_BBS_SEQ desc) R
+            SELECT ECLASS_PDS_BBS_SEQ, USER_ID,TITLE , CONTENT , READCOUNT,
+                  FILENAME,ORG_FILENAME, STATUS, WDATE, SDATE, EDATE, SUB_SEQ, 
+                  ROW_NUMBER() OVER (ORDER BY ECLASS_PDS_BBS_SEQ desc) R
             FROM ECLASS_PDS_BBS
       ) E,USERS U
     WHERE SUB_SEQ= #{sub_seq} AND E.USER_ID = U.USER_ID
@@ -97,84 +97,74 @@
 
 <!-- 디테일 -->
 <select id="getPdsCount" parameterType="E_PDS_DTO" resultType="java.lang.Integer">
-	SELECT NVL(COUNT(*), 0) AS CNT
-	FROM ECLASS_PDS_BBS
-	WHERE SUB_SEQ=#{sub_seq}
+   SELECT NVL(COUNT(*), 0) AS CNT
+   FROM ECLASS_PDS_BBS
+   WHERE SUB_SEQ=#{sub_seq}
 </select>
 
 <select id="getPds" resultType="E_PDS_DTO" parameterType="java.lang.Integer">
-	SELECT E.ECLASS_PDS_BBS_SEQ, E.USER_ID,TITLE , E.CONTENT , E.READCOUNT,
-		    E.FILENAME, E.ORG_FILENAME, E.STATUS, E.WDATE, E.SDATE, E.EDATE, E.SUB_SEQ, U.USER_NAME
-	FROM ECLASS_PDS_BBS E, USERS U
-	WHERE ECLASS_PDS_BBS_SEQ= #{eclass_pds_bbs_seq} AND E.USER_ID = U.USER_ID
+   SELECT E.ECLASS_PDS_BBS_SEQ, E.USER_ID,TITLE , E.CONTENT , E.READCOUNT,
+          E.FILENAME, E.ORG_FILENAME, E.STATUS, E.WDATE, E.SDATE, E.EDATE, E.SUB_SEQ, U.USER_NAME
+   FROM ECLASS_PDS_BBS E, USERS U
+   WHERE ECLASS_PDS_BBS_SEQ= #{eclass_pds_bbs_seq} AND E.USER_ID = U.USER_ID
     
 </select>
 
 <insert id="uploadPds" parameterType="kh.com.model.E_PdsBean" useGeneratedKeys="false">
-	INSERT INTO ECLASS_PDS_BBS
-	(ECLASS_PDS_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, FILENAME, ORG_FILENAME,
-	STATUS, WDATE, SDATE , EDATE, SUB_SEQ)
-	VALUES
-	(ECLASS_PDS_BBS_SEQ.NEXTVAL,#{user_id}, #{title},#{content},0,#{filename},
-	#{org_filename},0,SYSDATE, #{sdate},#{edate},#{sub_seq})
+   INSERT INTO ECLASS_PDS_BBS
+   (ECLASS_PDS_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, FILENAME, ORG_FILENAME,
+   STATUS, WDATE, SDATE , EDATE, SUB_SEQ)
+   VALUES
+   (ECLASS_PDS_BBS_SEQ.NEXTVAL,#{user_id}, #{title},#{content},0,#{filename},
+   #{org_filename},0,SYSDATE, #{sdate},#{edate},#{sub_seq})
 </insert>
 
 <update id="addPdsReadcount" parameterType="java.lang.Integer">
-		UPDATE ECLASS_PDS_BBS
-		SET READCOUNT=READCOUNT+1
-		WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
+      UPDATE ECLASS_PDS_BBS
+      SET READCOUNT=READCOUNT+1
+      WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
 </update>
 
 <update id="updateEPds" parameterType="kh.com.model.E_PdsBean">
-	UPDATE ECLASS_PDS_BBS
-	SET TITLE=#{title}, 
-		CONTENT=#{content},
-		FILENAME=#{filename},
-		ORG_FILENAME=#{org_filename},
-		SDATE=#{sdate},
-		EDATE=#{edate}
-	WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
+   UPDATE ECLASS_PDS_BBS
+   SET TITLE=#{title}, 
+      CONTENT=#{content},
+      FILENAME=#{filename},
+      ORG_FILENAME=#{org_filename},
+      SDATE=#{sdate},
+      EDATE=#{edate}
+   WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
 </update>
 
 <delete id="deleteEPds" parameterType="E_PDS_DTO" >
-	DELETE FROM ECLASS_PDS_BBS
-	WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
+   DELETE FROM ECLASS_PDS_BBS
+   WHERE ECLASS_PDS_BBS_SEQ=#{eclass_pds_bbs_seq}
 </delete>
 
 
-
-
-
-
 <!-- ************************************************************
-	 * 							과제 댓글 
-	 * **********************************************************/ -->
-	 
+    *                      과제 댓글 
+    * **********************************************************/ -->
+    
 <select id="getClist" resultType="kh.com.model.E_CommentDto">
-	SELECT  E.ECLASS_PDS_BBS_SEQ,E.C_SEQ,E.C_CONTENT,E.USER_ID,E.ORG_FILENAME,E.FILENAME,E.WDATE, U.USER_NAME
-	FROM (
-    SELECT 	ECLASS_PDS_BBS_SEQ,C_SEQ,C_CONTENT,USER_ID,ORG_FILENAME,FILENAME,WDATE
-	FROM ECLASS_COMMENTS ) E, USERS U
-	WHERE ECLASS_PDS_BBS_SEQ = #{eclass_pds_bbs_seq} AND E.USER_ID = U.USER_ID
-	ORDER BY C_SEQ ASC
+   SELECT  E.ECLASS_PDS_BBS_SEQ,E.C_SEQ,E.C_CONTENT,E.USER_ID,E.ORG_FILENAME,E.FILENAME,E.WDATE, U.USER_NAME
+   FROM (
+    SELECT    ECLASS_PDS_BBS_SEQ,C_SEQ,C_CONTENT,USER_ID,ORG_FILENAME,FILENAME,WDATE
+   FROM ECLASS_COMMENTS ) E, USERS U
+   WHERE ECLASS_PDS_BBS_SEQ = #{eclass_pds_bbs_seq} AND E.USER_ID = U.USER_ID
+   ORDER BY C_SEQ ASC
 </select>
-	 
+    
 <insert id="uploadComment" parameterType="kh.com.model.E_CommentDto" useGeneratedKeys="false">
 INSERT INTO ECLASS_COMMENTS
 (ECLASS_PDS_BBS_SEQ, C_SEQ, C_CONTENT, USER_ID, ORG_FILENAME, FILENAME, WDATE, SUB_SEQ)
 VALUES(#{eclass_pds_bbs_seq}, COMMENTS_SEQ.NEXTVAL, #{c_content}, #{user_id}, #{org_filename},
-	#{filename}, SYSDATE, #{sub_seq})
+   #{filename}, SYSDATE, #{sub_seq})
 </insert>
-	 
-	 
-
-	 
-	 
-	 
-	 
-	 
-
-
-
+    
+<delete id="deleteComment" parameterType="kh.com.model.E_CommentDto">
+DELETE FROM ECLASS_COMMENTS
+WHERE C_SEQ = #{c_seq}
+</delete>
 
 </mapper>

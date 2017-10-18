@@ -26,5 +26,10 @@ public class E_CommentServiceImpl implements E_CommentService{
 	public void uploadComment(E_CommentDto cdto) throws Exception {
 		e_CommentDao.uploadComment(cdto);
 	}
+
+	@Override
+	public int deleteComment(int seq) throws Exception {
+		return e_CommentDao.deleteComment(seq);
+	}
 	
 }

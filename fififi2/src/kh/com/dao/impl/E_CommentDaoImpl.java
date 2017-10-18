@@ -29,4 +29,10 @@ public class E_CommentDaoImpl implements E_CommentDao{
 		sqlSession.insert(ns+"uploadComment", cdto);
 	}
 
+
+	@Override
+	public int deleteComment(int seq) throws Exception {
+		return sqlSession.delete(ns+"deleteComment",seq);
+	}
+
 }
