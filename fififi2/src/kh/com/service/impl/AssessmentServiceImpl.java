@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import kh.com.dao.AssessmentDao;
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
-import kh.com.model.StudentGradeDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 
@@ -33,9 +33,10 @@ public class AssessmentServiceImpl implements AssessmentService {
 		return assessmentDao.getAsListFromUser(user_id);
 	}
 
+	
 	@Override
-	public boolean deleteAs(int sub_seq) {
-		return assessmentDao.deleteAs(sub_seq);
+	public boolean deleteAs(AssessmentDto as) {
+		return assessmentDao.deleteAs(as);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 	}
 
 	@Override
-	public StudentGradeDTO getStudent(String student_id) throws Exception {
+	public StudentDTO getStudent(String student_id) throws Exception {
 		return assessmentDao.getStudent(student_id);
 	}
 

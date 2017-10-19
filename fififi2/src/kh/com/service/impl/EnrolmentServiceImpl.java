@@ -45,6 +45,11 @@ public class EnrolmentServiceImpl implements EnrolmentService {
 		return enrolmentDao.getEnrollist(query); 
 	}
 
+	@Override
+	public boolean updateReg(SubjectDto sub) throws Exception {		
+		return enrolmentDao.updateReg(sub);
+	}
+
 	
 	
 	

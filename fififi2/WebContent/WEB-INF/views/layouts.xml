@@ -154,11 +154,6 @@
 	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
 </definition>
 
-<!-- 장터 -->
-<definition name="bbsGrid.tiles" extends="bbsList.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsGrid.jsp"/>
-</definition>
-
 <!--********************
 
 	체크 처리 페이지
@@ -176,8 +171,14 @@
 	장터 페이지
 
 ************************-->
-<definition name="marketWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/market/write.jsp"/>
+<definition name="goodWrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/goods/write.jsp"/>
+</definition>
+<definition name="goodList.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/goods/list.jsp"/>
+</definition>
+<definition name="goodDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/goods/controller/detail.jsp"/>
 </definition>
 
 

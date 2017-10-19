@@ -14,21 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
-import kh.com.service.GradeInputService;
 import kh.com.service.SubjectService;
 
 @Controller
 public class GradeInputController {
 	private static final Logger logger = LoggerFactory.getLogger(GradeInputController.class);
-		
-	@Autowired
-	GradeInputService gradeinputService;	 
 
 	@Autowired
 	AssessmentService assessmentService;

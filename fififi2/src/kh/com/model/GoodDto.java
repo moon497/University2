@@ -2,7 +2,10 @@ package kh.com.model;
 
 import java.io.Serializable;
 
-public class MarketDto implements Serializable {
+import org.apache.ibatis.type.Alias;
+
+@Alias("good")
+public class GoodDto implements Serializable {
 	private static final long serialVersionUID = -7370392075178708767L;
 	
 	private String status;
@@ -16,6 +19,14 @@ public class MarketDto implements Serializable {
 	private String address;
 	private String phone;
 	private String wdate;
+	
+	//view용 변수
+	private String imgUrl;
+	
+	//query용 변수
+	private int startArticle;					//시작 게시물
+	private int endArticle;						//끝 게시물
+	
 	
 	public String getStatus() {
 		return status;
@@ -83,11 +94,30 @@ public class MarketDto implements Serializable {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	public int getStartArticle() {
+		return startArticle;
+	}
+	public void setStartArticle(int startArticle) {
+		this.startArticle = startArticle;
+	}
+	public int getEndArticle() {
+		return endArticle;
+	}
+	public void setEndArticle(int endArticle) {
+		this.endArticle = endArticle;
+	}
 	@Override
 	public String toString() {
-		return "MarketDto [status=" + status + ", seq=" + seq + ", category=" + category + ", userId=" + userId
+		return "GoodDto [status=" + status + ", seq=" + seq + ", category=" + category + ", userId=" + userId
 				+ ", userName=" + userName + ", title=" + title + ", content=" + content + ", price=" + price
-				+ ", address=" + address + ", phone=" + phone + ", wdate=" + wdate + "]";
+				+ ", address=" + address + ", phone=" + phone + ", wdate=" + wdate + ", imgUrl=" + imgUrl
+				+ ", startArticle=" + startArticle + ", endArticle=" + endArticle + "]";
 	}
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
 import kh.com.model.QuerySubjectDto;
-import kh.com.model.StudentGradeDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 import kh.com.service.EnrolmentService;
@@ -43,7 +43,7 @@ public class EnrolmentController {
 		logger.info("진입");
 		
 		MemberDto login = ((MemberDto)req.getSession().getAttribute("login"));
-		StudentGradeDTO student =  assessmentService.getStudent(login.getUser_id());
+		StudentDTO student =  assessmentService.getStudent(login.getUser_id());
 		
 		if(login.getUser_auth().equals("200")){				
 			return "redirect:/main.do";			
@@ -153,22 +153,32 @@ public class EnrolmentController {
 		return "redirect:/registrationlist.do";
 	}
 	
-	/*
-	//수강신청 화면에서 과목 검색
-	@RequestMapping(value="subsearch.do", method= {RequestMethod.GET, RequestMethod.POST,})
-	public String subsearch(HttpServletRequest req, String major, Model model)throws Exception {
-		logger.info("EnrolmentController subsearch");
-		System.out.println("major : " + major);
+	// 강의 수정 
+	@RequestMapping(value="updateReg.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateReg(HttpServletRequest req, int seq, Model model) throws Exception {
+		logger.info("EnrolmentController updateReg");
+		MemberDto user = ((MemberDto)req.getSession().getAttribute("login"));	
+		System.out.println("강의등록 전 : " + user.toString());						
+				
+		System.out.println("seq : " + seq);
+		SubjectDto sub = enrolmentService.getReg(seq);
+		System.out.println("sub : " + sub);
 		
-		MemberDto mem = ((MemberDto)req.getSession().getAttribute("login"));
-		
-		model.addAttribute("user", mem);				
-		model.addAttribute("major", major);
-		
-		
-		return "enrolment.tiles";
+		model.addAttribute("sub", sub);
+		model.addAttribute("user", user);	
+		return "upReg.tiles";
 	}
-	*/
+	
+	@RequestMapping(value="updateRegAf.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateRegAf(SubjectDto sub, Model model) throws Exception {
+		logger.info("EnrolmentController updateRegAf");
+		
+		System.out.println("updateregaf sub : "  + sub.toString());
+		enrolmentService.updateReg(sub);	
+		
+		return "redirect:/registrationlist.do";
+	}
+	
 	
 	// 수강신청화면에서 강의목록 
 	@RequestMapping(value="sublist.do", method= {RequestMethod.GET, RequestMethod.POST,})

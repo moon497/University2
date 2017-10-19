@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
-import kh.com.model.StudentGradeDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 import kh.com.service.EnrolmentService;
@@ -90,22 +90,28 @@ public class AssessmentController {
 		logger.info("진입");
 		int sub_seq;
 		
-		sub_seq = Integer.parseInt(req.getParameter("sub_seq"));	
+		sub_seq = Integer.parseInt(req.getParameter("sub_seq"));
+		MemberDto mem = (MemberDto)req.getSession().getAttribute("login");
 		
-		assessmentService.deleteAs(sub_seq);
+		AssessmentDto as = new AssessmentDto();
+		as.setSub_seq_num(sub_seq);
+		as.setStudent_id(mem.getUser_id());
+		
+		assessmentService.deleteAs(as);
 		assessmentService.minusNowStudent(sub_seq);
 		
 		return "삭제 성공";
-	}
+	}	
+	
 	
 	// 학점 계산
 	@RequestMapping(value="sumpoint.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody StudentGradeDTO sumpoint(HttpServletRequest req, Model model) throws Exception {
+	public @ResponseBody StudentDTO sumpoint(HttpServletRequest req, Model model) throws Exception {
 		
 		String student_id = req.getParameter("student_id");
 		System.out.println("student_id : " + student_id);
 		
-		StudentGradeDTO student = assessmentService.getStudent(student_id);
+		StudentDTO student = assessmentService.getStudent(student_id);
 		List<AssessmentDto>list = assessmentService.sumPoint(student_id);
 		SubjectDto sub = new SubjectDto();
 		
@@ -128,7 +134,7 @@ public class AssessmentController {
 		
 		student.setTotalPoint(totalPoint);		// 이번학기 총 수강 학점
 		
-		System.out.println("@@@@@ student : " + student);
+		System.out.println("student : " + student);
 		
 		return student;
 	}

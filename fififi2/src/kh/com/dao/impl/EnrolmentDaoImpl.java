@@ -59,6 +59,12 @@ public class EnrolmentDaoImpl implements EnrolmentDao {
 		return sqlSession.selectList(ns+"getEnrollist", query);
 	}
 
+	@Override
+	public boolean updateReg(SubjectDto sub) throws Exception {		
+		int n = sqlSession.update(ns+"updateReg", sub);
+		return n>0?true:false;
+	}
+
 	
 	
 	

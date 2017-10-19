@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.com.dao.AssessmentDao;
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
-import kh.com.model.StudentGradeDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 
 @Repository
@@ -36,8 +36,8 @@ private static final Logger logger = LoggerFactory.getLogger(AssessmentDaoImpl.c
 	}
 
 	@Override
-	public boolean deleteAs(int sub_seq) {
-		int n = sqlSession.insert(ns + "deleteAs", sub_seq);
+	public boolean deleteAs(AssessmentDto as) {
+		int n = sqlSession.insert(ns + "deleteAs", as);
 		return n>0?true:false;
 	}
 
@@ -59,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(AssessmentDaoImpl.c
 	}
 
 	@Override
-	public StudentGradeDTO getStudent(String student_id) throws Exception {
+	public StudentDTO getStudent(String student_id) throws Exception {
 		return sqlSession.selectOne(ns+"getStudent", student_id);
 	}
 

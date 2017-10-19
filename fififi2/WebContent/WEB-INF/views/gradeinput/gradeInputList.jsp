@@ -47,13 +47,13 @@
 		</c:if>
 	
 		<c:if test="${not empty list}">
-			<table border="1" style="text-align: center">
+			<table border="1" style="text-align: center" class="table table-bordered table-hover">
 			<colgroup>
 				<col width="80">
-				<col width="100">
-				<col width="200">
+				<col width="250">
 				<col width="150">
-				<col width="50">
+				<col width="100">
+				<col width="30">
 			</colgroup>
 		<tr>
 			<td>번호</td> <td>과목이름</td> <td>학번</td> <td>학생 이름</td> <td>점수</td>
@@ -70,6 +70,9 @@
 		</table>
 		<br><br>
 		<button type="submit" class="buttoncss">성적제출</button>
+		
+		<jsp:include page="./gradInputChart.jsp?list=${list }" flush="false"/> 
+		
 		</c:if>
 	</form>
 	

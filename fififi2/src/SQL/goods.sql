@@ -4,7 +4,7 @@ CASCADE CONSTRAINT;
 
 DROP SEQUENCE MARKETS_SEQ;
 
-CREATE TABLE MARKETS(
+CREATE TABLE Goods(
 	status VARCHAR2(20) DEFAULT '판매중' NOT NULL,
 	seq NUMBER PRIMARY KEY,
 	category VARCHAR2(300) NOT NULL,
@@ -19,5 +19,23 @@ CREATE TABLE MARKETS(
 );
 
 --시퀀스 생성
-CREATE SEQUENCE MARKETS_SEQ
-START WITH 1 INCREMENT BY 1;
+--CREATE SEQUENCE Goods_SEQ
+--START WITH 1 INCREMENT BY 1;
+
+--!!!!!!!MAIN_BBS_SEQ를 공유한다!!!
+
+
+--데이터 조회
+SELECT * FROM GOODS;
+
+SELECT 
+	status, seq, category, userId, userName, title, 
+	content, price, address, phone, wdate
+FROM (
+		SELECT status, seq, category, userId, userName, title, 
+				content, price, address, phone, wdate, 
+				ROW_NUMBER() OVER (ORDER BY seq desc) R
+		FROM GOODS
+		WHERE status != '삭제'
+)
+WHERE R BETWEEN 1 and 10

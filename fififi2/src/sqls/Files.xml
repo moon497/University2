@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="Files">
+
+	<!-- 						CREATE 						-->
+	<!-- 게시물 입력 -->
+	<insert id="insertFile" parameterType="File" useGeneratedKeys="false">
+		INSERT INTO files(
+			seq,originalFileName,storedFileName,fileSize,contentType
+		)
+		VALUES(
+			files_SEQ.NEXTVAL, #{originalFileName}, #{storedFileName}, #{fileSize}, #{contentType}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<select id="getFileList" parameterType="Integer" resultType="File">
+		SELECT 
+			f.seq as fileSeq,
+			f.originalFileName,
+			f.storedFileName,
+			f.fileSize,
+			f.contentType,
+			f.downCount,
+			f.createAt
+		FROM postfiles p, files f
+		WHERE p.fileSeq = f.seq
+		AND p.postSeq = #{postSeq}
+	</select>
+	
+	<!-- 						UPDATE 						-->
+	
+	<!-- 						DELETE 						-->
+</mapper>

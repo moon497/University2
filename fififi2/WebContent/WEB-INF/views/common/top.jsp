@@ -100,6 +100,7 @@
 						</ul>
 					</li>
 					</c:if>
+					<li><a href="${pageContext.request.contextPath }/good/list.do" title="벼룩시장">벼룩시장</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

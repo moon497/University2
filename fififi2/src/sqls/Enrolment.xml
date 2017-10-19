@@ -58,7 +58,21 @@
 	ORDER BY SUB_REF ASC, SUB_MAX_STUDENT DESC
 </select>	 
 
-
+<update id="updateReg" parameterType="SubjectDto">
+UPDATE SUBJECT
+SET SUB_CATEGORY = #{sub_category},	
+	SUB_GRADE = #{sub_grade},
+	SUB_SEMESTER = #{sub_semester},
+	SUB_NAME = #{sub_name},
+	SUB_INFO = #{sub_info},
+	SUB_ROOM = #{sub_room},
+	SUB_WEEK = #{sub_week},
+	SUB_S_CLASS = #{sub_s_class},
+	SUB_E_CLASS = #{sub_e_class},
+	SUB_MAX_STUDENT = #{sub_max_student},
+	SUB_POINT = #{sub_point}	
+WHERE SUB_SEQ=#{sub_seq}
+</update>
 
 </mapper>
 

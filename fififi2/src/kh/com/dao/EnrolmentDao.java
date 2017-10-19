@@ -13,5 +13,5 @@ public interface EnrolmentDao {
 	public boolean addClassTime(SubjectDto sub) throws Exception;	// 수업 시간 추가
 	public void deleteReg(int seq) throws Exception;				// 수업 삭제
 	public List<SubjectDto> getEnrollist(QuerySubjectDto query) throws Exception;	// 검색된 과 수업리스트
-	
+	public boolean updateReg(SubjectDto sub) throws Exception;		// 강의 수정 
 }

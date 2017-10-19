@@ -16,7 +16,7 @@
 <tr>
 	<th>번호</th><th>전공/교양</th><th>과목명</th>
 	<th>강의실</th><th>요일/시간</th><th>최대인원</th>
-	<th>시간 추가</th><th>삭제</th>	
+	<th>시간 추가</th><th>수정</th><th>삭제</th>	
 </tr>
 </thead>
 
@@ -35,12 +35,20 @@
 		<td><a href="E_Bbslist.do?sub_seq=${reg.sub_seq }">${reg.sub_name }</a></td>
 		<td>${reg.sub_room }</td>
 		<td>${reg.sub_week } / ${reg.sub_s_class }교시 ~ ${reg.sub_e_class }교시</td>
-		<td>${reg.sub_max_student }</td>		
+		<td>${reg.sub_max_student }</td>
+				
 		<td style="text-align: -webkit-center;">
 		<c:if test="${reg.sub_max_student ne 0 }">
-			<a href="addReg.do?seq=${reg.sub_seq }"><i class="fa fa-plus-square" style="color:green"></i></a>
-		</c:if>
+			<a href="addReg.do?seq=${reg.sub_seq }"><i class="fa fa-plus-square" style="color:blue"></i></a>
+		</c:if>		
 		</td>
+		
+		<td style="text-align: -webkit-center;">
+		<c:if test="${reg.sub_max_student ne 0 }">
+			<a href="updateReg.do?seq=${reg.sub_seq }"><i class="fa fa-cog" style="color:green"></i></a>
+		</c:if>				
+		</td>
+		
 		<td style="text-align: -webkit-center;">
 			<a onclick="deleteReg('${reg.sub_seq}')" href="#"><i class="fa fa-trash-o" style="color:red"></i></a>
 		</td>
@@ -57,8 +65,7 @@ function deleteReg(seq){
 		location.href='delReg.do?seq='+seq;
 	}else{   //취소
 	    return;
-	}
-	
+	}	
 }
 </script>
 </section>

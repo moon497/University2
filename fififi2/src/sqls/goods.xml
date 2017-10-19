@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="Goods">
+
+	<!-- 						CREATE 						-->
+	<!-- 게시물 입력 -->
+	<insert id="insertGood" parameterType="good" useGeneratedKeys="false">
+		INSERT INTO GOODS(
+			seq, category, userId, userName, title, 
+			content, price, address, phone
+		)
+		VALUES(
+			MAIN_BBS_SEQ.NEXTVAL, #{category}, #{userId}, #{userName}, #{title}, 
+			#{content}, #{price}, #{address}, #{phone}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<!-- 게시물들 가져오기 -->
+	<select id="getGoodList" resultType="good" parameterType="good">
+		SELECT 
+			status, seq, category, userId, userName, title, 
+			content, price, address, phone, wdate
+		FROM (
+				SELECT status, seq, category, userId, userName, title, 
+						content, price, address, phone, wdate, 
+						ROW_NUMBER() OVER (ORDER BY seq desc) R
+				FROM GOODS
+				WHERE status != '삭제'
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getGood" resultType="good" parameterType="Integer">
+		SELECT 
+			status, seq, category, userId, userName, title, 
+			content, price, address, phone, wdate
+		FROM GOODS
+		WHERE seq = #{seq}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalBbs" parameterType="String" resultType="Integer">
+		SELECT NVL(COUNT(BBS_SEQ), 0)
+		FROM MAIN_BBS
+		WHERE BOARD_URL = #{boardUrl}
+		AND BBS_STATUS = 1
+	</select>
+	
+	<!-- Update -->
+	<update id="updateBbs" parameterType="MainBBS">
+		UPDATE MAIN_BBS
+		SET BBS_TITLE = #{bbsTitle},
+			BBS_CONTENT = #{bbsContent},
+			BBS_STORED_FILENAME = #{bbsStoredFileName}, 
+			BBS_ORG_FILENAME = #{bbsOrgFileName}
+		WHERE BOARD_URL = #{boardUrl}
+		AND BBS_SEQ = #{bbsSeq}
+	</update>
+	
+	<!-- 						DELETE 						-->
+	<update id="deleteGood" parameterType="Integer">
+		UPDATE GOODS
+		SET status = '삭제'
+		WHERE seq = #{seq}
+	</update>
+</mapper>

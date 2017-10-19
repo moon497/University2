@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.apache.ibatis.type.Alias;
 
 @Alias("Student")
-public class StudentGradeDTO implements Serializable {
+public class StudentDTO implements Serializable {
 
 	private String student_id; 			// USER_ID
 	private String student_name; 		// USER_NAME
@@ -19,9 +19,9 @@ public class StudentGradeDTO implements Serializable {
 	private String student_major;		// 전공
 	private String first_major;			// 학부
 
-	public StudentGradeDTO() {	}
+	public StudentDTO() {	}
 
-	public StudentGradeDTO(String student_id, String student_name, String student_regidate, int student_term,
+	public StudentDTO(String student_id, String student_name, String student_regidate, int student_term,
 			int student_year, int student_total_credit, int student_term_grade, int student_total_grade, int totalPoint,
 			String student_major, String first_major) {
 		super();

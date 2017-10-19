@@ -13,5 +13,5 @@ public interface EnrolmentService {
 	public boolean addClassTime(SubjectDto sub) throws Exception;
 	public void deleteReg(int seq) throws Exception;	
 	public List<SubjectDto> getEnrollist(QuerySubjectDto query) throws Exception;
-	
+	public boolean updateReg(SubjectDto sub) throws Exception;		// 강의 수정 
 }

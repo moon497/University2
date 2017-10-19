@@ -117,8 +117,8 @@ int e_class = 0;
 	</td>
 </tr>
 <td colspan="2">
-	<input type="submit" size="30" id="addBtn" name="addBtn" value="등록">
-	<input type="reset" value="취소">
+	<input type="submit" size="30" id="addBtn" name="addBtn" class="btn btn-info" value="등록">
+	<input type="reset" class="btn btn-danger" value="취소">
 </td>
 
 </table>

@@ -24,9 +24,9 @@
 	ORDER BY SUB_REF ASC, SUB_MAX_STUDENT DESC	
 </select>
 
-<delete id="deleteAs" parameterType="java.lang.Integer">
+<delete id="deleteAs" parameterType="Assessment">
 	DELETE FROM ASSESSMENT
-	WHERE SUB_SEQ_NUM=#{sub_seq}
+	WHERE SUB_SEQ_NUM=#{sub_seq_num} and STUDENT_ID=#{student_id}
 </delete>
 
 <update id="addnowStudent" parameterType="java.lang.Integer">

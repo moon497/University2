@@ -48,7 +48,7 @@ public class CommentController {
         
         //listen
         boardUrl = req.getParameter("boardUrl");
-        page = Integer.parseInt(req.getParameter("page"));
+        page = getParam(req,"page");
 		bbsSeq = getBbsSeq(req);
 		userId = req.getParameter("userId");
 		commentContent = req.getParameter("commentContent");
@@ -66,7 +66,7 @@ public class CommentController {
 		
 		return "redirect:/"+boardUrl+"/detail.do";
 	}
-	
+
 	//대댓글 기능
 	@RequestMapping(value="/comment/reply.do",method=RequestMethod.POST)
 	public String writeReply(RedirectAttributes redirectAttr, HttpServletRequest req, CommentDto comment, Model model) {
@@ -214,6 +214,17 @@ public class CommentController {
 
 	private int getTotalComment(int bbsSeq) {
 		return serv.getTotalComment(bbsSeq);
+	}
+	
+	private int getParam(HttpServletRequest req, String param) {
+		int bbsSeq;
+		
+		if (req.getParameter(param) == null || req.getParameter(param).equals("")) {
+			bbsSeq = 1;
+		} else {
+			bbsSeq = Integer.parseInt(req.getParameter(param));
+		}
+		return bbsSeq;
 	}
 
 	private int getBbsSeq(HttpServletRequest req) {

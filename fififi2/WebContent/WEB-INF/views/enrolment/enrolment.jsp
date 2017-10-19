@@ -48,6 +48,8 @@ $(document).ready(function(){
 						<option value="100">기계공학</option>
 						<option value="200">전기공학</option>
 						<option value="컴퓨터공학과">컴퓨터공학</option>
+						<option value="유아교육학과">유아교육</option>
+						<option value="정치외교학과">정치외교</option>
 					</select>	
 				</td>
 				
