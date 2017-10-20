@@ -30,9 +30,17 @@ td{
 						       location.href = "login.do";
 						    </script>
 					</c:if>
-<table style="width:85%; text-align: center; border: 1px solid black; margin: auto">
-	<col width="100"/><col width="300"/><col width="50"/><col width="100"/>
-	<col width="150"/><col width="100"/><col width="50"/>
+<table class="table table-hover table-bordered">
+<colgroup>
+<col class="col-sm-1" />
+<col class="col-sm-3" />
+<col class="col-sm-1" />
+<col class="col-sm-1" />
+<col class="col-sm-2" />
+<col class="col-sm-2" />
+<col class="col-sm-1" />
+<col class="col-sm-1" />
+</colgroup>
 <tr>
 <th>전공/교양</th><th>과목명</th><th>학년</th><th>교수명</th><th>시간</th>
 <th>학과</th><th>학점</th><th>E-Class</th>
@@ -53,17 +61,9 @@ td{
 		<td>${ec.professor_name }</td>
 		<td>${ec.sub_s_class }교시 ~ ${ec.sub_e_class } 교시 </td>
 		<c:set var="major" value="${ec.major_number }" />
-		<c:choose>
-		    <c:when test="${major eq ''}">
-			   <td>기계공학과</td>
-		    </c:when>
-		    <c:when test="${major eq ''}">
-			   <td>전기공학과</td>
-		    </c:when>
-		    <c:when test="${major eq '컴퓨터공학과'}">
-			   <td>컴퓨터공학과</td>
-		    </c:when>
-		</c:choose>
+		<td>
+		${ec.major_number }
+		</td>
 		<td>${ec.sub_point }</td>
 		<td><a href="#" onclick="seqSumit('${ec.sub_seq}')" ><i class="fa fa-arrow-right" style="color:black;"></i></a></td>
 	</tr>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kh.com.model.GoodDto;
 import kh.com.model.MemberDto;
 import kh.com.service.GoodService;
+import kh.com.util.Pagination;
 
 @Controller
 public class GoodController {
@@ -75,6 +76,7 @@ public class GoodController {
 		
 		//init
 		List<GoodDto> list;
+		Pagination pagination = new Pagination(10, 1);		//FIXME
 		GoodDto query = new GoodDto();
 		
 		
@@ -91,7 +93,7 @@ public class GoodController {
 
 		    Pattern p = Pattern.compile(re1+re2,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 		    
-		    Matcher m = p.matcher(goodDto.toString());
+		    Matcher m = p.matcher(goodDto.getContent());
 		    if (m.find())
 		    {
 		        goodDto.setImgUrl(m.group(1));
@@ -102,6 +104,7 @@ public class GoodController {
 		
 		//set
 		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
 		
 		return "goodList.tiles";
 		

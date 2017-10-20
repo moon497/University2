@@ -27,14 +27,14 @@ td, th {
 </head>
 <body>
 
-<div class="category-content col-sm-9" style="margin-top: 1em;">
+
 
 <button onclick="content(1)" class="buttoncss">정보일괄등록</button> <button onclick="content(2)" class="buttoncss">사진일괄등록</button>
   <button onclick="content(3)" class="buttoncss">상세회원가입</button> <br><br>
 
 
 <!-- 1.일괄등록 -->
-<form action="excelread.do" name="regiexcel" id="_regiexcel"  method="POST" enctype="multipart/form-data" style="display: none;">
+<form action="excelread.do" name="regiexcel" id="_regiexcel"  method="POST" style="display: none;">
 		<input type="file" name="fileread" style=" width : 400px;" id="fileread" required="required" >
 		<button id="_btnRegiexcel">정보일괄등록</button>
 </form> 
@@ -61,7 +61,7 @@ td, th {
 			<td>사진</td>
 			<td required="required">
 				<input type="file" name="file">
-			</td>
+			<td>
 		</tr>
 		<tr>
 			<td>학과</td>
@@ -156,7 +156,7 @@ td, th {
 		</tr>
 		</table>
 </form>        
-</div>
+</section>
 
 <script type="text/javascript">
 

@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -59,6 +60,7 @@
 
 <!-- 로그인 -->
 <c:if test="${not empty login.user_id}">
+<input type="hidden" name="student_id" value="${login.user_id }">
 <!-- 질문테이블 -->
 <table id="studentGrade_table">
 <colgroup>
@@ -71,6 +73,7 @@
 	<col width="100">
 	<col width="50">
 </colgroup>
+	<thead>
 	<tr>
 		<th>학생이름</th>
 		<th>과목명</th>
@@ -79,6 +82,8 @@
 		<th colspan="2">점수</th>
 		<th>이수학점</th>
 	</tr>
+	</thead>
+	<tbody>
 	<c:forEach var="grade" items="${StudentGrade }" varStatus="gs">
 	<c:if test="${0 eq grade.professor_grade}">
 		<table id="assesment_table" style="width: 100%;">
@@ -90,7 +95,7 @@
 			</tr>
 		</table>
 	</c:if>
-	<c:if test="${grade.professor_grade != 0 }">
+	<c:if test="${grade.professor_grade != 0}">
 	<tr>
 		<td>${grade.student_name }</td>
 		<td>${grade.sub_info }</td>
@@ -133,10 +138,58 @@
 				F
 			</c:if>
 		</td>
-		<td>${grade.sub_point }</td>
+		<td>
+			${grade.sub_point }
+			<input type="text" name="grade_confirm" value="${grade.grade_confirm }" >
+			<input type="text" name="listSize" value="${fn:length(StudentGrade) }" >
+		</td>
 	</tr>
 	</c:if> 
 	</c:forEach>
+	</tbody>
 </table>
+<div>
+<button id="gradeConfirmBtn">성적확인 완료</button>
+</div>
 </c:if>
+<script>
+$(document).ready(function () {
+	$('#gradeConfirmBtn').hide();
+	
+	var gradeConfirm = $('grade_confirm').val();
+	var listSize = $('input[name=listSize]').val();
+	if(listSize > 0){
+		$('#gradeConfirmBtn').show();
+	}
+});
+
+$('#gradeConfirmBtn').click(function () {
+	$.ajax({
+        type : "POST",
+        data : { 
+           "student_id" : $('[name="student_id"]').val()
+        },
+        url : "./gradeConfirm.do",
+        success : function(data) {
+        	alert(data);
+        	$('#studentGrade_table > thead').empty();
+        	$('#studentGrade_table > tbody').empty();
+        	$('#studentGrade_table > tbody').prepend("<tr><td colspan='7'>성적을 확인하셨습니다.<br></td></tr>");
+        	$('#gradeConfirmBtn').hide();
+        },
+        error : function(xhr, status, error) {
+           alert("통신불가");
+        }
+     });
+});
+</script>
+
+
+
+
+
 </section> <!-- layout.xml 상 꼭 있어야함 지우지마세요! -->
+
+
+
+

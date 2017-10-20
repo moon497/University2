@@ -25,7 +25,7 @@ $(document).ready(function(){
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover">
 			<tr>
-				<th>전공</th><th>이름</th><th>학년</th><th>학기</th>
+				<th>전공</th><th>이름</th><th>학년</th><th>학기</th><td>학부</td>
 				<th>과 선택</th><th>조회</th>
 			</tr>
 			<tr>
@@ -42,14 +42,19 @@ $(document).ready(function(){
 					<input class="col-sm-12" type="text" id="student_term" name="student_term" value="${student.student_term }" readonly>
 				</td>
 				
+					
 				<td class="col-sm-2">
-					<select id="major" name="major" >			
-						<option value="0" selected="selected">----------</option>
-						<option value="보건행정경영학과">보건행정경영학</option>
-						<option value="컴퓨터공학과">컴퓨터공학</option>
-						<option value="유아교육학과">유아교육</option>
-						<option value="정치외교학과">정치외교</option>
-					</select>	
+					<select onchange="categoryChange(this)" name="student_first_major" required="required" >
+						 <option>학부</option>
+						  <option value="인문과학대학">인문과학대학</option>
+						  <option value="사회과학대학">사회과학대학</option>
+						  <option value="자연과학대학">자연과학대학</option>
+						  <option value="공과대학">공과대학</option>
+						  <option value="의료과학대학">의료과학대학</option>
+					</select>
+						</td>
+					<td class="col-sm-2">
+					<select id="major" name="major" ><option>학과</option></select>
 				</td>
 				
 				<td class="col-sm-1" style="text-align: -webkit-center;">
@@ -454,6 +459,33 @@ function result(){
 		$("#_frmForm").attr({"target":"_self", "action":"main.do"}).submit();
 	}
 	
+}
+
+
+//상세학과 
+function categoryChange(e) {
+	  var student_major_a = ["국어국문학과", "유아교육학과", "영어영문학과", "중문학과", "사학과"];
+	  var student_major_b = ["정치외교학과","언론정보학과","경제학과","소비자학과","사회복지학과"];
+	  var student_major_c = ["수학과","통계학과","물리학과","화학과","생명과학과","해양과학과","식품영양학과"];
+	  var student_major_d = ["컴퓨터공학과","정보통신공학과","전자공학과","전기공학과","전자정보공학과"];
+	  var student_major_e = ["보건행정경영학과","의료생명공학과","의료IT공학과","의예과","간호학과"];
+
+	  var target = document.getElementById("major");
+	 
+	  if(e.value == "인문과학대학") var d = student_major_a;
+	  else if(e.value == "사회과학대학") var d = student_major_b;
+	  else if(e.value == "자연과학대학") var d = student_major_c;
+	  else if(e.value == "공과대학") var d = student_major_d;
+	  else if(e.value == "의료과학대학") var d = student_major_e;
+	 
+	  target.options.length = 0;
+	 
+	  for (x in d) {
+	    var opt = document.createElement("option");
+	    opt.value = d[x];
+	    opt.innerHTML = d[x];
+	    target.appendChild(opt);
+	  } 
 }
 </script>
 

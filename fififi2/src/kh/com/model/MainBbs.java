@@ -20,6 +20,9 @@ public class MainBbs implements Serializable {
 	
 	//List용 추가 변수
 	private int totalComment;
+	
+	//join용 추가 변수
+	private String userName;
 
 	public String getBoardUrl() {
 		return boardUrl;
@@ -125,12 +128,23 @@ public class MainBbs implements Serializable {
 		this.totalComment = totalComment;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public String toString() {
 		return "MainBbs [boardUrl=" + boardUrl + ", bbsRef=" + bbsRef + ", bbsReply=" + bbsReply + ", bbsSeq=" + bbsSeq
 				+ ", userId=" + userId + ", bbsTitle=" + bbsTitle + ", bbsContent=" + bbsContent + ", bbsReadCount="
 				+ bbsReadCount + ", bbsStoredFileName=" + bbsStoredFileName + ", bbsOrgFileName=" + bbsOrgFileName
-				+ ", bbsStatus=" + bbsStatus + ", bbsWdate=" + bbsWdate + ", totalComment=" + totalComment + "]";
+				+ ", bbsStatus=" + bbsStatus + ", bbsWdate=" + bbsWdate + ", totalComment=" + totalComment
+				+ ", userName=" + userName + "]";
 	}
+
+	
 	
 }

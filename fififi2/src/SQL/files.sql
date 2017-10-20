@@ -20,5 +20,7 @@ START WITH 1 INCREMENT BY 1;
 
 --파일 삽입
 
+--
+
 --테이블 조회
 SELECT * FROM files

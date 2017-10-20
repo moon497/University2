@@ -39,3 +39,6 @@ FROM (
 		WHERE status != '삭제'
 )
 WHERE R BETWEEN 1 and 10
+
+--데이터 삭제
+DELETE FROM GOODS;

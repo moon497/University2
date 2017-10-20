@@ -196,6 +196,11 @@
 </definition>
 <definition name="addReg.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/addReg.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+<definition name="upReg.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/regiUpdate.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 
 <!-- 학생 시간표 -->

@@ -85,6 +85,9 @@ public class EnrolmentController {
 		MemberDto user = ((MemberDto)req.getSession().getAttribute("login"));
 		System.out.println("강의등록 af : " + user.toString());			
 		
+		if (user.getUser_auth().equals("200") == false) {
+			return "checkLogin.tiles";
+		}
 		MemberDto prof = assessmentService.getProf(user.getUser_id());		
 	/*	
 		prof.setUser_id(user.getUser_id());

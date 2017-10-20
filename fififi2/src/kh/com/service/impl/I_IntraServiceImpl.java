@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.com.dao.I_IntraDao;
 import kh.com.model.ProfEvaluationDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -17,6 +18,15 @@ public class I_IntraServiceImpl implements I_IntraService {
 	
 	@Autowired
 	I_IntraDao khIntraDao;
+
+	/**
+	 * 학생정보 받아오기
+	 */
+	@Override
+	public StudentDTO StudentInformation(String id) throws Exception {
+		StudentDTO studentinformation = khIntraDao.StudentInformation(id);
+		return studentinformation;
+	}
 	
 	/**
 	 * 해당학생이 평가해야할 강의목록 불러오기
@@ -43,6 +53,14 @@ public class I_IntraServiceImpl implements I_IntraService {
 		List<I_StudentGradeDTO> list = khIntraDao.StudentGradeCheck(Sgrade); 
 		return list;
 	}
+
+	/**
+	 * 학생이 성적확인 완료 클릭
+	 */
+	@Override
+	public boolean updateGradeConfirm(StudentDTO id) throws Exception {
+		return khIntraDao.updateGradeConfirm(id);
+	}
 	
 	/**
 	 * 내정보(학생) : 기본학생정보
@@ -65,7 +83,7 @@ public class I_IntraServiceImpl implements I_IntraService {
 	 * 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음)
 	 */
 	@Override
-	public boolean studentTotalsemester(String id) throws Exception {
+	public boolean studentTotalsemester(StudentDTO id) throws Exception {
 		return khIntraDao.studentTotalsemester(id);
 	}
 	

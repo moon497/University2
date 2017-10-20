@@ -93,11 +93,16 @@
 						aria-haspopup="true" aria-expanded="false">교직원
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath }/regi.do" title="">회원가입</a></li>
+							<c:if test="${login != null && login.user_auth =='300'}">
+		                     <li><a href="${pageContext.request.contextPath }/regi.do" title="">회원가입</a></li>
+		                     </c:if>
 							<li><a href="${pageContext.request.contextPath }/registration.do" title="강의등록">강의등록</a></li>
 							<li><a href="${pageContext.request.contextPath }/registrationlist.do" title="강의목록">나의강의목록</a></li>
 							<li><a href="${pageContext.request.contextPath }/gradeinput.do" title="">성적입력</a></li>
+							
+							<c:if test="${login != null && login.user_auth =='200'}">
 							<li><a href="${pageContext.request.contextPath }/ProInfo.do" title="교수정보">교수정보</a></li>
+							</c:if>
 						</ul>
 					</li>
 					</c:if>

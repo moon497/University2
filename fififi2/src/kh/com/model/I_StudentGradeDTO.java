@@ -22,6 +22,7 @@ public class I_StudentGradeDTO implements Serializable {
 	private int sub_point; 			// 학점
 	private int student_score; 		// 점수(학기별 점수)
 	private int professor_grade;    // 교수(강의)평가(완료여부확인용)
+	private int grade_confirm;		// 강의 성적확인 여부
 
 	public I_StudentGradeDTO() {   }
 
@@ -38,10 +39,25 @@ public class I_StudentGradeDTO implements Serializable {
 		this.student_score = student_score;
 	}
 
+	public I_StudentGradeDTO(String student_name, int sub_seq, int sub_semester, int sub_category,
+			String professor_name, String sub_info, int sub_point, int student_score, int professor_grade, int grade_confirm) {
+		super();
+		this.student_name = student_name;
+		this.sub_seq = sub_seq;
+		this.sub_semester = sub_semester;
+		this.sub_category = sub_category;
+		this.professor_name = professor_name;
+		this.sub_info = sub_info;
+		this.sub_point = sub_point;
+		this.student_score = student_score;
+		this.professor_grade = professor_grade;
+		this.grade_confirm = grade_confirm;
+	}
+
 	public I_StudentGradeDTO(String student_id, String student_name, String student_regidate, int student_term,
 			int student_year, int student_total_credit, int student_term_grade, int student_total_grade, int sub_seq,
 			int sub_semester, int sub_category, String professor_name, String sub_info, int sub_point,
-			int student_score, int professor_grade) {
+			int student_score, int professor_grade, int grade_confirm) {
 		super();
 		this.student_id = student_id;
 		this.student_name = student_name;
@@ -59,6 +75,7 @@ public class I_StudentGradeDTO implements Serializable {
 		this.sub_point = sub_point;
 		this.student_score = student_score;
 		this.professor_grade = professor_grade;
+		this.grade_confirm = grade_confirm;
 	}
 
 	public String getStudent_id() {
@@ -188,16 +205,24 @@ public class I_StudentGradeDTO implements Serializable {
 	public void setProfessor_grade(int professor_grade) {
 		this.professor_grade = professor_grade;
 	}
+	
+	public int getGrade_confirm() {
+		return grade_confirm;
+	}
+
+	public void setGrade_confirm(int grade_confirm) {
+		this.grade_confirm = grade_confirm;
+	}
 
 	@Override
 	public String toString() {
-		return "StudentGradeDTO [student_id=" + student_id + ", student_name=" + student_name + ", student_regidate="
+		return "I_StudentGradeDTO [student_id=" + student_id + ", student_name=" + student_name + ", student_regidate="
 				+ student_regidate + ", student_term=" + student_term + ", student_year=" + student_year
 				+ ", student_total_credit=" + student_total_credit + ", student_term_grade=" + student_term_grade
 				+ ", student_total_grade=" + student_total_grade + ", sub_seq=" + sub_seq + ", sub_semester="
 				+ sub_semester + ", sub_category=" + sub_category + ", professor_name=" + professor_name + ", sub_info="
 				+ sub_info + ", sub_point=" + sub_point + ", student_score=" + student_score + ", professor_grade="
-				+ professor_grade + "]";
+				+ professor_grade + ", grade_confirm=" + grade_confirm + "]";
 	}
 	
 }

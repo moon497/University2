@@ -34,16 +34,24 @@ public class FileUpload {
 				logger.info("upload file start");
 	        	//이름 짓기
 				orgFileName = uploadFile.getOriginalFilename();
+				
+				//확장자
 				ext = orgFileName.substring(orgFileName.lastIndexOf('.'));
+				
 				do {
+					
+					//UUID 생성
 					storedFileName = UUID.randomUUID().toString().replace("-", "")+ext;
 		            file = new File(path + storedFileName);
 					
 					logger.info("저장된 파일 이름: {}",storedFileName);
+					
 				} while (isFile(file));
 	            
+				
 				bytes = uploadFile.getBytes();
-	            //파일 저장
+	            
+				//파일 저장
 	            out = new FileOutputStream(file);
 	            out.write(bytes);
 	            

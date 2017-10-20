@@ -4,9 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Intranet">
 
+<!-- 학생정보 받아오기 -->
+<select id="studentInformation" parameterType="java.lang.String" 
+								resultType="Student">
+	SELECT STUDENT_ID          , 
+	       STUDENT_NAME        , 
+	       STUDENT_REGIDATE    , 
+	       STUDENT_TERM        , 
+	       STUDENT_YEAR        , 
+	       STUDENT_TOTAL_CREDIT, 
+	       STUDENT_TERM_GRADE  , 
+	       STUDENT_TOTAL_GRADE , 
+	       STUDENT_MAJOR       , 
+	       STUDENT_FIRST_MAJOR 
+	  FROM STUDENT
+	 WHERE STUDENT_ID = #{student_id}
+
+</select>
+
 <!-- 강의평가 : 교수&과목 및 모든 정보 불러오기 -->
-<select id="SelectSubNames" parameterType="ProfEvaluationDTO" 
-							   resultType="ProfEvaluationDTO">
+<select id="SelectSubNames" parameterType="kh.com.model.ProfEvaluationDTO" 
+							   resultType="kh.com.model.ProfEvaluationDTO">
 	SELECT SB.SUB_SEQ       , 
 		   SB.SUB_CATEGORY  , 
 		   SB.MAJOR_NUMBER  , 
@@ -24,7 +42,7 @@
 	   AND A.STUDENT_ID = #{student_id}
 	   AND A.STUDENT_ID = ST.STUDENT_ID
 	   AND ST.STUDENT_YEAR = #{student_year}
-	   AND SB.SUB_SEMESTER = #{sub_semester}
+	   AND ST.STUDENT_TERM = #{sub_semester}
   	   AND A.PROFESSOR_GRADE = 0
 </select>
 
@@ -60,9 +78,9 @@
 </update>
 
 <!-- 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음) : 교수평가가 끝나면 확인가능(한 학기가 끝나면 하는걸로 ..) -->
-<update id="updateTotalsemester" parameterType="java.lang.String">
-	UPDATE ASSESSMENT 
-	   SET SEMESTER = SEMESTER +1 
+<update id="updateTotalsemester" parameterType="Student">
+	UPDATE STUDENT 
+	   SET STUDENT_TERM = STUDENT_TERM +1 
 	 WHERE STUDENT_ID = #{student_id}
 </update>
 
@@ -99,5 +117,32 @@
 	   AND ST.STUDENT_ID = #{student_id}
 	   AND AT.SEMESTER = #{semester}
 </select>
+
+<!-- 학생 성적 불러오기 -->
+<select id="studentGrade" parameterType="kh.com.model.ProfEvaluationDTO" 
+						  resultType="kh.com.model.I_StudentGradeDTO">
+	SELECT AT.STUDENT_NAME   , 
+		   SB.SUB_SEQ        ,  
+		   SB.SUB_SEMESTER   , 
+		   SUB_CATEGORY      , 
+		   SB.PROFESSOR_NAME , 
+		   SB.SUB_INFO       , 
+		   SB.SUB_POINT      , 
+		   AT.STUDENT_SCORE  , 
+		   AT.PROFESSOR_GRADE,
+           AT.GRADE_CONFIRM
+	  FROM ASSESSMENT AT, SUBJECT SB
+	 WHERE AT.SUB_SEQ_NUM = SB.SUB_SEQ
+	   AND AT.STUDENT_ID = #{student_id}
+	   AND AT.PROFESSOR_GRADE > 0
+	   AND AT.GRADE_CONFIRM = 0
+</select>
+
+<!-- 학생이 성적확인 완료 클릭 -->
+<update id="updateGradeConfirm" parameterType="Student">
+	UPDATE ASSESSMENT 
+	   SET GRADE_CONFIRM = 1 
+	 WHERE STUDENT_ID = #{student_id}
+</update>
 
 </mapper>

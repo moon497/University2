@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.com.model.MemberDto;
 import kh.com.model.ProfEvaluationDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -42,6 +43,8 @@ public class I_IntranetController {
 		MemberDto login;
 		ProfEvaluationDTO info = new ProfEvaluationDTO();
 		String id = "";
+		int sub_semester = 0;
+		int student_year = 0;
 		
 		// 로그아웃
 		if (((MemberDto)req.getSession().getAttribute("login")) == null) {
@@ -52,15 +55,15 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			
-			info.setStudent_id(id);
-			info.setSub_semester(2);
-			info.setStudent_year(1);
+			StudentDTO studentInformation = khIntraService.StudentInformation(id);
+			
+			info.setStudent_id(studentInformation.getStudent_id());
+			info.setSub_semester(studentInformation.getStudent_term());
+			info.setStudent_year(studentInformation.getStudent_year());
+			
 			List<ProfEvaluationDTO> list =  khIntraService.ProfEvaluation(info);
 			model.addAttribute("assessmentList", list);
 			
-			if(list.size() == 0) {
-				khIntraService.studentTotalsemester(id);
-			}
 		}
 		model.addAttribute("current", "current");
 		model.addAttribute("selector", "assessment");
@@ -230,15 +233,25 @@ public class I_IntranetController {
 			return "수정이 실패되었습니다.";
 		}	
 	}
+
 	
+	/**
+	 * 성적확인 후 성적확인 완료 버튼 클릭시 gradeConfirm.do
+	 */
+	@ResponseBody
+	@RequestMapping(value="gradeConfirm.do", 
+					produces="application/String; charset=utf-8",
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String gradeConfirm(StudentDTO id) throws Exception {
+		logger.info("KhIntranetController gradeConfirm");
+		System.out.println("id : " + id);
+		boolean confirm = khIntraService.studentTotalsemester(id);
+		khIntraService.updateGradeConfirm(id);
+		if(confirm == true) {
+			return "성적확인을 완료하셨습니다.";
+		}else {
+			return "재시도해주세요";
+		}
+		
+	}
 }
-
-
-
-
-
-
-
-
-
-

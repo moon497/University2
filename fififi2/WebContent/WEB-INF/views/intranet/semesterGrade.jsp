@@ -225,7 +225,7 @@ function getTotalStudentScore(totalStudentScore) {
 		<tr>
 			<th>학년</th>
 			<th>학기</th>
-			<th>과목이름</th>
+			<th>과목내용</th>
 			<th>구분</th>
 			<th>점수</th>
 			<th>학점</th>

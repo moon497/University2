@@ -50,7 +50,9 @@
 		</td>
 		
 		<td style="text-align: -webkit-center;">
+		<c:if test="${reg.sub_now_student eq 0 }">
 			<a onclick="deleteReg('${reg.sub_seq}')" href="#"><i class="fa fa-trash-o" style="color:red"></i></a>
+		</c:if>	
 		</td>
 	</tr>
 	</c:forEach>

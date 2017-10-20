@@ -43,19 +43,19 @@
 	    	<!-- 10페이지 이전 -->
 	    	<c:choose>
 		  	<c:when test="${pagination.currPage <= pagination.pageLimit }">
-		  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>	  	
+		  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-left" style="font-size: x-large;"></i></a></li>	  	
 		  	</c:when>
 		  	<c:otherwise>
-		  		<li><a href="./list.do?page=${pagination.currPage - pagination.pageLimit }"><i class="fa fa-angle-double-left"></i></a></li>	 	  	
+		  		<li><a href="./list.do?page=${pagination.currPage - pagination.pageLimit }"><i class="fa fa-angle-double-left" style="font-size: x-large;"></i></a></li>	 	  	
 		  	</c:otherwise>
 		  </c:choose> 
 		  <!-- 1페이지 이전 -->
 		  <c:choose>
 		  	<c:when test="${pagination.currPage == 1 }">
-		  		<li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>	  	
+		  		<li class="disabled"><a href="#"><i class="fa fa-angle-left" style="font-size: x-large;"></i></a></li>	  	
 		  	</c:when>
 		  	<c:otherwise>
-		  		<li><a href="./list.do?page=${pagination.currPage - 1 }"><i class="fa fa-angle-left"></i></a></li>	 	  	
+		  		<li><a href="./list.do?page=${pagination.currPage - 1 }"><i class="fa fa-angle-left" style="font-size: x-large;"></i></a></li>	 	  	
 		  	</c:otherwise>
 		  </c:choose>
 		  <!-- 페이징 설정만큼 돌리기 -->
@@ -74,16 +74,16 @@
 		  <!-- 1페이지 이후 -->
 		  <c:choose>
 		  	<c:when test="${pagination.currPage == pagination.finalEndPage }">
-		  		<li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>	  	
+		  		<li class="disabled"><a href="#"><i class="fa fa-angle-right" style="font-size: x-large;"></i></a></li>	  	
 		  	</c:when>
 		  	<c:otherwise>
-		  		<li><a href="./list.do?page=${pagination.currPage + 1 }"><i class="fa fa-angle-right"></i></a></li>	 	  	
+		  		<li><a href="./list.do?page=${pagination.currPage + 1 }"><i class="fa fa-angle-right" style="font-size: x-large;"></i></a></li>	 	  	
 		  	</c:otherwise>
 		  </c:choose>
 		  <!-- 10페이지 이후 -->
 		  <c:choose>
 		  	<c:when test="${pagination.currPage + pagination.pageLimit > pagination.finalEndPage }">
-		  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>	  	
+		  		<li class="disabled"><a href="#"><i class="fa fa-angle-double-right" style="font-size: x-large;"></i></a></li>	  	
 		  	</c:when>
 		  	<c:otherwise>
 		  		<li><a href="./list.do?page=${pagination.currPage + pagination.pageLimit }"><i class="fa fa-angle-double-right"></i></a></li>	 	  	

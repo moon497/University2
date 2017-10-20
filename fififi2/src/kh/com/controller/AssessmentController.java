@@ -20,11 +20,10 @@ import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 import kh.com.service.EnrolmentService;
-import kh.com.service.LoginService;
 
 @Controller
 public class AssessmentController {
-  
+	
 	@Autowired
 	AssessmentService assessmentService;
 	
@@ -139,23 +138,6 @@ public class AssessmentController {
 		
 		return student;
 	}
-	/*
-	@RequestMapping(value="schedule.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String schedule(HttpServletRequest req, Model model) throws Exception {
-		
-		MemberDto mem = (MemberDto)req.getSession().getAttribute("login");
-		StudentDTO student = assessmentService.getStudent(mem.getUser_id());
-		
-		//학생이 듣는 과목 불러오기 
-		List<AssessmentDto>list = assessmentService.sumPoint(student.getStudent_id());
-		
-		model.addAttribute("student", student);
-		model.addAttribute("sublist", list);
-		
-		return "schedule.tiles";
-	}
-	*/
-	// 교수정보
 	@RequestMapping(value="ProInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String ProInfo(HttpServletRequest req, Model model) throws Exception {
 		logger.info("ProInfo");
@@ -171,6 +153,7 @@ public class AssessmentController {
 		prof.setUser_name(user.getUser_name());
 		prof.setUser_email(user.getUser_email());
 		prof.setUser_phone(user.getUser_phone());
+		prof.setUser_photo(user.getUser_photo());
 		
 		System.out.println(prof.toString());
 		
@@ -190,6 +173,7 @@ public class AssessmentController {
 		
 		return "redirect:/ProInfo.do";
 	}
+	
 }
 
 

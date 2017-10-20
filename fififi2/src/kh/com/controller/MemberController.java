@@ -26,7 +26,7 @@ public class MemberController {
 	/**
 	 * 메인페이지 
 	 */
-	@RequestMapping(value="main.do", method=RequestMethod.GET)
+	@RequestMapping(value="main.do", method= {RequestMethod.GET,RequestMethod.POST})
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("진입");
 		//init

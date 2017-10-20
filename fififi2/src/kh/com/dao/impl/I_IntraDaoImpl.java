@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.I_IntraDao;
 import kh.com.model.ProfEvaluationDTO;
+import kh.com.model.StudentDTO;
 import kh.com.model.I_StudentBasicInfoDTO;
 import kh.com.model.I_StudentGradeDTO;
 import kh.com.model.I_semesterGradeDTO;
@@ -25,7 +26,16 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	private String intra = "Intranet.";
 	
 	// 성적확인
-	private String studentGrade = "studentGrade.";
+	// private String studentGrade = "studentGrade.";
+	
+	/**
+	 * 학생정보 받아오기
+	 */
+	@Override
+	public StudentDTO StudentInformation(String id) throws Exception {
+		StudentDTO studentinformation = sqlsession.selectOne(intra+"studentInformation", id);
+		return studentinformation;
+	}
 	
 	/**
 	 * 해당학생이 평가해야할 강의목록 불러오기
@@ -51,8 +61,18 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	 */
 	@Override
 	public List<I_StudentGradeDTO> StudentGradeCheck(ProfEvaluationDTO Sgrade) throws Exception {
-		List<I_StudentGradeDTO> PSdto = sqlsession.selectList(studentGrade+"studentGrade", Sgrade);
+		List<I_StudentGradeDTO> PSdto = sqlsession.selectList(intra+"studentGrade", Sgrade);
 		return PSdto;
+	}
+	
+
+	/**
+	 * 학생이 성적확인 완료 클릭
+	 */
+	@Override
+	public boolean updateGradeConfirm(StudentDTO id) throws Exception {
+		int n = sqlsession.update(intra + "updateGradeConfirm", id);
+		return n!=0?true:false;
 	}
 	
 	/**
@@ -78,7 +98,7 @@ public class I_IntraDaoImpl implements I_IntraDao {
 	 * 학생 총 수료학기 증가(다른의미로 학년으로 볼 수 있음)
 	 */
 	@Override
-	public boolean studentTotalsemester(String id) throws Exception {
+	public boolean studentTotalsemester(StudentDTO id) throws Exception {
 		int totalsemester = sqlsession.update(intra+"updateTotalsemester", id);
 		return totalsemester!=0?true:false;
 	}
@@ -100,5 +120,5 @@ public class I_IntraDaoImpl implements I_IntraDao {
 		List<I_semesterGradeDTO> list = sqlsession.selectList(intra+"semesterGradechoice", grade);
 		return list;
 	}
-
+	
 }
