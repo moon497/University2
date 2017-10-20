@@ -62,10 +62,23 @@ public class AssessmentServiceImpl implements AssessmentService {
 	@Override
 	public MemberDto getProf(String prof_id) throws Exception {
 		return assessmentDao.getProf(prof_id);
+	}	
+	
+	@Override
+	public MemberDto getUsers(String user_id) throws Exception {
+		return assessmentDao.getUsers(user_id);
 	}
 
+	@Override
+	public boolean updateProInfo(MemberDto mem) throws Exception {
+		return assessmentDao.updateProInfo(mem);
+	}
 	
-	
+	@Override
+	public boolean updateProInfo2(MemberDto mem) throws Exception {		
+		return assessmentDao.updateProInfo2(mem);
+	}
+
 	//정혜
 	@Override
 	public List<AssessmentDto> gradeList(AssessmentDto dto) {

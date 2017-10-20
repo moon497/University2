@@ -56,7 +56,22 @@
 	WHERE PROF_ID=#{prof_id}
 </select>
 
+<select id="getUsers" parameterType="java.lang.String" resultType="kh.com.model.MemberDto">
+	SELECT * FROM USERS
+	WHERE USER_ID=#{user_id}
+</select>
 
+<update id="updateProInfo" parameterType="kh.com.model.MemberDto">
+	UPDATE PROFESSOR
+	SET PROF_ROOM=#{prof_room}, PROF_DEGREE=#{prof_degree}
+	WHERE PROF_ID=#{user_id}
+</update>
+
+<update id="updateProInfo2" parameterType="kh.com.model.MemberDto">
+	UPDATE USERS
+	SET USER_EMAIL=#{user_email}, USER_PHONE=#{user_phone}
+	WHERE USER_ID=#{user_id}
+</update>
 
 <!-- 성적 입력창 -->
 <select id="gradeList" parameterType="Assessment" resultType="Assessment">

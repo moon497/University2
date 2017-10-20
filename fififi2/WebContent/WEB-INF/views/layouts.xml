@@ -198,6 +198,16 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/addReg.jsp"/>
 </definition>
 
+<!-- 학생 시간표 -->
+<definition name="schedule.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/schedule.jsp"/>
+</definition>
+
+<!-- 교수 정보 -->
+<definition name="Pro.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/professor_page.jsp"/>
+</definition>
+
 
 
 

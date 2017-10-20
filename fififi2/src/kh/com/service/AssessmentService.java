@@ -20,7 +20,9 @@ public interface AssessmentService {
 	
 	public StudentDTO getStudent(String student_id) throws Exception;
 	public MemberDto getProf(String prof_id) throws Exception;
-	
+	public MemberDto getUsers(String user_id) throws Exception;	
+	public boolean updateProInfo(MemberDto mem) throws Exception;
+	public boolean updateProInfo2(MemberDto mem) throws Exception;
 	
 	//정혜
 	public List<AssessmentDto> gradeList(AssessmentDto dto);			// 성적확인 리스트	

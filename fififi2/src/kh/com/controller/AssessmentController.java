@@ -20,10 +20,11 @@ import kh.com.model.StudentDTO;
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 import kh.com.service.EnrolmentService;
+import kh.com.service.LoginService;
 
 @Controller
 public class AssessmentController {
-	
+  
 	@Autowired
 	AssessmentService assessmentService;
 	
@@ -129,7 +130,7 @@ public class AssessmentController {
 		if(student.getStudent_term() % 2 == 1) {
 			student.setStudent_term(1);
 		}if(student.getStudent_term() % 2 == 0) {
-			student.setStudent_term(2);
+			student.setStudent_term(2); 
 		}   
 		
 		student.setTotalPoint(totalPoint);		// 이번학기 총 수강 학점
@@ -138,7 +139,57 @@ public class AssessmentController {
 		
 		return student;
 	}
+	/*
+	@RequestMapping(value="schedule.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String schedule(HttpServletRequest req, Model model) throws Exception {
+		
+		MemberDto mem = (MemberDto)req.getSession().getAttribute("login");
+		StudentDTO student = assessmentService.getStudent(mem.getUser_id());
+		
+		//학생이 듣는 과목 불러오기 
+		List<AssessmentDto>list = assessmentService.sumPoint(student.getStudent_id());
+		
+		model.addAttribute("student", student);
+		model.addAttribute("sublist", list);
+		
+		return "schedule.tiles";
+	}
+	*/
+	// 교수정보
+	@RequestMapping(value="ProInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String ProInfo(HttpServletRequest req, Model model) throws Exception {
+		logger.info("ProInfo");
+				
+		MemberDto login = (MemberDto)req.getSession().getAttribute("login");
+		System.out.println("mem : " + login.toString());
+		
+		MemberDto user = assessmentService.getUsers(login.getUser_id());
+		System.out.println("user : " + user.toString());
+		
+		MemberDto prof = assessmentService.getProf(login.getUser_id());
+		prof.setUser_id(user.getUser_id());
+		prof.setUser_name(user.getUser_name());
+		prof.setUser_email(user.getUser_email());
+		prof.setUser_phone(user.getUser_phone());
+		
+		System.out.println(prof.toString());
+		
+		model.addAttribute("prof", prof);
+		
+		return "Pro.tiles";
+	}
 	
+	// 교수 정보수정
+	@RequestMapping(value="updateProInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String updateProInfo(MemberDto mem, Model model) throws Exception {
+		logger.info("updateProInfo");
+		System.out.println("정보수정 : " + mem.toString());
+		
+		assessmentService.updateProInfo(mem);	// prof 테이블 수정
+		assessmentService.updateProInfo2(mem);	// user 테이블 수정
+		
+		return "redirect:/ProInfo.do";
+	}
 }
 
 

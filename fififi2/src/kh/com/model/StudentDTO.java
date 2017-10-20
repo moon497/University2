@@ -7,6 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("Student")
 public class StudentDTO implements Serializable {
 
+
 	private String student_id; 			// USER_ID
 	private String student_name; 		// USER_NAME
 	private String student_regidate; 	// 입학일
@@ -128,13 +129,14 @@ public class StudentDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "StudentGradeDTO [student_id=" + student_id + ", student_name=" + student_name + ", student_regidate="
+		return "StudentDTO [student_id=" + student_id + ", student_name=" + student_name + ", student_regidate="
 				+ student_regidate + ", student_term=" + student_term + ", student_year=" + student_year
 				+ ", student_total_credit=" + student_total_credit + ", student_term_grade=" + student_term_grade
 				+ ", student_total_grade=" + student_total_grade + ", totalPoint=" + totalPoint + ", student_major="
 				+ student_major + ", first_major=" + first_major + "]";
 	}
 
+	
 	
 	
 }

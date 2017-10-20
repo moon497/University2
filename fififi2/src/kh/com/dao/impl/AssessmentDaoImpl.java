@@ -66,10 +66,37 @@ private static final Logger logger = LoggerFactory.getLogger(AssessmentDaoImpl.c
 	@Override
 	public MemberDto getProf(String prof_id) throws Exception {		
 		return sqlSession.selectOne(ns+"getProf", prof_id);
+	}	
+	
+	@Override
+	public MemberDto getUsers(String user_id) throws Exception {
+		MemberDto dto;
+		
+		dto = sqlSession.selectOne(ns+"getUsers", user_id);
+		
+		System.out.println("dto: " + dto.toString());
+		
+		return dto;
 	}
 
-	
-	
+	@Override
+	public boolean updateProInfo(MemberDto mem) throws Exception {
+		System.out.println("updateProInfo daoimpl");
+		System.out.println("prof 변경 : " + mem.toString());
+		
+		int n = sqlSession.update(ns+"updateProInfo", mem);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean updateProInfo2(MemberDto mem) throws Exception {
+		System.out.println("updateProInfo2 daoimpl");
+		System.out.println("users 변경 : " + mem.toString());
+		
+		int n = sqlSession.update(ns+"updateProInfo2", mem);
+		return n>0?true:false;
+	}
+
 	//정혜
 	@Override
 	public List<AssessmentDto> gradeList(AssessmentDto dto) {
