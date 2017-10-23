@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.com.model.AssessmentDto;
 import kh.com.model.MemberDto;
-import kh.com.model.StudentDTO;
+import kh.com.model.StudentDTO; 
 import kh.com.model.SubjectDto;
 import kh.com.service.AssessmentService;
 import kh.com.service.EnrolmentService;

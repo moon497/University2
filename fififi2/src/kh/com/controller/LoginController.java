@@ -59,6 +59,9 @@ public class LoginController {
    
    @RequestMapping(value="login.do", method={RequestMethod.GET, RequestMethod.POST})
    public String login(Model model) throws Exception{
+	  System.out.println("재현이가 수정한 소스코드");
+	  System.out.println("재현이가 수정한 소스코드2");
+	   
       logger.info("login.do");
       model.addAttribute("doc_title", "기타");
       model.addAttribute("doc_title_sub", "로그인");

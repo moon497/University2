@@ -28,6 +28,7 @@ public class FileController {
 	@RequestMapping(value="/file/image/upload.do",method=RequestMethod.POST)
 	public @ResponseBody String insertImage(MultipartHttpServletRequest req, MultipartFile file) {
 		logger.info("진입");
+		System.out.println("지윤이가 수정한 소스코드");
 		//init
 		FileUpload fileUpload;
 		String path;
