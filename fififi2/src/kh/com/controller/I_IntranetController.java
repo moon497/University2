@@ -35,16 +35,16 @@ public class I_IntranetController {
 	/**
 	 * 강의평가 : 해당학생이 평가해야할 강의목록 불러오기
 	 */
-	@RequestMapping(value="assessment.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String assessment(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="assessment.do", 
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String assessment(Model model, HttpServletRequest req) 
+													throws Exception {
 		logger.info("KhIntranetController assessment");
 		
 		//init
 		MemberDto login;
 		ProfEvaluationDTO info = new ProfEvaluationDTO();
 		String id = "";
-		int sub_semester = 0;
-		int student_year = 0;
 		
 		// 로그아웃
 		if (((MemberDto)req.getSession().getAttribute("login")) == null) {
@@ -55,15 +55,19 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			
-			StudentDTO studentInformation = khIntraService.StudentInformation(id);
+			// 학생정보를 가져오는 메소드
+			StudentDTO studentInformation 
+						= khIntraService.StudentInformation(id);
 			
+			// 받아온 학생정보를 통해서 평가 강의목록 가져오기위해  해당 dto에 필요한 값 저장
 			info.setStudent_id(studentInformation.getStudent_id());
 			info.setSub_semester(studentInformation.getStudent_term());
 			info.setStudent_year(studentInformation.getStudent_year());
 			
-			List<ProfEvaluationDTO> list =  khIntraService.ProfEvaluation(info);
+			// 평가해야할 강의목록 리스트 가져오기
+			List<ProfEvaluationDTO> list 
+						= khIntraService.ProfEvaluation(info);
 			model.addAttribute("assessmentList", list);
-			
 		}
 		model.addAttribute("current", "current");
 		model.addAttribute("selector", "assessment");
@@ -92,8 +96,10 @@ public class I_IntranetController {
 	/**
 	 * 성적확인
 	 */
-	@RequestMapping(value="student_grade.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String studentGrade(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="student_grade.do", 
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String studentGrade(Model model, HttpServletRequest req) 
+													throws Exception {
 		logger.info("KhIntranetController studentGrade");
 		model.addAttribute("doc_title", "성적확인");
 		model.addAttribute("selector", "studentGrade");
@@ -113,18 +119,17 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			info.setStudent_id(id);
-			System.out.println("info id : " + id);
-			List<I_StudentGradeDTO> sdto = khIntraService.StudentGradeCheck(info);
-			for(int i=0; i < sdto.size(); i++) {
-				logger.info("KhIntranetController studentGrade sdto : " + sdto.toString());
-			}
+			
+			// 
+			List<I_StudentGradeDTO> sdto 
+					= khIntraService.StudentGradeCheck(info);
 			model.addAttribute("StudentGrade", sdto);
 		}
 		return "studentGrade.tiles";
 	}
 	
 	/**
-	 * 내정보 updateInfo.do
+	 * 내정보 수정
 	 */
 	@RequestMapping(value="updateInfo.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String updateInfo(Model model, HttpServletRequest req) throws Exception {
@@ -143,14 +148,13 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			I_StudentBasicInfoDTO basicInfo = khIntraService.studentBasicInfo(id);
-			System.out.println("BasicInfo : " + basicInfo.toString());
 			model.addAttribute("basicinfo", basicInfo);
 		}
 		return "updateInfo.tiles";
 	}
 	
 	/**
-	 * 내정보 semesterGrade.do
+	 * 학생 모든 성적확인
 	 */
 	@RequestMapping(value="semesterGrade.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String semesterGrade(Model model, HttpServletRequest req) throws Exception {
@@ -203,7 +207,7 @@ public class I_IntranetController {
 	}
 	
 	/**
-	 * 학기별 성적확인 
+	 * 학생의 학기별 성적확인 
 	 */
 	@ResponseBody
 	@RequestMapping(value="semesterGradechoice.do", 
