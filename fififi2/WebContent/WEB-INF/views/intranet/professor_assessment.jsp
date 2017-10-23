@@ -79,8 +79,9 @@
 
 <!-- 교수선택 -->
 <select id="choiceProfessor">
+	<option selected="selected" style="text-align: center;">선택</option>
 	<c:forEach var="pe" items="${assessmentList }" varStatus="PeS">
-		<option name="sub_seq" value="${pe.sub_seq }" selected="selected">${pe.professor_name } 교수님 > ${pe.sub_name }</option>
+		<option name="sub_seq" value="${pe.sub_seq }">${pe.professor_name } 교수님 > ${pe.sub_name }</option>
 	</c:forEach>
 </select>
 <!-- 질문테이블 -->
@@ -117,10 +118,10 @@
 		};
 	%>
 	<tr>
-		<td rowspan="6">
+		<td rowspan="5">
 			<input type="text" name="professor_name" readonly="readonly" class="removeInputStyle"> 교수님
 		</td>
-		<td rowspan="6">
+		<td rowspan="5">
 			<input type="text" name="sub_name" readonly="readonly" class="removeInputStyle">
 		</td>
 		<%
@@ -148,14 +149,6 @@
 	<%
 		}
 	%>
-	<tr>
-		<td>
-			기타<br>의견
-		</td>
-		<td colspan="8">
-			<textarea id="othersThings" style="width: 100%; height:59px;">기타의견</textarea>
-		</td>
-	</tr>
 	
 </table>
 <button type="button" id="submitBtn">제출하기</button>
