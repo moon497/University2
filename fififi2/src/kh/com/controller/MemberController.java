@@ -30,6 +30,8 @@ public class MemberController {
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("진입");
 		System.out.println("깃허브를 통한 협업!");
+		System.out.println("멤버컨트롤러를 맡고 있는 정혜");
+		
 		//init
 		List<MainBbs> noticeList;
 		List<MainBbs> todayList;
