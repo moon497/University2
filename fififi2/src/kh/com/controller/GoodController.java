@@ -34,6 +34,7 @@ public class GoodController {
 	@RequestMapping(value= "/good/write.do",method=RequestMethod.GET)
 	public String writeGet(HttpServletRequest req) {
 		logger.info("진입");
+		System.out.println("종희가 수정한 소스코드");
 		
 		//init
 		HttpSession session;
