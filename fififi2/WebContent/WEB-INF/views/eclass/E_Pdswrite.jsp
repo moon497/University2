@@ -55,7 +55,7 @@ int tday = cal.get(Calendar.DATE);
 		</select>일
 		<select name="sday">
 		<%
-		for(int i=1; i<=cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){
+		for(int i=tday; i<=cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){
 			%>
 			<option <%=(tday+"").equals(i+"")?"selected='selected'":""%> value="<%=i%>">
 				<%=i %>
@@ -89,7 +89,7 @@ int tday = cal.get(Calendar.DATE);
 		</select>일
 		<select name="eday">
 		<%
-		for(int i=1; i<=cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){
+		for(int i=tday; i<=cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){
 			%>
 			<option <%=(tday+"").equals(i+"")?"selected='selected'":""%> value="<%=i%>">
 				<%=i %>
