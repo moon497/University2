@@ -41,6 +41,7 @@ public class BbsController {
 	@RequestMapping(value= "/{boardUrl}/write.do",method=RequestMethod.GET)
 	public String write(@PathVariable String boardUrl, HttpServletRequest req) {
 		logger.info("/{}/write.do",boardUrl);
+		System.out.println("깃을 통한 프로젝트 관리!");
 		
 		//init
 		HttpSession session;
