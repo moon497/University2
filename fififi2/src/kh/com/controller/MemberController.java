@@ -29,9 +29,6 @@ public class MemberController {
 	@RequestMapping(value="main.do", method= {RequestMethod.GET,RequestMethod.POST})
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("진입");
-		System.out.println("깃허브를 통한 협업!");
-		System.out.println("멤버컨트롤러를 맡고 있는 정혜");
-		System.out.println("계속 수정하고 있는 정혜");
 		
 		//init
 		List<MainBbs> noticeList;
@@ -67,12 +64,14 @@ public class MemberController {
 		for (MainBbs mainBbs : todayList) {
 			mainBbs.setBbsContent(mainBbs.getBbsContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 			logger.info(mainBbs.toString());
-		}		
-				
-		//요소 추가
-		model.addAttribute("notice1", noticeList.get(0));
-		model.addAttribute("notice2", noticeList.get(1));
-		model.addAttribute("notice3", noticeList.get(2));
+		}
+		
+		//요소 추가		
+		if (noticeList.isEmpty() == false) {
+			model.addAttribute("notice1", noticeList.get(0));
+			model.addAttribute("notice2", noticeList.get(1));
+			model.addAttribute("notice3", noticeList.get(2));
+		}
 		model.addAttribute("todayList", todayList);
 		
 		return "index.tiles";
