@@ -73,7 +73,7 @@
 </select>
 학기 
 <select class="semester">
-<option>학년선택</option>
+<option>학기선택</option>
 </select>
 <script>
 // 학년에 따라 학기를 다르게 보여줌.
@@ -88,9 +88,12 @@ $('.year').change(function () {
 		$(".semester").html("<option>선택</option><option value='5'>1 학기 </option><option value='6'>2 학기 </option>");
 	}else if(year == 4){
 		$(".semester").html("<option>선택</option><option value='7'>1 학기 </option><option value='8'>2 학기 </option>");
+	}else if(year = '선택'){
+		$(".semester").html("<option>선택</option>");
 	}; 
 });
 
+// 학기선택
 $('.semester').change(function () {
 $('#studentGrade_table > tbody').empty();
 // 클릭 후 이벤트
@@ -119,12 +122,11 @@ $.ajax({
        }
     });
     
-var totalStudentScore = 0; //총점수
-var totalStudentSubScore; // 이수학점
+var totalStudentScore = 0; 		//총점수
+var totalStudentSubScore; 		// 이수학점
 function setHtml(comment) {
-	var totalStudentscore; // 점수
-	var sub_category; // 전공 & 비전공
-	//var student_score; // 점수
+	var totalStudentscore; 		// 점수
+	var sub_category; 		// 전공 & 비전공
 	if(comment.sub_category == 100){
 		sub_category = "전공";
 	}else{
@@ -229,9 +231,7 @@ function getTotalStudentScore(totalStudentScore) {
 			<th>구분</th>
 			<th>점수</th>
 			<th>학점</th>
-			<th>총학점</th>
 			<th>이수학점</th>
-			<th>총이수학점</th>
 		</tr>
 	</thead>
 	<!-- --------------------------------------------------------------- 총 점수 및 학점을 위한 영역  -->
@@ -315,7 +315,22 @@ function getTotalStudentScore(totalStudentScore) {
 					F
 				</c:if> 
 			</td>
-			<td><!-- 총학점 -->
+			<td><!-- 이수학점 -->
+				${grade.sub_point }
+			</td>
+		</tr>
+	</c:forEach>
+	</tbody>
+	</table>
+	
+	<table id="studentGrade_table" style="width:100%; margin-top: 10px;">
+	<colgroup>
+		<col width="35">
+		<col width="180">
+	</colgroup>
+		<tr>
+			<th>총 학점</th>
+			<td>
 				<c:if test="${totalsub_point <= 100 && totalsub_point >= 95 }">
 					A+
 				</c:if>
@@ -344,17 +359,12 @@ function getTotalStudentScore(totalStudentScore) {
 					F
 				</c:if>
 			</td>
-			<td><!-- 이수학점 -->
-				${grade.sub_point }
-			</td>
-			<td>
-				<!-- 총 이수학점 -->
-				${sumsub_point }
-			</td>
-			
 		</tr>
-	</c:forEach>
-	</tbody>
+	
+		<tr>
+			<th>총 이수학점</th>
+			<td>${sumsub_point }</td>
+		</tr>
 	</table>
 	
 </form>
