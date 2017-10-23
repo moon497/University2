@@ -80,6 +80,7 @@ public class I_IntranetController {
 	@RequestMapping(value="assessmentAf.do", produces="application/String; charset=utf-8", method={RequestMethod.GET, RequestMethod.POST})
 	public String assessmentAf(ProfEvaluationDTO pdfo) throws Exception {
 		logger.info("KhIntranetController assessmentAf");
+		logger.info("KhIntranetController assessmentAf pdfo : " + pdfo.toString());
 		boolean b = khIntraService.addProfessorGrade(pdfo);
 		if(b == true) {
 			return "평가를 성공적으로 하였습니다.";
@@ -112,7 +113,11 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			info.setStudent_id(id);
+			System.out.println("info id : " + id);
 			List<I_StudentGradeDTO> sdto = khIntraService.StudentGradeCheck(info);
+			for(int i=0; i < sdto.size(); i++) {
+				logger.info("KhIntranetController studentGrade sdto : " + sdto.toString());
+			}
 			model.addAttribute("StudentGrade", sdto);
 		}
 		return "studentGrade.tiles";
@@ -166,8 +171,10 @@ public class I_IntranetController {
 		// 로그인
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
-			grade.setStudent_id(id);
-			grade.setStudent_term(5);
+			
+			StudentDTO studentInformation = khIntraService.StudentInformation(id);
+			grade.setStudent_id(studentInformation.getStudent_id());
+			grade.setStudent_term(studentInformation.getStudent_term());
 			
 			//DB 받음
 			List<I_semesterGradeDTO> gradeList = khIntraService.semesterGrade(grade);
@@ -203,14 +210,10 @@ public class I_IntranetController {
 					method={RequestMethod.GET, RequestMethod.POST})
 	public List<I_semesterGradeDTO> semesterGradechoice(I_semesterGradeDTO grade) throws Exception {
 		logger.info("KhIntranetController semesterGradechoice");
+		logger.info("KhIntranetController semesterGradechoice grade : " + grade.toString());
 		int grades = grade.getStudent_term();
 		System.out.println(grade.toString());
 		List<I_semesterGradeDTO> semelist = khIntraService.semesterGradechoice(grade);
-		for(int i=0; i < semelist.size(); i++) {
-			System.out.println("★★★★★★★★★★★ : " + semelist.get(i).toString());
-		}
-		Map<String, Object> map = new HashedMap<>();
-		map.put("gradelist", semelist);
 		
 		return semelist;
 	}
@@ -224,6 +227,7 @@ public class I_IntranetController {
 					method={RequestMethod.GET, RequestMethod.POST})
 	public String updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception {
 		logger.info("KhIntranetController updateStudentInfo");
+		logger.info("KhIntranetController updateStudentInfo info : " + info.toString());
 		System.out.println("KhIntranetController I_StudentBasicInfoDTO : " + info.toString());
 		boolean b = khIntraService.updateStudentInfo(info);
 		System.out.println("b : " + b);
@@ -233,7 +237,6 @@ public class I_IntranetController {
 			return "수정이 실패되었습니다.";
 		}	
 	}
-
 	
 	/**
 	 * 성적확인 후 성적확인 완료 버튼 클릭시 gradeConfirm.do
@@ -255,3 +258,13 @@ public class I_IntranetController {
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+

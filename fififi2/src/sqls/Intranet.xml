@@ -98,6 +98,7 @@
 	 WHERE SB.SUB_SEQ = AT.SUB_SEQ_NUM
    	   AND ST.STUDENT_ID = AT.STUDENT_ID
 	   AND ST.STUDENT_ID = #{student_id}
+	   AND AT.PROFESSOR_GRADE > 0
 </select>
 
 <!-- 학년 / 학기별 성적 검색 -->

@@ -140,8 +140,8 @@
 		</td>
 		<td>
 			${grade.sub_point }
-			<input type="text" name="grade_confirm" value="${grade.grade_confirm }" >
-			<input type="text" name="listSize" value="${fn:length(StudentGrade) }" >
+			<input type="hidden" name="grade_confirm" value="${grade.grade_confirm }" >
+			<input type="hidden" name="listSize" value="${fn:length(StudentGrade) }" >
 		</td>
 	</tr>
 	</c:if> 

@@ -30,7 +30,7 @@ $(document).ready(function() {
       <h4>SERVICES</h4>
       <ul id="sidebar-assessment">
          <li class="clicks"><a href="assessment.do">교수평가</a></li>
-         <li class="clicks" style="    display: none;"><a href="student_grade.do">성적확인</a></li>
+         <li class="clicks"><a href="student_grade.do">성적확인</a></li>
          <li class="clicks"><a href="updateInfo.do" class="studentbasic">내정보</a>
             <ul class="stBasicList">
                <li class="clicks"><a href="updateInfo.do" class="studentbasic">기본정보</a></li>

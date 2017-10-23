@@ -83,11 +83,11 @@ $('.year').change(function () {
 	if(year == 1){
 		$(".semester").html("<option>선택</option><option value='1'>1 학기 </option><option value='2'>2 학기 </option>");
 	}else if(year == 2){
-		$(".semester").html("<option>선택</option><option value='3'>3 학기 </option><option value='4'>4 학기 </option>");
+		$(".semester").html("<option>선택</option><option value='3'>1 학기 </option><option value='4'>2 학기 </option>");
 	}else if(year == 3){
-		$(".semester").html("<option>선택</option><option value='5'>5 학기 </option><option value='6'>6 학기 </option>");
+		$(".semester").html("<option>선택</option><option value='5'>1 학기 </option><option value='6'>2 학기 </option>");
 	}else if(year == 4){
-		$(".semester").html("<option>선택</option><option value='7'>7 학기 </option><option value='8'>8 학기 </option>");
+		$(".semester").html("<option>선택</option><option value='7'>1 학기 </option><option value='8'>2 학기 </option>");
 	}; 
 });
 
@@ -225,7 +225,7 @@ function getTotalStudentScore(totalStudentScore) {
 		<tr>
 			<th>학년</th>
 			<th>학기</th>
-			<th>과목내용</th>
+			<th>과목이름</th>
 			<th>구분</th>
 			<th>점수</th>
 			<th>학점</th>
