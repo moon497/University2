@@ -29,6 +29,7 @@ public class MemberController {
 	@RequestMapping(value="main.do", method= {RequestMethod.GET,RequestMethod.POST})
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("진입");
+		System.out.println("깃허브를 통한 협업!");
 		//init
 		List<MainBbs> noticeList;
 		List<MainBbs> todayList;
