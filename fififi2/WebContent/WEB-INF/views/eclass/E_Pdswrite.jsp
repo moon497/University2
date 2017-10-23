@@ -22,7 +22,8 @@ int tday = cal.get(Calendar.DATE);
 <div class="col-md-9">
 <div class="form-group"> <!-- userId field -->
 		<label class="control-label " for="user_id">글쓴이</label>
-		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id}" readonly="readonly"/>
+		<input class="form-control" id="user_id" name="user_id" type="hidden" value="${login.user_id}" readonly="readonly"/>
+		<input class="form-control" type="text" value="${login.user_name}" readonly="readonly"/>
 </div>
 <div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
