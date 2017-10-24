@@ -195,12 +195,12 @@ public class LoginController {
 
        //init
       String path = "";
-        String storedFileName; //dto 저장 파일 
-        String orgFileName;
+      String storedFileName; //dto 저장 파일 
+      String orgFileName;
 
         //init
-        path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
-        FileUpload fileUpload = new FileUpload(file, path);
+      path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
+      FileUpload fileUpload = new FileUpload(file, path);
       storedFileName = fileUpload.getStoredFileName();
       orgFileName = fileUpload.getOrgFileName();
 
@@ -216,10 +216,11 @@ public class LoginController {
    
    
    // 사진 대량 등록 
-    @RequestMapping(value="photoUpdate.do",method={RequestMethod.GET, RequestMethod.POST})
+   @RequestMapping(value="photoUpdate.do",method={RequestMethod.GET, RequestMethod.POST})
    public String excelread_photo(Model model,   MultipartHttpServletRequest req, List<MultipartFile> file) throws Exception {
-       logger.info("photoUpdate.do");
-       String path = "";
+    
+    	logger.info("photoUpdate.do");
+        String path = "";
         String storedFileName; //dto 저장 파일 
         String orgFileName;
         
@@ -227,40 +228,49 @@ public class LoginController {
         logger.info("경로 : " + path);
         
         for(int i = 0; i<file.size(); i++) { 
-        FileUpload fileUpload = new FileUpload(file.get(i), path);
-      storedFileName = fileUpload.getStoredFileName();
-      orgFileName = fileUpload.getOrgFileName();
-      logger.info(orgFileName);
-      logger.info(storedFileName);
-      
-      int idx = orgFileName.lastIndexOf(".");
-      String fileName = orgFileName.substring(0,idx);
-      System.out.println(fileName);
-      
-      MemberDto dto = new MemberDto();
-      dto.setUser_id(fileName);
-      dto.setUser_photo(storedFileName);
-      loginservice.updatePhoto_student(dto);
-      
+          FileUpload fileUpload = new FileUpload(file.get(i), path);
+	      storedFileName = fileUpload.getStoredFileName();
+	      orgFileName = fileUpload.getOrgFileName();
+	      logger.info(orgFileName);
+	      logger.info(storedFileName);
+	      
+	      int idx = orgFileName.lastIndexOf(".");
+	      String fileName = orgFileName.substring(0,idx);
+	      System.out.println(fileName);
+	      
+	      MemberDto dto = new MemberDto();
+	      dto.setUser_id(fileName);
+	      dto.setUser_photo(storedFileName);
+	      loginservice.updatePhoto_student(dto);
+	      
       }
         
        return "regiAf.tiles";
     }
    
    
-    @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
-   public String excelread(Model model, String fileread) throws Exception {
+   @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
+   public String excelread(Model model, MultipartFile file, MultipartHttpServletRequest req) throws Exception {
+    	
        logger.info("excelread");
+       
+       String path = "";
+       String orgFileName;
+       
+       path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
 
-      MemberDto dto = new MemberDto();
+       MemberDto dto = new MemberDto();
       
-      FileInputStream fis = new FileInputStream("F:\\"+fileread);
-      logger.info("fileread: " + fileread);
-   
-      int rowindex=0;
-      int columnindex=0;
+       FileInputStream fis = new FileInputStream(path);
+       
+       FileUpload fileUpload = new FileUpload(file, path);
+	   orgFileName = fileUpload.getOrgFileName();
+	   logger.info(orgFileName);
+	      
+	   int rowindex=0;
+	   int columnindex=0;
       
-      if(fileread.toUpperCase().endsWith(".XLS")) {
+      if(orgFileName.toUpperCase().endsWith(".XLS")) {
          HSSFWorkbook workbook = new HSSFWorkbook(fis);
          HSSFSheet sheet = workbook.getSheetAt(0);
          //시트 수 (첫번째에만 존재하므로 0을 준다)
@@ -359,7 +369,7 @@ public class LoginController {
                  System.out.println();
              }
          }
-      }else if(fileread.toUpperCase().endsWith(".XLSX")) {
+      }else if(orgFileName.toUpperCase().endsWith(".XLSX")) {
          
          XSSFWorkbook workbook=new XSSFWorkbook(fis);
           XSSFSheet sheet=workbook.getSheetAt(0);
