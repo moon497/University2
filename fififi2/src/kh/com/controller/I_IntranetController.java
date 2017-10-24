@@ -281,13 +281,3 @@ public class I_IntranetController {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
