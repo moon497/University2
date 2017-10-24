@@ -12,7 +12,7 @@
 <%
 	response.sendRedirect("./main.do");
 
-// 지윤이가 성환이오빠자리에서 테스트ㅎㅇㅎㅇㅎㅇㅎgdggd
+// 지윤이가 성환이오빠자리에서 테스트
 %>
 
 </body>

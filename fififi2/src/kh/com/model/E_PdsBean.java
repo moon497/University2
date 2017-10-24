@@ -1,7 +1,6 @@
 package kh.com.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import kh.com.util.DateUtil;
 
@@ -18,7 +17,7 @@ public class E_PdsBean implements Serializable {
 	private String content;
 	private String filename;
 	private String org_filename;
-
+	
 	private int syear;
 	private int smonth;
 	private int sday;
