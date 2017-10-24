@@ -156,7 +156,7 @@ public class EnrolmentController {
 		return "redirect:/registrationlist.do";
 	}
 	
-	// 강의 수정 
+	//강의 수정 페이지
 	@RequestMapping(value="updateReg.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateReg(HttpServletRequest req, int seq, Model model) throws Exception {
 		logger.info("EnrolmentController updateReg");
@@ -172,13 +172,15 @@ public class EnrolmentController {
 		return "upReg.tiles";
 	}
 	
+	//강의 수정 POST
 	@RequestMapping(value="updateRegAf.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateRegAf(SubjectDto sub, Model model) throws Exception {
-		logger.info("EnrolmentController updateRegAf");
+		logger.info("진입");
 		
-		System.out.println("updateregaf sub : "  + sub.toString());
+		//강의 수정
 		enrolmentService.updateReg(sub);	
 		
+		//강의 목록 화면으로
 		return "redirect:/registrationlist.do";
 	}
 	

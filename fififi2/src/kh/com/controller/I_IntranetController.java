@@ -124,7 +124,16 @@ public class I_IntranetController {
 			// 성적 리스트 보여주기
 			List<I_StudentGradeDTO> sdto 
 					= khIntraService.StudentGradeCheck(info);
-			model.addAttribute("StudentGrade", sdto);
+			// 합이 0이 아닐 경우 jsp로 값 안보내줌
+			for (int i = 0; i < sdto.size(); i++) {
+				if(sdto.get(i).getProfessor_grade() == 0) {
+					System.out.println("아직 등록되지 않은 평가과목이 존재한다.");
+					model.addAttribute("confirm","existNullgrade");
+				}else {
+					model.addAttribute("confirm","notexistNullgrade");
+					model.addAttribute("StudentGrade", sdto);
+				}
+			}
 		}
 		return "studentGrade.tiles";
 	}
@@ -272,13 +281,3 @@ public class I_IntranetController {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
