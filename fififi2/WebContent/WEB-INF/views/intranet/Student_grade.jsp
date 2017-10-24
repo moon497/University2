@@ -143,12 +143,12 @@
 		</td>
 	</tr>
 	</c:forEach>
-	</c:if>
 	</tbody>
 </table>
 <div>
 <button id="gradeConfirmBtn">성적확인 완료</button>
 </div>
+</c:if>
 </c:if>
 <script>
 $(document).ready(function () {

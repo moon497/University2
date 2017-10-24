@@ -404,4 +404,3 @@ function getTotalStudentScore(totalStudentScore) {
 
 
 
-

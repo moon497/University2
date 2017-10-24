@@ -126,6 +126,7 @@ public class I_IntranetController {
 					= khIntraService.StudentGradeCheck(info);
 			// 합이 0이 아닐 경우 jsp로 값 안보내줌
 			for (int i = 0; i < sdto.size(); i++) {
+				System.out.println(sdto.get(i).toString());
 				if(sdto.get(i).getProfessor_grade() == 0) {
 					System.out.println("아직 등록되지 않은 평가과목이 존재한다.");
 					model.addAttribute("confirm","existNullgrade");
