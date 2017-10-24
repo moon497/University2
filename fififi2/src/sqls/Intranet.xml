@@ -146,5 +146,4 @@
       SET GRADE_CONFIRM = 1 
     WHERE STUDENT_ID = #{student_id}
 </update>
-
 </mapper>

@@ -120,7 +120,7 @@ public class EnrolmentController {
 		logger.info("EnrolmentController registrationlist");
 		
 		String id = ((MemberDto)req.getSession().getAttribute("login")).getUser_id();		
-		List<SubjectDto> reglist = enrolmentService.getSublist(id);
+		List<SubjectDto> reglist = enrolmentService.getSublist(id);				
 		model.addAttribute("reglist", reglist);
 		
 		return "registrationlist.tiles";
@@ -156,35 +156,31 @@ public class EnrolmentController {
 		return "redirect:/registrationlist.do";
 	}
 	
-	// 강의 수정 
+	//강의 수정 페이지
 	@RequestMapping(value="updateReg.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateReg(HttpServletRequest req, int seq, Model model) throws Exception {
-		logger.info("진입");
-		
-		//init
-		MemberDto login;
-		SubjectDto sub;
-		
-		//로그인 정보 가져오기
-		login = ((MemberDto)req.getSession().getAttribute("login"));
+		logger.info("EnrolmentController updateReg");
+		MemberDto user = ((MemberDto)req.getSession().getAttribute("login"));	
+		System.out.println("강의등록 전 : " + user.toString());						
 				
-		//과목 정보 가져오기
-		sub = enrolmentService.getReg(seq);
+		System.out.println("seq : " + seq);
+		SubjectDto sub = enrolmentService.getReg(seq);
+		System.out.println("sub : " + sub);
 		
-		//attribute 추가
 		model.addAttribute("sub", sub);
-		model.addAttribute("user", login);
-
+		model.addAttribute("user", user);	
 		return "upReg.tiles";
 	}
 	
+	//강의 수정 POST
 	@RequestMapping(value="updateRegAf.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateRegAf(SubjectDto sub, Model model) throws Exception {
-		logger.info("EnrolmentController updateRegAf");
+		logger.info("진입");
 		
-		System.out.println("updateregaf sub : "  + sub.toString());
+		//강의 수정
 		enrolmentService.updateReg(sub);	
 		
+		//강의 목록 화면으로
 		return "redirect:/registrationlist.do";
 	}
 	
@@ -208,3 +204,16 @@ public class EnrolmentController {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -56,7 +56,7 @@
          </c:when>
 
           <c:otherwise>
-            <td>
+              <td>
             <a href="./E_Pdsdetail.do?seq=${pds.eclass_pds_bbs_seq }&sub_seq=${pds.sub_seq }&page=${pagination.currPage}">
             ${pds.title }
             </a>

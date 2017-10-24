@@ -30,33 +30,20 @@
 <div class="panel panel-default">
 		<div class="panel-heading">
 			<strong>${comments.user_name }</strong>
-			<c:choose>
-				<c:when test="${comments.filename != '-1' and login.user_id eq comments.user_id}">
-					<div class="row" style="text-align: -webkit-auto;">
+			<c:if test="${comments.filename != '-1' }">
+                  <div class="row" style="text-align: -webkit-auto;">
 					<div class="col-sm-10">
-	                	<span> 첨부파일 : <a href="${pageContext.request.contextPath }/upload/${comments.filename}" download="${comments.org_filename }">${comments.org_filename }</a></span>
-		       		</div>
-	          	</div>
-				</c:when>
-				
-				<c:when test="${comments.filename != '-1' and login.user_auth eq 200}">
-					<div class="row" style="text-align: -webkit-auto;">
-					<div class="col-sm-10">
-	                	<span> 첨부파일 : <a href="${pageContext.request.contextPath }/upload/${comments.filename}" download="${comments.org_filename }">${comments.org_filename }</a></span>
-		       		</div>
-	          	</div>
-				</c:when>
-				
-            </c:choose>
+                     <span> 첨부파일 : <a href="${pageContext.request.contextPath }/upload/${comments.filename}" download="${comments.org_filename }">${comments.org_filename }</a></span>
+                    </div>
+                  </div>
+            </c:if>
 		</div>
 	 	<div class="panel-body">
 			<span>${comments.c_content }</span>					
 		</div>
 		<div class="panel-footer" style="text-align: -webkit-right;">				
 				<div style="display: -webkit-inline-box;">
-				<c:if test="${login.user_id eq comments.user_id }">
-					<span class="label label-default"><a href="deleteComment.do?seq=${param.seq }&sub_seq=${param.sub_seq}&c_seq=${comments.c_seq }">삭제</a></span>
-				</c:if>
+					<span class="label label-default"><a href="">삭제</a></span>
 				</div>
 		</div>
 </div>
@@ -100,3 +87,4 @@
 		</form>
 	</div>       
 </div>
+

@@ -249,220 +249,212 @@ public class LoginController {
    
    
     @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
-    public String excelread(Model model, String fileread) throws Exception {
-    	logger.info("진입");
+   public String excelread(Model model, String fileread) throws Exception {
+       logger.info("excelread");
 
-    	//init
-    	MemberDto dto = new MemberDto();
-    	FileInputStream fis;
-    	int rowindex;
-    	int columnindex;
-
-    	//파일위치 생성
-    	fis = new FileInputStream("F:\\"+fileread);
-    	logger.info("fileread: {}",fileread);
-
-    	//XLS
-    	if(fileread.toUpperCase().endsWith(".XLS")) {
-    		HSSFWorkbook workbook = new HSSFWorkbook(fis);
-    		HSSFSheet sheet = workbook.getSheetAt(0);		//시트 수 (첫번째에만 존재하므로 0을 준다)
-
-    		//행의 수
-    		int rows = sheet.getPhysicalNumberOfRows();
-    		
-    		//행이 끝날때까지 for를 돌린다
-    		for(rowindex = 1; rowindex < rows; rowindex++){
-
-    			//행을읽는다
-    			HSSFRow row = sheet.getRow(rowindex);
-    			if(row != null){
-
-    				//셀의 수
-    				int cells = row.getPhysicalNumberOfCells();
-    				for(columnindex = 0; columnindex <= cells; columnindex++){
-    					//셀값을 읽는다
-    					HSSFCell cell = row.getCell(columnindex);
-
-    					String value = "";
-
-    					//셀이 빈값일경우를 위한 널체크
-    					if(cell == null){
-    						continue;
-    					} else {
-    						//타입별로 내용 읽기
-    						switch (cell.getCellType()){
-    						case HSSFCell.CELL_TYPE_FORMULA:
-    							value=cell.getCellFormula();
-    							break;
-    						case HSSFCell.CELL_TYPE_NUMERIC:
-    							value=cell.getNumericCellValue()+"";
-    							break;
-    						case HSSFCell.CELL_TYPE_STRING:
-    							value=cell.getStringCellValue()+"";
-    							break;
-    						case HSSFCell.CELL_TYPE_BLANK:
-    							value=cell.getBooleanCellValue()+"";
-    							break;
-    						case HSSFCell.CELL_TYPE_ERROR:
-    							value=cell.getErrorCellValue()+"";
-    							break;
-    						}
-    					}
-
-    					switch (columnindex) {
-    					case 0: 
-    						dto.setUser_id(value);
-    						break;
-    					case 1: 
-    						dto.setUser_pw(value);;
-    						break;
-    					case 2: 
-    						dto.setUser_name(value);
-    						break;
-    					case 3: 
-    						dto.setUser_email(value);
-    						break;
-    					case 4: 
-    						dto.setUser_phone(value);
-    						break;
-    					case 5: 
-    						dto.setUser_address(value);
-    						break;
-    					case 6: 
-    						dto.setUser_birth(value);
-    						break;
-    					case 7: 
-    						dto.setUser_auth(value);
-    						break;
-    					case 8: 
-    						dto.setStudent_first_major(value);
-    						break;      
-    					case 9: 
-    						dto.setStudent_major(value);
-    						break;   
-    					case 10: 
-    						dto.setUser_status(value);
-    						break;   
-    					case 11: 
-    						dto.setStudent_regidate(value);
-    						break;
-    					case 12: 
-    						String v = value;
-    						int n = Integer.parseInt(v);
-    						dto.setStudent_year(n);
-    						break;
-    					default:
-    						break;
-    					}
-    					System.out.println("내용 :"+value);
-    				}
-    				System.out.println("loginController 최종 dto :" +dto.toString());
-    				dto.setUser_photo("사진없음");
-    				loginservice.addMember(dto);
-    				System.out.println();
-    			}
-    		}
-    		
-    		//객체 닫기
-    		workbook.close();
-    	}else if(fileread.toUpperCase().endsWith(".XLSX")) {
-
-    		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-    		XSSFSheet sheet=workbook.getSheetAt(0);
-    		int rows=sheet.getPhysicalNumberOfRows();
-    		for(rowindex=1;rowindex<rows;rowindex++){
-
-    			//행을읽는다
-    			XSSFRow row = sheet.getRow(rowindex);
-    			if(row != null){
-
-    				//셀의 수
-    				int cells = row.getPhysicalNumberOfCells();
-    				for(columnindex = 0;columnindex <= cells; columnindex++){
-    					//셀값을 읽는다
-    					XSSFCell cell=row.getCell(columnindex);
-
-    					String value="";
-    					//셀이 빈값일경우를 위한 널체크
-    					if(cell == null){
-    						continue;
-    					}else{
-    						//타입별로 내용 읽기
-    						switch (cell.getCellType()){
-    						case XSSFCell.CELL_TYPE_FORMULA:
-    							value=cell.getCellFormula();
-    							break;
-    						case XSSFCell.CELL_TYPE_NUMERIC:
-    							value=cell.getNumericCellValue()+"";
-    							break;
-    						case XSSFCell.CELL_TYPE_STRING:
-    							value=cell.getStringCellValue()+"";
-    							break;
-    						case XSSFCell.CELL_TYPE_BLANK:
-    							value=cell.getBooleanCellValue()+"";
-    							break;
-    						case XSSFCell.CELL_TYPE_ERROR:
-    							value=cell.getErrorCellValue()+"";
-    							break;
-    						}
-    					}
-    					switch (columnindex) {
-    					case 0: 
-    						dto.setUser_id(value);
-    						break;
-    					case 1: 
-    						dto.setUser_pw(value);;
-    						break;
-    					case 2: 
-    						dto.setUser_name(value);
-    						break;
-    					case 3: 
-    						dto.setUser_email(value);
-    						break;
-    					case 4: 
-    						dto.setUser_phone(value);
-    						break;
-    					case 5: 
-    						dto.setUser_address(value);
-    						break;
-    					case 6: 
-    						dto.setUser_birth(value);
-    						break;
-    					case 7: 
-    						dto.setUser_auth(value);
-    						break;
-    					case 8: 
-    						dto.setStudent_first_major(value);
-    						break;      
-    					case 9: 
-    						dto.setStudent_major(value);
-    						break;   
-    					case 10: 
-    						dto.setUser_status(value);
-    						break;   
-    					case 11: 
-    						dto.setStudent_regidate(value);
-    						break;
-    					case 12: 
-    						int n = Integer.parseInt(value);
-    						dto.setStudent_year(n);
-    						break;
-    					default:
-    						break;
-    					}
-    					System.out.println("내용"+value);
-    				}
-    				System.out.println("loginController 최종 dto" +dto.toString());
-    				dto.setUser_photo("사진없음");
-    				loginservice.addMember(dto);
-    				System.out.println();
-    			}
-    		}
-    		workbook.close();
-    	}
-		
-    	return "regiAf.tiles";
-    }   
+      MemberDto dto = new MemberDto();
+      
+      FileInputStream fis = new FileInputStream("F:\\"+fileread);
+      logger.info("fileread: " + fileread);
+   
+      int rowindex=0;
+      int columnindex=0;
+      
+      if(fileread.toUpperCase().endsWith(".XLS")) {
+         HSSFWorkbook workbook = new HSSFWorkbook(fis);
+         HSSFSheet sheet = workbook.getSheetAt(0);
+         //시트 수 (첫번째에만 존재하므로 0을 준다)
+         //만약 각 시트를 읽기위해서는 FOR문을 한번더 돌려준다
+      
+         
+         //행의 수
+         int rows=sheet.getPhysicalNumberOfRows();
+         for(rowindex=1;rowindex<rows;rowindex++){
+             
+            //행을읽는다
+             HSSFRow row=sheet.getRow(rowindex);
+             if(row !=null){
+                 
+                //셀의 수
+                 int cells=row.getPhysicalNumberOfCells();
+                 for(columnindex=0;columnindex<=cells;columnindex++){
+                     //셀값을 읽는다
+                     HSSFCell cell=row.getCell(columnindex);
+                     
+                     String value="";
+                     //셀이 빈값일경우를 위한 널체크
+                     if(cell==null){
+                         continue;
+                     }else{
+                         //타입별로 내용 읽기
+                         switch (cell.getCellType()){
+                         case HSSFCell.CELL_TYPE_FORMULA:
+                             value=cell.getCellFormula();
+                             break;
+                         case HSSFCell.CELL_TYPE_NUMERIC:
+                             value=cell.getNumericCellValue()+"";
+                             break;
+                         case HSSFCell.CELL_TYPE_STRING:
+                             value=cell.getStringCellValue()+"";
+                             break;
+                         case HSSFCell.CELL_TYPE_BLANK:
+                             value=cell.getBooleanCellValue()+"";
+                             break;
+                         case HSSFCell.CELL_TYPE_ERROR:
+                             value=cell.getErrorCellValue()+"";
+                             break;
+                         }
+                     }
+                    
+                     switch (columnindex) {
+                  case 0: 
+                     dto.setUser_id(value);
+                     break;
+                  case 1: 
+                     dto.setUser_pw(value);;
+                     break;
+                  case 2: 
+                     dto.setUser_name(value);
+                     break;
+                  case 3: 
+                     dto.setUser_email(value);
+                     break;
+                  case 4: 
+                     dto.setUser_phone(value);
+                     break;
+                  case 5: 
+                     dto.setUser_address(value);
+                     break;
+                  case 6: 
+                     dto.setUser_birth(value);
+                     break;
+                  case 7: 
+                     dto.setUser_auth(value);
+                     break;
+                  case 8: 
+                     dto.setStudent_first_major(value);
+                     break;      
+                  case 9: 
+                     dto.setStudent_major(value);
+                     break;   
+                  case 10: 
+                     dto.setUser_status(value);
+                     break;   
+                  case 11: 
+                     dto.setStudent_regidate(value);
+                     break;
+                  case 12: 
+                     String v = value;
+                     int n = Integer.parseInt(v);
+                     dto.setStudent_year(n);
+                     break;
+                  default:
+                     break;
+                  }
+                    System.out.println("내용 :"+value);
+                 }
+                 System.out.println("loginController 최종 dto :" +dto.toString());
+                 dto.setUser_photo("사진없음");
+                 loginservice.addMember(dto);
+                 System.out.println();
+             }
+         }
+      }else if(fileread.toUpperCase().endsWith(".XLSX")) {
+         
+         XSSFWorkbook workbook=new XSSFWorkbook(fis);
+          XSSFSheet sheet=workbook.getSheetAt(0);
+          int rows=sheet.getPhysicalNumberOfRows();
+         for(rowindex=1;rowindex<rows;rowindex++){
+             
+            //행을읽는다
+             XSSFRow row=sheet.getRow(rowindex);
+             if(row !=null){
+                 
+                //셀의 수
+                 int cells=row.getPhysicalNumberOfCells();
+                 for(columnindex=0;columnindex<=cells;columnindex++){
+                     //셀값을 읽는다
+                     XSSFCell cell=row.getCell(columnindex);
+                     
+                     String value="";
+                     //셀이 빈값일경우를 위한 널체크
+                     if(cell==null){
+                         continue;
+                     }else{
+                         //타입별로 내용 읽기
+                         switch (cell.getCellType()){
+                         case XSSFCell.CELL_TYPE_FORMULA:
+                             value=cell.getCellFormula();
+                             break;
+                         case XSSFCell.CELL_TYPE_NUMERIC:
+                             value=cell.getNumericCellValue()+"";
+                             break;
+                         case XSSFCell.CELL_TYPE_STRING:
+                             value=cell.getStringCellValue()+"";
+                             break;
+                         case XSSFCell.CELL_TYPE_BLANK:
+                             value=cell.getBooleanCellValue()+"";
+                             break;
+                         case XSSFCell.CELL_TYPE_ERROR:
+                             value=cell.getErrorCellValue()+"";
+                             break;
+                         }
+                     }
+                     switch (columnindex) {
+                    case 0: 
+                     dto.setUser_id(value);
+                     break;
+                  case 1: 
+                     dto.setUser_pw(value);;
+                     break;
+                  case 2: 
+                     dto.setUser_name(value);
+                     break;
+                  case 3: 
+                     dto.setUser_email(value);
+                     break;
+                  case 4: 
+                     dto.setUser_phone(value);
+                     break;
+                  case 5: 
+                     dto.setUser_address(value);
+                     break;
+                  case 6: 
+                     dto.setUser_birth(value);
+                     break;
+                  case 7: 
+                     dto.setUser_auth(value);
+                     break;
+                  case 8: 
+                     dto.setStudent_first_major(value);
+                     break;      
+                  case 9: 
+                     dto.setStudent_major(value);
+                     break;   
+                  case 10: 
+                     dto.setUser_status(value);
+                     break;   
+                  case 11: 
+                     dto.setStudent_regidate(value);
+                     break;
+                  case 12: 
+                     int n = Integer.parseInt(value);
+                     dto.setStudent_year(n);
+                     break;
+                  default:
+                     break;
+                  }
+                    System.out.println("내용"+value);
+                 }
+                 System.out.println("loginController 최종 dto" +dto.toString());
+                 dto.setUser_photo("사진없음");
+                 loginservice.addMember(dto);
+                 System.out.println();
+             }
+         }
+      }
+      return "regiAf.tiles";
+   }   
    
    
    

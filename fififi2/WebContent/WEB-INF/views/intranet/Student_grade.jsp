@@ -62,6 +62,15 @@
 <c:if test="${not empty login.user_id}">
 <input type="hidden" name="student_id" value="${login.user_id }">
 <!-- 질문테이블 -->
+<c:if test="${confirm == 'existNullgrade' }">
+<table id="studentGrade_table">
+	<tr>
+		<td colspan="7">아직 등록되지 않은 평가과목이 존재합니다.</td>
+	</tr>
+</table>
+</c:if>
+
+<c:if test="${confirm == 'notexistNullgrade' }">
 <table id="studentGrade_table">
 <colgroup>
 	<col width="150">
@@ -85,17 +94,6 @@
 	</thead>
 	<tbody>
 	<c:forEach var="grade" items="${StudentGrade }" varStatus="gs">
-	<c:if test="${0 eq grade.professor_grade}">
-		<table id="assesment_table" style="width: 100%;">
-			<colgroup>
-				<col width="100">
-			</colgroup>
-			<tr>
-				<td>강의평가를 완료해주세요.</td>
-			</tr>
-		</table>
-	</c:if>
-	<c:if test="${grade.professor_grade != 0}">
 	<tr>
 		<td>${grade.student_name }</td>
 		<td>${grade.sub_info }</td>
@@ -144,8 +142,8 @@
 			<input type="hidden" name="listSize" value="${fn:length(StudentGrade) }" >
 		</td>
 	</tr>
-	</c:if> 
 	</c:forEach>
+	</c:if>
 	</tbody>
 </table>
 <div>

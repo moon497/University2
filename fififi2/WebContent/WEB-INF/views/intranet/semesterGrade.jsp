@@ -60,6 +60,8 @@
 	</tr>
 </table>
 </c:if>
+
+<!-- 로그인 -->
 <c:if test="${not empty login.user_id}">
 <input type="hidden" name="student_id" value="${login.user_id }">
 학년 
@@ -76,7 +78,9 @@
 <option>학기선택</option>
 </select>
 <script>
-// 학년에 따라 학기를 다르게 보여줌.
+/*
+ * 학년에 따라 학기를 다르게 보여줌.
+ */
 var year = "";
 $('.year').change(function () {
 	year = $('.year option:selected').val();
@@ -322,7 +326,6 @@ function getTotalStudentScore(totalStudentScore) {
 	</c:forEach>
 	</tbody>
 	</table>
-	
 	<table id="studentGrade_table" style="width:100%; margin-top: 10px;">
 	<colgroup>
 		<col width="35">
@@ -360,13 +363,11 @@ function getTotalStudentScore(totalStudentScore) {
 				</c:if>
 			</td>
 		</tr>
-	
 		<tr>
 			<th>총 이수학점</th>
 			<td>${sumsub_point }</td>
 		</tr>
 	</table>
-	
 </form>
 </c:if>
 
