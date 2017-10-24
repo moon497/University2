@@ -11,22 +11,22 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <fmt:requestEncoding value="utf-8"/> 
 <style>
-#studentGrade_table * {
+#studentGrade_table *, #totalGradeTable * {
 	font-size: 12px;
 }
 
-#studentGrade_table th, td {
+#studentGrade_table th, td, #totalGradeTable th, td {
 	color: #404040;
 	border-collapse: collapse;
 	border: 1px solid #e7e7e7;
 	text-align: center;
 }
 
-#studentGrade_table th {
+#studentGrade_table th, #totalGradeTable th {
 	font-size: 13px;
 }
 
-#studentGrade_table tr {
+#studentGrade_table tr, #totalGradeTable tr {
 	height: 35px;
 }
 
@@ -116,10 +116,10 @@ $.ajax({
     	   dataCount(data);
     	   $.each(data, function(i, item) {
                console.log(data[i]);
-               $('#studentGrade_table > tbody').prepend(setHtml(data[i]));
+               $('#totalGradeTable > tbody').prepend(setHtml(data[i]));
            }); 
     	   var TotalstudentScore = getTotalStudentScore(totalStudentScore); // 총 학점
-           $('#studentGrade_table > tbody > tr > td:nth-child(7)').text(getTotalStudentScore(totalStudentScore));
+           $('#totalGradeTable > tbody > tr > td:nth-child(2)').text(getTotalStudentScore(totalStudentScore));
        },
        error : function(xhr, status, error) {
           alert("통신불가");
@@ -326,7 +326,8 @@ function getTotalStudentScore(totalStudentScore) {
 	</c:forEach>
 	</tbody>
 	</table>
-	<table id="studentGrade_table" style="width:100%; margin-top: 10px;">
+	
+	<table id="totalGradeTable" style="width:100%; margin-top: 10px;">
 	<colgroup>
 		<col width="35">
 		<col width="180">
