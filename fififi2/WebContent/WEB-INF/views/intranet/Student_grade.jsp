@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="kh.com.model.I_StudentGradeDTO"%>
 <%@page import="kh.com.model.ProfEvaluationDTO"%>
 <%@page import="java.util.List"%>
@@ -143,12 +144,12 @@
 		</td>
 	</tr>
 	</c:forEach>
-	</c:if>
 	</tbody>
 </table>
 <div>
 <button id="gradeConfirmBtn">성적확인 완료</button>
 </div>
+</c:if>
 </c:if>
 <script>
 $(document).ready(function () {
@@ -187,7 +188,3 @@ $('#gradeConfirmBtn').click(function () {
 
 
 </section> <!-- layout.xml 상 꼭 있어야함 지우지마세요! -->
-
-
-
-
