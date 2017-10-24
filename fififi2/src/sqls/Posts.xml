@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="Post">
+
+	<!-- 				!!!BOARDSEQ 더미데이터 1!!! 			-->
+	<!-- 						CREATE 						-->
+	<!-- 게시물 입력 -->
+	<insert id="insertBbs" parameterType="post" useGeneratedKeys="false">
+		INSERT INTO Posts(
+			board_seq, REF, POST_SEQ, USER_ID, TITLE, 
+			CONTENT, STORED_FILENAME, ORG_FILENAME
+		)
+		VALUES(
+			#{boardSeq}, POSTS_SEQ.NEXTVAL, POSTS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
+			#{bbsContent}, #{bbsStoredFileName}, #{bbsOrgFileName}
+		)
+	</insert>
+
+	<!-- 						READ 						-->
+	<!-- 게시물들 가져오기 -->
+	<select id="getBbsList" resultType="post" parameterType="post">
+		SELECT 
+			REF as bbsRef, 
+			REPLY as bbsReply, 
+			POST_SEQ as bbsSeq, 
+			USER_ID as userId, 
+			TITLE as bbsTitle, 
+			CONTENT as bbsContent, 
+			READCOUNT as bbsReadCount, 
+			STORED_FILENAME as bbsStoredFileName, 
+			ORG_FILENAME as bbsOrgFileName, 
+			STATUS as bbsStatus, 
+			WDATE as bbsWdate
+		FROM (
+				SELECT REF, REPLY, POST_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, STORED_FILENAME, ORG_FILENAME, STATUS, WDATE, 
+				ROW_NUMBER() OVER (ORDER BY REF desc, REPLY ASC) R
+				FROM POSTS
+				WHERE BOARD_SEQ = #{boardSeq}
+				AND STATUS != '삭제'
+		)
+		WHERE R BETWEEN #{startArticle} and #{endArticle}
+	</select>
+	
+	<!-- 게시물 하나 가져오기 -->
+	<select id="getBbs" resultType="post" parameterType="Integer">
+		SELECT 
+			REF as bbsRef, 
+			REPLY as bbsReply, 
+			POST_SEQ as bbsSeq, 
+			USER_ID as userId, 
+			TITLE as bbsTitle, 
+			CONTENT as bbsContent, 
+			READCOUNT as bbsReadCount, 
+			STORED_FILENAME as bbsStoredFileName, 
+			ORG_FILENAME as bbsOrgFileName, 
+			STATUS as bbsStatus, 
+			WDATE as bbsWdate
+		FROM POSTS
+		WHERE POST_SEQ = #{bbsSeq}
+	</select>
+	
+	<!-- 총 게시물 수 가져오기 -->
+	<select id="getTotalBbs" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(POST_SEQ), 0)
+		FROM POSTS
+		WHERE BOARD_SEQ = #{boardSeq}
+		AND STATUS != '삭제'
+	</select>
+	
+	<!-- Update -->
+	<update id="updateBbs" parameterType="post">
+		UPDATE POSTS
+		SET TITLE = #{bbsTitle},
+			CONTENT = #{bbsContent},
+			STORED_FILENAME = #{bbsStoredFileName}, 
+			ORG_FILENAME = #{bbsOrgFileName}
+		WHERE BOARD_SEQ = #{boardSeq}
+		AND POST_SEQ = #{bbsSeq}
+	</update>
+	
+	<!-- 						DELETE 						-->
+	<update id="deleteBbs" parameterType="Integer">
+		UPDATE POSTS
+		SET STATUS = '삭제'
+		WHERE POST_SEQ = #{bbsSeq}
+	</update>
+</mapper>

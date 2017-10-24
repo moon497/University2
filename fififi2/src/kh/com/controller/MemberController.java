@@ -12,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kh.com.model.MainBbs;
-import kh.com.model.QueryBbs;
+import kh.com.model.Board;
+import kh.com.model.Post;
 import kh.com.service.BbsService;
 import kh.com.util.Pagination;
 
@@ -31,19 +31,19 @@ public class MemberController {
 		logger.info("진입");
 		
 		//init
-		List<MainBbs> noticeList;
-		List<MainBbs> todayList;
-		QueryBbs query;
+		List<Post> noticeList;
+		List<Post> todayList;
+		Post query;
 		Pagination paginationNotice;
 		Pagination paginationToday;
 		
 		//페이징
-		paginationNotice = new Pagination(getTotalBbs("notice"), getCurrPage(req));
-		paginationToday = new Pagination(getTotalBbs("today"), getCurrPage(req));
+		paginationNotice = new Pagination(getTotalBbs(getBoardSeq("notice")), getCurrPage(req));
+		paginationToday = new Pagination(getTotalBbs(getBoardSeq("today")), getCurrPage(req));
 
 		//질의 설정
-		query = new QueryBbs();
-		query.setBoardUrl("notice");
+		query = new Post();
+		query.setBoardSeq(getBoardSeq("notice"));
 		query.setStartArticle(paginationNotice.getStartArticle());
 		query.setEndArticle(paginationNotice.getEndArticle());
 		
@@ -51,23 +51,23 @@ public class MemberController {
 		noticeList = servBbs.getBbsList(query);
 				
 		//받아오기
-		query.setBoardUrl("today");									//쿼리 수정
+		query.setBoardSeq(getBoardSeq("today"));									//쿼리 수정
 		query.setStartArticle(paginationToday.getStartArticle());
 		query.setEndArticle(paginationToday.getEndArticle());
 		
 		todayList = servBbs.getBbsList(query);
 		
 		//엔터처리
-		for (MainBbs mainBbs : noticeList) {
+		for (Post mainBbs : noticeList) {
 			mainBbs.setBbsContent(mainBbs.getBbsContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 		}
-		for (MainBbs mainBbs : todayList) {
+		for (Post mainBbs : todayList) {
 			mainBbs.setBbsContent(mainBbs.getBbsContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
 			logger.info(mainBbs.toString());
 		}
 		
 		//요소 추가		
-		if (noticeList.isEmpty() == false) {
+		if (noticeList.isEmpty() == false && noticeList.size() >= 3) {
 			model.addAttribute("notice1", noticeList.get(0));
 			model.addAttribute("notice2", noticeList.get(1));
 			model.addAttribute("notice3", noticeList.get(2));
@@ -101,7 +101,19 @@ public class MemberController {
 		return currPage;
 	}
 	
-	private int getTotalBbs(String boardName) {
-		return servBbs.getTotalBbs(boardName);
+	private int getTotalBbs(int boardSeq) {
+		return servBbs.getTotalBbs(boardSeq);
+	}
+	
+	private boolean checkBoardUrl(String boardUrl) {
+		Board boards = new Board();
+		
+		return boards.containsKey(boardUrl);
+	}
+	
+	private Integer getBoardSeq(String boardUrl) {
+		Board boards = new Board();
+		
+		return boards.getBoardSeq(boardUrl);
 	}
 }

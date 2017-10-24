@@ -2,10 +2,13 @@ package kh.com.model;
 
 import java.io.Serializable;
 
-public class MainBbs implements Serializable {
+import org.apache.ibatis.type.Alias;
+
+@Alias("post")
+public class Post implements Serializable {
 	private static final long serialVersionUID = 1843374038002416069L;
 	
-	private String boardUrl;
+	private int boardSeq;
 	private int bbsRef;
 	private String bbsReply;
 	private int bbsSeq;
@@ -23,13 +26,17 @@ public class MainBbs implements Serializable {
 	
 	//join용 추가 변수
 	private String userName;
+	
+	//Query용 추가 변수
+	private int startArticle;					//시작 게시물
+	private int endArticle;						//끝 게시물
 
-	public String getBoardUrl() {
-		return boardUrl;
+	public int getBoardSeq() {
+		return boardSeq;
 	}
 
-	public void setBoardUrl(String boardUrl) {
-		this.boardUrl = boardUrl;
+	public void setBoardSeq(int boardSeq) {
+		this.boardSeq = boardSeq;
 	}
 
 	public int getBbsRef() {
@@ -136,14 +143,31 @@ public class MainBbs implements Serializable {
 		this.userName = userName;
 	}
 
+	public int getStartArticle() {
+		return startArticle;
+	}
+
+	public void setStartArticle(int startArticle) {
+		this.startArticle = startArticle;
+	}
+
+	public int getEndArticle() {
+		return endArticle;
+	}
+
+	public void setEndArticle(int endArticle) {
+		this.endArticle = endArticle;
+	}
+
 	@Override
 	public String toString() {
-		return "MainBbs [boardUrl=" + boardUrl + ", bbsRef=" + bbsRef + ", bbsReply=" + bbsReply + ", bbsSeq=" + bbsSeq
+		return "Post [boardSeq=" + boardSeq + ", bbsRef=" + bbsRef + ", bbsReply=" + bbsReply + ", bbsSeq=" + bbsSeq
 				+ ", userId=" + userId + ", bbsTitle=" + bbsTitle + ", bbsContent=" + bbsContent + ", bbsReadCount="
 				+ bbsReadCount + ", bbsStoredFileName=" + bbsStoredFileName + ", bbsOrgFileName=" + bbsOrgFileName
 				+ ", bbsStatus=" + bbsStatus + ", bbsWdate=" + bbsWdate + ", totalComment=" + totalComment
-				+ ", userName=" + userName + "]";
+				+ ", userName=" + userName + ", startArticle=" + startArticle + ", endArticle=" + endArticle + "]";
 	}
+	
 
 	
 	
