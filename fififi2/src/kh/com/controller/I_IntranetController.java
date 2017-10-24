@@ -30,7 +30,7 @@ public class I_IntranetController {
 	I_IntraService khIntraService;
 	
 	private static final Logger logger 
-	= LoggerFactory.getLogger(I_IntranetController.class);
+				= LoggerFactory.getLogger(I_IntranetController.class);
 	
 	/**
 	 * 강의평가 : 해당학생이 평가해야할 강의목록 불러오기
@@ -81,10 +81,11 @@ public class I_IntranetController {
 	 * 강의평가 : 평가제출
 	 */
 	@ResponseBody
-	@RequestMapping(value="assessmentAf.do", produces="application/String; charset=utf-8", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="assessmentAf.do", 
+					produces="application/String; charset=utf-8", 
+					method={RequestMethod.GET, RequestMethod.POST})
 	public String assessmentAf(ProfEvaluationDTO pdfo) throws Exception {
 		logger.info("KhIntranetController assessmentAf");
-		logger.info("KhIntranetController assessmentAf pdfo : " + pdfo.toString());
 		boolean b = khIntraService.addProfessorGrade(pdfo);
 		if(b == true) {
 			return "평가를 성공적으로 하였습니다.";
@@ -120,7 +121,7 @@ public class I_IntranetController {
 			id = login.getUser_id();
 			info.setStudent_id(id);
 			
-			// 
+			// 성적 리스트 보여주기
 			List<I_StudentGradeDTO> sdto 
 					= khIntraService.StudentGradeCheck(info);
 			model.addAttribute("StudentGrade", sdto);
@@ -131,23 +132,28 @@ public class I_IntranetController {
 	/**
 	 * 내정보 수정
 	 */
-	@RequestMapping(value="updateInfo.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String updateInfo(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="updateInfo.do", 
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String updateInfo(Model model, HttpServletRequest req) 
+													throws Exception {
 		logger.info("KhIntranetController updateInfo");
 		model.addAttribute("doc_title", "내정보(학생)");
 		model.addAttribute("current", "current");
+		
 		//init
 		MemberDto login;
 		String id = "";
+		
 		// 로그아웃
 		if (((MemberDto)req.getSession().getAttribute("login")) == null) {
 			login = new MemberDto();
 			login.setUser_id("");
-		} else {
-		// 로그인
+			
+		} else {// 로그인
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
-			I_StudentBasicInfoDTO basicInfo = khIntraService.studentBasicInfo(id);
+			I_StudentBasicInfoDTO basicInfo 
+								= khIntraService.studentBasicInfo(id);
 			model.addAttribute("basicinfo", basicInfo);
 		}
 		return "updateInfo.tiles";
@@ -156,10 +162,13 @@ public class I_IntranetController {
 	/**
 	 * 학생 모든 성적확인
 	 */
-	@RequestMapping(value="semesterGrade.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String semesterGrade(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value="semesterGrade.do", 
+					method={RequestMethod.GET, RequestMethod.POST})
+	public String semesterGrade(Model model, HttpServletRequest req) 
+													throws Exception {
 		logger.info("KhIntranetController semesterGrade");
 		model.addAttribute("doc_title", "학기별 성적");
+		
 		//init
 		MemberDto login;
 		String id = "";
@@ -176,15 +185,18 @@ public class I_IntranetController {
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
 			
-			StudentDTO studentInformation = khIntraService.StudentInformation(id);
+			StudentDTO studentInformation 
+						= khIntraService.StudentInformation(id);
 			grade.setStudent_id(studentInformation.getStudent_id());
 			grade.setStudent_term(studentInformation.getStudent_term());
 			
 			//DB 받음
-			List<I_semesterGradeDTO> gradeList = khIntraService.semesterGrade(grade);
+			List<I_semesterGradeDTO> gradeList 
+							= khIntraService.semesterGrade(grade);
 			
 			for(int i=0; i < gradeList.size(); i++) {
-				maxYear = getMax(gradeList.get(i).getStudent_term(),maxYear);
+				maxYear 
+					= getMax(gradeList.get(i).getStudent_term(),maxYear);
 			}
 			if(gradeList.size() == 0) {
 				System.out.println("등록된 성적 없음.");
@@ -197,7 +209,7 @@ public class I_IntranetController {
 		}
 		return "semesterGrade.tiles";
 	}
-	// 성적확인시 보여주는 부분
+	// 학생 모든 성적확인 > 성적확인시 보여주는 부분
 	private int getMax(int a, int b) {
 		if (a >= b) {
 			return a;
@@ -212,29 +224,27 @@ public class I_IntranetController {
 	@ResponseBody
 	@RequestMapping(value="semesterGradechoice.do", 
 					method={RequestMethod.GET, RequestMethod.POST})
-	public List<I_semesterGradeDTO> semesterGradechoice(I_semesterGradeDTO grade) throws Exception {
+	public List<I_semesterGradeDTO> semesterGradechoice(I_semesterGradeDTO grade) 
+																throws Exception {
 		logger.info("KhIntranetController semesterGradechoice");
-		logger.info("KhIntranetController semesterGradechoice grade : " + grade.toString());
 		int grades = grade.getStudent_term();
-		System.out.println(grade.toString());
-		List<I_semesterGradeDTO> semelist = khIntraService.semesterGradechoice(grade);
+		List<I_semesterGradeDTO> semelist 
+					= khIntraService.semesterGradechoice(grade);
 		
 		return semelist;
 	}
 	
 	/**
-	 * 학생 내정보 변경 updateStudentInfo.do
+	 * 학생 내정보 변경
 	 */
 	@ResponseBody
 	@RequestMapping(value="updateStudentInfo.do", 
 					produces="application/String; charset=utf-8",
 					method={RequestMethod.GET, RequestMethod.POST})
-	public String updateStudentInfo(I_StudentBasicInfoDTO info) throws Exception {
+	public String updateStudentInfo(I_StudentBasicInfoDTO info) 
+													throws Exception {
 		logger.info("KhIntranetController updateStudentInfo");
-		logger.info("KhIntranetController updateStudentInfo info : " + info.toString());
-		System.out.println("KhIntranetController I_StudentBasicInfoDTO : " + info.toString());
 		boolean b = khIntraService.updateStudentInfo(info);
-		System.out.println("b : " + b);
 		if(b == true) {
 			return "수정이 완료되었습니다.";
 		}else {
