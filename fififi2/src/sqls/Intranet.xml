@@ -50,6 +50,7 @@
 <update id="addAssessment" parameterType="ProfEvaluationDTO">
 	UPDATE ASSESSMENT SET PROFESSOR_GRADE = #{critic}
 	 WHERE SUB_SEQ_NUM = #{sub_seq}
+	  AND STUDENT_ID = #{student_id}
 </update>
 
 <!-- 내정보(학생) : 기본학생정보 -->
