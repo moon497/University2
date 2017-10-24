@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.GoodDao;
 import kh.com.model.GoodDto;
-import kh.com.model.MainBbs;
-import kh.com.model.QueryBbs;
+import kh.com.model.Post;
 
 @Repository
 public class GoodDaoImpl implements GoodDao {
@@ -47,7 +46,7 @@ public class GoodDaoImpl implements GoodDao {
 	}
 
 	@Override
-	public boolean updateBbs(MainBbs bbs) {
+	public boolean updateBbs(Post bbs) {
 		// TODO Auto-generated method stub
 		return false;
 	}

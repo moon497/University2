@@ -2,21 +2,20 @@ package kh.com.service;
 
 import java.util.List;
 
-import kh.com.model.MainBbs;
-import kh.com.model.QueryBbs;
+import kh.com.model.Post;
 
 public interface BbsService {
 	
 	/*					CREATE					*/
-	boolean insertBbs(MainBbs dto);
+	boolean insertBbs(Post dto);
 	
 	/*					READ					*/
-	MainBbs getBbs(int seq);
-	List<MainBbs> getBbsList(QueryBbs query);
-	int getTotalBbs(String boardName);
+	Post getBbs(int seq);
+	List<Post> getBbsList(Post query);
+	int getTotalBbs(int boardSeq);
 	
 	/*					UPDATE					*/
-	boolean updateBbs(MainBbs bbs);
+	boolean updateBbs(Post bbs);
 
 	/*					DELETE					*/
 	boolean deleteBbs(int seq);

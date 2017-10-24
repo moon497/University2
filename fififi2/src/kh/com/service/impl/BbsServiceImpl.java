@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.dao.BbsDao;
 import kh.com.dao.CommentDao;
-import kh.com.model.MainBbs;
-import kh.com.model.QueryBbs;
+import kh.com.model.Post;
 import kh.com.service.BbsService;
 
 @Service
@@ -23,23 +22,23 @@ public class BbsServiceImpl implements BbsService {
 	CommentDao commentDao;
 	
 	@Override
-	public boolean insertBbs(MainBbs dto) {
+	public boolean insertBbs(Post dto) {
 		return bbsDao.insertBbs(dto);
 	}
 
 	@Override
-	public MainBbs getBbs(int seq) {
+	public Post getBbs(int seq) {
 		return bbsDao.getBbs(seq);
 	}
 
 	@Override
-	public List<MainBbs> getBbsList(QueryBbs query) {
-		List<MainBbs> list;
+	public List<Post> getBbsList(Post query) {
+		List<Post> list;
 		
 		list = bbsDao.getBbsList(query);
 		
 		//댓글 갯수 가져오기
-		for (MainBbs mainBbs : list) {
+		for (Post mainBbs : list) {
 			int totalComment = commentDao.getTotalComment(mainBbs.getBbsSeq());
 			mainBbs.setTotalComment(totalComment);
 		}
@@ -48,12 +47,12 @@ public class BbsServiceImpl implements BbsService {
 	}
 
 	@Override
-	public int getTotalBbs(String boardName) {
-		return bbsDao.getTotalBbs(boardName);
+	public int getTotalBbs(int boardSeq) {
+		return bbsDao.getTotalBbs(boardSeq);
 	}
 
 	@Override
-	public boolean updateBbs(MainBbs bbs) {
+	public boolean updateBbs(Post bbs) {
 		return bbsDao.updateBbs(bbs);
 	}
 

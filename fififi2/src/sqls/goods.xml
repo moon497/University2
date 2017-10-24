@@ -50,17 +50,6 @@
 		AND BBS_STATUS = 1
 	</select>
 	
-	<!-- Update -->
-	<update id="updateBbs" parameterType="MainBBS">
-		UPDATE MAIN_BBS
-		SET BBS_TITLE = #{bbsTitle},
-			BBS_CONTENT = #{bbsContent},
-			BBS_STORED_FILENAME = #{bbsStoredFileName}, 
-			BBS_ORG_FILENAME = #{bbsOrgFileName}
-		WHERE BOARD_URL = #{boardUrl}
-		AND BBS_SEQ = #{bbsSeq}
-	</update>
-	
 	<!-- 						DELETE 						-->
 	<update id="deleteGood" parameterType="Integer">
 		UPDATE GOODS

@@ -3,8 +3,7 @@ package kh.com.dao;
 import java.util.List;
 
 import kh.com.model.GoodDto;
-import kh.com.model.MainBbs;
-import kh.com.model.QueryBbs;
+import kh.com.model.Post;
 
 public interface GoodDao {
 	
@@ -17,7 +16,7 @@ public interface GoodDao {
 	int getTotalBbs(String boardName);
 	
 	/*					UPDATE					*/
-	boolean updateBbs(MainBbs bbs);
+	boolean updateBbs(Post bbs);
 
 	/*					DELETE					*/
 	boolean deleteGood(int seq);

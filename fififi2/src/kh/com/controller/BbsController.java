@@ -2,7 +2,9 @@ package kh.com.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kh.com.model.MainBbs;
+import kh.com.model.Board;
+import kh.com.model.Post;
 import kh.com.model.MemberDto;
-import kh.com.model.QueryBbs;
 import kh.com.service.BbsService;
 import kh.com.util.FileUpload;
 import kh.com.util.Pagination;
@@ -41,26 +43,27 @@ public class BbsController {
 	@RequestMapping(value= "/{boardUrl}/write.do",method=RequestMethod.GET)
 	public String write(@PathVariable String boardUrl, HttpServletRequest req) {
 		logger.info("/{}/write.do",boardUrl);
-		System.out.println("깃을 통한 프로젝트 관리!");
+		
+		//boardUrl 체크
+		if (checkBoardUrl(boardUrl) == false) {
+			return "checkLogin.tiles";		//TODO 바꿀 것
+		}
 		
 		//init
 		HttpSession session;
 		MemberDto mem;
 		
-		
 		session = req.getSession();
 		
 		mem = (MemberDto) session.getAttribute("login");
 		
-		
-		
 		if (mem == null) {
-			return "checkLogin.tiles";		
+			return "checkLogin.tiles";
 		} else {
-			return "bbsWrite.tiles";			
+			return "bbsWrite.tiles";
 		}
 	}
-	
+
 	//글쓰기 기능
 	@RequestMapping(value="/{boardUrl}/write.do",method=RequestMethod.POST)
 	public String writePost(@PathVariable String boardUrl, MultipartHttpServletRequest req, MultipartFile uploadFile, Model model) throws IOException {
@@ -77,7 +80,7 @@ public class BbsController {
         path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
         logger.info(path);
         FileUpload fileUpload = new FileUpload(uploadFile, path);
-        MainBbs bbs = new MainBbs();
+        Post bbs = new Post();
         
         //listen
 		userId = req.getParameter("userId");
@@ -87,7 +90,7 @@ public class BbsController {
 		bbsOrgFileName = fileUpload.getOrgFileName();
 		
 		//setup
-        bbs.setBoardUrl(boardUrl);
+        bbs.setBoardSeq(getBoardSeq(boardUrl));
         bbs.setUserId(userId);
         bbs.setBbsTitle(bbsTitle);
         bbs.setBbsContent(bbsContent);
@@ -113,16 +116,16 @@ public class BbsController {
 		logger.info("/bbs/list.do");
 		
 		//init
-		List<MainBbs> bbsList;
-		QueryBbs query;
+		List<Post> bbsList;
+		Post query;
 		Pagination pagination;
 		
 		//페이징
-		pagination = new Pagination(getTotalBbs(boardUrl), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(getBoardSeq(boardUrl)), getCurrPage(req));
 
 		//질의 설정
-		query = new QueryBbs();
-		query.setBoardUrl(boardUrl);
+		query = new Post();
+		query.setBoardSeq(getBoardSeq(boardUrl));
 		query.setStartArticle(pagination.getStartArticle());
 		query.setEndArticle(pagination.getEndArticle());
 		
@@ -144,27 +147,27 @@ public class BbsController {
 		logger.info("/{}/detail.do", boardUrl);
 		//init
 		Pagination pagination;
-		List<MainBbs> bbsList;
-		MainBbs bbs;
-		QueryBbs queryBbs;
+		List<Post> bbsList;
+		Post bbs;
+		Post query;
 		int seq;
 		String ext;
 		boolean isImg;
 
 		//페이징
-		pagination = new Pagination(getTotalBbs(boardUrl), getCurrPage(req));
+		pagination = new Pagination(getTotalBbs(getBoardSeq(boardUrl)), getCurrPage(req));
 		
 		//질의 설정
 		seq = Integer.parseInt(req.getParameter("seq"));
 		
-		queryBbs = new QueryBbs();
-		queryBbs.setBoardUrl(boardUrl);
-		queryBbs.setStartArticle(pagination.getStartArticle());
-		queryBbs.setEndArticle(pagination.getEndArticle());
+		query = new Post();
+		query.setBoardSeq(getBoardSeq(boardUrl));
+		query.setStartArticle(pagination.getStartArticle());
+		query.setEndArticle(pagination.getEndArticle());
 		
 		//DB 데이터
 		bbs = servBbs.getBbs(seq);
-		bbsList = servBbs.getBbsList(queryBbs);
+		bbsList = servBbs.getBbsList(query);
 		ext = getExt(bbs);
 		logger.info("ext: {}",ext);
 		isImg = isImg(ext);
@@ -188,7 +191,7 @@ public class BbsController {
 	public String updatePost(@PathVariable String boardUrl, HttpServletRequest req, Model model) {
 		logger.info("bbs/update");
 		//init
-		MainBbs bbs;
+		Post bbs;
 		
 		//DB get
 		bbs = servBbs.getBbs(getSeq(req));
@@ -201,7 +204,7 @@ public class BbsController {
 	
 	//글 수정하기
 	@RequestMapping(value="/{boardUrl}/update.do",method=RequestMethod.POST)
-	public String updateAf(@PathVariable String boardUrl, MultipartHttpServletRequest req, MultipartFile uploadFile, MainBbs bbs, Model model) {
+	public String updateAf(@PathVariable String boardUrl, MultipartHttpServletRequest req, MultipartFile uploadFile, Post bbs, Model model) {
 		logger.info("진입");
 		//init
 		String path = "";
@@ -218,7 +221,7 @@ public class BbsController {
 		bbsOrgFileName = fileUpload.getOrgFileName();
 		
 		//setup
-        bbs.setBoardUrl(boardUrl);
+        bbs.setBoardSeq(getBoardSeq(boardUrl));
         
         if (bbsOrgFileName == null || bbsOrgFileName.equals("-1") ) {
             bbs.setBbsStoredFileName(req.getParameter("bbsStoredFileName"));
@@ -229,7 +232,7 @@ public class BbsController {
          }
 		
 		//query Set
-		bbs.setBoardUrl(boardUrl);
+		bbs.setBoardSeq(getBoardSeq(boardUrl));
 		
 		logger.info(bbs.toString());
 		
@@ -290,8 +293,8 @@ public class BbsController {
 		return seq;
 	}
 
-	private int getTotalBbs(String boardName) {
-		return servBbs.getTotalBbs(boardName);
+	private int getTotalBbs(int boardSeq) {
+		return servBbs.getTotalBbs(boardSeq);
 	}
 	
 	private boolean isImg(String ext) {
@@ -312,7 +315,7 @@ public class BbsController {
 		return false;
 	}
 
-	private String getExt(MainBbs bbs) {
+	private String getExt(Post bbs) {
 		if (bbs.getBbsOrgFileName() == null || bbs.getBbsOrgFileName().equals("-1")) {
 			return "-1";
 		} else {
@@ -337,6 +340,18 @@ public class BbsController {
 		}
 		
 		return null;
+	}
+	
+	private boolean checkBoardUrl(String boardUrl) {
+		Board boards = new Board();
+		
+		return boards.containsKey(boardUrl);
+	}
+	
+	private Integer getBoardSeq(String boardUrl) {
+		Board boards = new Board();
+		
+		return boards.getBoardSeq(boardUrl);
 	}
 
 }
