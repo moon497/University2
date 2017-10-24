@@ -167,4 +167,14 @@ DELETE FROM ECLASS_COMMENTS
 WHERE C_SEQ = #{c_seq}
 </delete>
 
+<!-- ************************************************************
+    *                      질의 게시판 
+    * **********************************************************/ -->
+<!-- <select id="getQnAList" parameterType="">
+SELECT * FROM ECLASS_QNA_BBS;
+</select>
+ -->
+
+
+
 </mapper>
