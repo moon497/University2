@@ -43,27 +43,3 @@
 	
 	</div>
 </form>
-<!-- <script type="text/javascript">
-$('#hi').click(function () {
-	alert("ddd");
-	$.ajax({
-        type : "POST",
-        dataType : "json",
-        data : { 
-           "student_id"   : $('input[name=user_phone]').val() ,
-           "user_email"   : $('input[name=user_email]').val() ,
-           "user_address" : $('input[name=user_address]').val()
-        },
-        traditional : true,
-        url : "./updateStu   dentInfo.do",
-        async : true,
-        success : function(data) {
-           alert("통신성공");
-        },
-        error : function(xhr, status, error) {
-           alert("통신불가");
-        }
-  });
-});
-
-</script> -->

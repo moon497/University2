@@ -2,6 +2,7 @@ package kh.com.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -217,7 +218,7 @@ public class LoginController {
    
    // 사진 대량 등록 
    @RequestMapping(value="photoUpdate.do",method={RequestMethod.GET, RequestMethod.POST})
-   public String excelread_photo(Model model,   MultipartHttpServletRequest req, List<MultipartFile> file) throws Exception {
+   public String excelread_photo(Model model,  MultipartHttpServletRequest req, List<MultipartFile> file) throws Exception {
     
     	logger.info("photoUpdate.do");
         String path = "";
@@ -231,8 +232,6 @@ public class LoginController {
           FileUpload fileUpload = new FileUpload(file.get(i), path);
 	      storedFileName = fileUpload.getStoredFileName();
 	      orgFileName = fileUpload.getOrgFileName();
-	      logger.info(orgFileName);
-	      logger.info(storedFileName);
 	      
 	      int idx = orgFileName.lastIndexOf(".");
 	      String fileName = orgFileName.substring(0,idx);
@@ -242,40 +241,36 @@ public class LoginController {
 	      dto.setUser_id(fileName);
 	      dto.setUser_photo(storedFileName);
 	      loginservice.updatePhoto_student(dto);
-	      
       }
         
        return "regiAf.tiles";
     }
    
    
+   
    @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
    public String excelread(Model model, MultipartFile file, MultipartHttpServletRequest req) throws Exception {
     	
        logger.info("excelread");
+       System.out.println("filename : " + file.getName());
        
+       MemberDto dto = new MemberDto();
        String path = "";
        String orgFileName;
        
        path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
-
-       MemberDto dto = new MemberDto();
-      
-       FileInputStream fis = new FileInputStream(path);
        
        FileUpload fileUpload = new FileUpload(file, path);
 	   orgFileName = fileUpload.getOrgFileName();
-	   logger.info(orgFileName);
-	      
+	   
 	   int rowindex=0;
 	   int columnindex=0;
-      
+	   
       if(orgFileName.toUpperCase().endsWith(".XLS")) {
-         HSSFWorkbook workbook = new HSSFWorkbook(fis);
+         HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
          HSSFSheet sheet = workbook.getSheetAt(0);
          //시트 수 (첫번째에만 존재하므로 0을 준다)
          //만약 각 시트를 읽기위해서는 FOR문을 한번더 돌려준다
-      
          
          //행의 수
          int rows=sheet.getPhysicalNumberOfRows();
@@ -371,7 +366,7 @@ public class LoginController {
          }
       }else if(orgFileName.toUpperCase().endsWith(".XLSX")) {
          
-         XSSFWorkbook workbook=new XSSFWorkbook(fis);
+         XSSFWorkbook workbook=new XSSFWorkbook(file.getInputStream());
           XSSFSheet sheet=workbook.getSheetAt(0);
           int rows=sheet.getPhysicalNumberOfRows();
          for(rowindex=1;rowindex<rows;rowindex++){
@@ -463,6 +458,6 @@ public class LoginController {
              }
          }
       }
-      return "regiAf.tiles";
+      return "redirect:/gradeinput.do";
    }   
 }

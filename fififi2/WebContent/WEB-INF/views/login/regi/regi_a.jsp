@@ -62,38 +62,12 @@ td, th {
 		<tr>
 			<td>생년월일</td>
 			<td>
-				<select name="user_birth1" id="user_birth1" data-msg="생년월일" style="width: 60px;" required="required">
-							<option value="">년도</option>
-						<%for(int i=1960; i < 1998; i++){ %>
-							<option value="<%=i%>"><%=i%>년</option>
-						<%} %>
-				</select>
-				
-			
-				<select name="user_birth2" id="user_birth2" data-msg="생년월일" style="width: 60px;" required="required">
-						<option value="">월</option>
-					
-					<%for(int i=1; i < 13 ; i++){ %>
-						<option value="<%=i%>"><%=i%>월</option>
-					<% } %>	 
-				</select>
-				
-				
-				<select name="user_birth3" id="user_birth3" data-msg="생년월일" style="width: 60px;" required="required">
-						<option value="">일</option>
-						
-					<%Calendar cal = Calendar.getInstance(); %>
-					<%for(int i=1; i < 31 ; i++){ %>
-						<option value="<%=i%>"><%=i%>일</option>
-					<%} %>	
-				</select>
+			<input type="date" name="user_birth" required="required" max="2017-01-01" min=1950-12-31">
 			</td>
-			
 		</tr>
-			</tr>
-			<tr>
+		<tr>
 			<td>이메일 </td>
-			<td><input type="text" name="user_email" required="required"></td>
+			<td><input type="email" name="user_email" required="required"></td>
 		</tr>
 		<tr>
 			<td>핸드폰번호 </td>
@@ -107,14 +81,13 @@ td, th {
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호" required="required"><br>
 			<input type="text" id="sample4_roadAddress" placeholder="도로명주소"  required="required" onkeyup="address(this)">
 			<input type="text" id="detail_address" required="required" placeholder="상세주소" onkeyup="address(this)">
-			
 			<input type="hidden" name="user_address" id="user_address">
 			</td>
 		</tr>
 	<!-- 교직원 추가입력 -->
 		<tr>
 			<td>입사일</td>
-			<td><input type="text" name="admin_regidate" required="required" pattern="\d{8}">(ex: 20170301)</td>
+			<td><input type="date" name="admin_regidate" required="required"  max="2000-01-01" min=1979-12-31"></td>
 		</tr>
 
 		<tr>
@@ -131,21 +104,6 @@ td, th {
 </div>
 
 <script type="text/javascript">
-//생년월일 
-$(document).ready(function() {
-	$("select[name='user_birth2']").change(function() {
-		var lastday = (new Date($("select[name='user_birth1']").val()+ "",
-			       $("select[name='user_birth2']").val()+"", 0)).getDate();
-		// 적용
-		var str = "";
-		for(i = 1; i<= lastday; i++){
-			str += "<option value='"+ i +"'>" + i + "</option>";	
-		}
-		$("select[name='user_birth3']").html(str);
-	});
-});
-
-
 //주소합치기
 function address(obj) {
 	  var p = document.getElementById('sample4_postcode').value ;

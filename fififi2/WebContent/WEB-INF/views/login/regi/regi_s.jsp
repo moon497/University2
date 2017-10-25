@@ -27,24 +27,24 @@ td, th {
 </head>
 <body>
 
-
-
-<button onclick="content(1)" class="buttoncss">정보일괄등록</button> <button onclick="content(2)" class="buttoncss">사진일괄등록</button>
-  <button onclick="content(3)" class="buttoncss">상세회원가입</button> <br><br>
+<div class="category-content col-sm-9" style="margin-top: 1em;">
+<button onclick="content(1)" class="buttoncss">정보일괄등록</button> 
+<button onclick="content(2)" class="buttoncss">사진일괄등록</button>
+<button onclick="content(3)" class="buttoncss">상세회원가입</button> <br><br>
 
 
 <!-- 1.일괄등록 -->
-<form action="excelread.do" name="regiexcel" id="_regiexcel"  method="POST" style="display: none;">
-		<input type="file" name="fileread" style=" width : 400px;" id="fileread" required="required" >
-		<button id="_btnRegiexcel">정보일괄등록</button>
+<form action="excelread.do" name="regiexcel" id="_regiexcel"  method="POST" style="display: none;" enctype="multipart/form-data">
+		<input type="file" name="file" style=" width : 400px;" id="fileread" required="required" >
+		<input type="submit" value="정보일괄등록">
 </form> 
 
 
 <!-- 2.사진일괄등록 -->
 <form action="photoUpdate.do" name="regiexcel" id="_regiexcel_photo"  method="POST" enctype="multipart/form-data" style="display: none;">
-		<div> ** 사진명은 아이디(학번)과 일치해야 대량 등록 가능합니다 ** </div><br><br>
+		<div> ** 사진명은 아이디(학번)과 일치해야 대량 등록 가능합니다 ** </div><br>
 		<input type="file" name="file" style=" width : 400px;" id="file" multiple required="required">
-		<button id="_btnRegi_photo">사진일괄등록</button>
+		<input type="submit" value="사진대량등록">
 </form> 
 
 
@@ -52,7 +52,6 @@ td, th {
 
 <!-- 3.상세회원가입 -->
 <form action="regiAf.do" id ="regiform" style="display: none;" method="POST" enctype="multipart/form-data"> 
-
 		<input type="hidden" value="100" name="user_status">
 		<input type="hidden" value="100" name="user_auth">
 			
@@ -90,36 +89,13 @@ td, th {
 		</tr>
 		<tr>
 			<td>생년월일</td>
-			<td>
-				<select name="user_birth1" style="width: 60px;" required="required">
-							<option value="">년도</option>
-						<%for(int i=1960; i < 1998; i++){ %>
-							<option value="<%=i%>"><%=i%>년</option>
-						<%} %>
-				</select>
-				
-				<select name="user_birth2" style="width: 60px;" required="required">
-						<option value="">월</option>
-					
-					<%for(int i=1; i < 13 ; i++){ %>
-						<option value="<%=i%>"><%=i%>월</option>
-					<% } %>	 
-				</select>
-				
-				<select name="user_birth3" style="width: 60px;" required="required" onchange="birth()">
-						<option value="">일</option>
-						
-					<%Calendar cal = Calendar.getInstance(); %>
-					<%for(int i=1; i < 31 ; i++){ %>
-						<option value="<%=i%>"><%=i%>일</option>
-					<%} %>	
-				</select>
+				<td>
+			<input type="date" name="user_birth" required="required" max="2017-01-01" min=1950-12-31">
 			</td>
-			
 		</tr>
 		<tr>
 			<td>이메일 </td>
-			<td><input type="text" name="user_email" required="required"></td>
+			<td><input type="email" name="user_email" required="required"></td>
 		</tr>
 		<tr>
 			<td>핸드폰번호 </td>
@@ -142,7 +118,7 @@ td, th {
 	    <!-- 학생 추가입력 -->
 		<tr>
 			<td>입학일</td>
-			<td><input type="text" name="student_regidate" required="required" pattern="\d{8}"> (ex: 20170301)
+			<td><input type="date" name="student_regidate" required="required" max="2000-01-01" min=1979-12-31"> 
 			</td>
 		</tr>
 		<tr> 
@@ -155,11 +131,10 @@ td, th {
 			</td>
 		</tr>
 		</table>
-</form>        
-</section>
+</form>     
+</div>   
 
 <script type="text/javascript">
-
 function content(n) {
 	v = n;
 	if(v==1){ //일괄등록 form 펼치기
@@ -184,20 +159,6 @@ function content(n) {
 
 
 <script type="text/javascript">
-//생년월일 
-$(document).ready(function() {
-	$("select[name='user_birth2']").change(function() {
-		var lastday = (new Date($("select[name='user_birth1']").val()+ "",
-			       $("select[name='user_birth2']").val()+"", 0)).getDate();
-		// 적용
-		var str = "";
-		for(i = 1; i<= lastday; i++){
-			str += "<option value='"+ i +"'>" + i + "</option>";	
-		}
-		$("select[name='user_birth3']").html(str);
-	});
-});
-
 //주소합치기
 function address(obj) {
 	  var p = document.getElementById('sample4_postcode').value ;
