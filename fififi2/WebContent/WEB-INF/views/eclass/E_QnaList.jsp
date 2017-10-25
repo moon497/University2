@@ -1,4 +1,4 @@
-<%@page import="kh.com.util.DateUtil"%>
+<%-- <%@page import="kh.com.util.DateUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -51,16 +51,10 @@
     <c:forEach items="${qnaslist }" var="qna" varStatus="qnaS">
       <tr>
         <td>${qnaS.count}</td>
-       
-            <td>
-            <a href="./E_Pdsdetail.do?seq=${qna.eclass_qna_bbs_seq }&sub_seq=${qna.sub_seq }&page=${pagination.currPage}">
-            ${qna.title }
-            </a>
-            <c:if test="${qna.filename != '-1' }"><i class="fa fa-file"></i></c:if>
-            </td>
-   
-        <td style="font-size: 12px;">${DateUtil.pollState(pds.edate)}${fn:substring(pds.sdate,0,10)} ~ ${fn:substring(pds.edate,0,10)}</td>
+        <td>${qna.title }</td>
+        <td>${qna.wdate }</td>
         <td>${qna.user_name }</td>
+        <td>${qna.readcount }</td>
       </tr>
       </c:forEach>      
     </tbody>
@@ -129,4 +123,4 @@
      </c:choose>
    </ul>
 </div>
-</section>
+</section> --%>

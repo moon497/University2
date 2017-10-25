@@ -170,10 +170,21 @@ WHERE C_SEQ = #{c_seq}
 <!-- ************************************************************
     *                      질의 게시판 
     * **********************************************************/ -->
-<!-- <select id="getQnAList" parameterType="">
-SELECT * FROM ECLASS_QNA_BBS;
-</select>
- -->
+<!-- <select id="getQnAList" resultType="E_QnADto" parameterType="kh.com.util.Pagination">
+SELECT 
+         E.ECLASS_QNA_BBS_SEQ, E.USER_ID,E.REF,E.STEP,E.DEPTH, E.TITLE , E.CONTENT ,E.READCOUNT,
+         E.WDATE,E.PARENT,E.SUB_SEQ,E.DEL, U.USER_NAME
+    FROM (
+            SELECT ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
+            CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL,
+                  ROW_NUMBER() OVER (ORDER BY ECLASS_QNA_BBS_SEQ desc) R
+            FROM ECLASS_QNA_BBS
+      ) E,USERS U
+    WHERE SUB_SEQ= #{sub_seq} AND E.USER_ID = U.USER_ID
+    AND R BETWEEN #{startArticle} and #{endArticle}
+    ORDER BY ECLASS_QNA_BBS_SEQ DESC
+</select> -->
+
 
 
 
