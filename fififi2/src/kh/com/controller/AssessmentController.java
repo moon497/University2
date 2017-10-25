@@ -138,6 +138,24 @@ public class AssessmentController {
 		
 		return student;
 	}
+	
+	
+	@RequestMapping(value="schedule.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String schedule(HttpServletRequest req, Model model) throws Exception {
+		
+		MemberDto mem = (MemberDto)req.getSession().getAttribute("login");
+		StudentDTO student = assessmentService.getStudent(mem.getUser_id());
+		
+		//학생이 듣는 과목 불러오기 
+		List<AssessmentDto>list = assessmentService.sumPoint(student.getStudent_id());
+		
+		model.addAttribute("student", student);
+		model.addAttribute("sublist", list);
+		
+		return "schedule.tiles";
+	}
+	
+	
 	@RequestMapping(value="ProInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String ProInfo(HttpServletRequest req, Model model) throws Exception {
 		logger.info("ProInfo");
