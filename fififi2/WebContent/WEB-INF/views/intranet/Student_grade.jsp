@@ -73,6 +73,13 @@
 	</tr>
 </table>
 </c:if>
+<c:if test="${confirm == 'notseason' }">
+<table id="studentGrade_table">
+	<tr>
+		<td colspan="7">성적확인기간이 아닙니다.</td>
+	</tr>
+</table>
+</c:if>
 
 <c:if test="${confirm == 'notexistNullgrade' }">
 <table id="studentGrade_table">
