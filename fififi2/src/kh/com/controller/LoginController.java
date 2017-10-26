@@ -250,8 +250,6 @@ public class LoginController {
    
    @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
    public String excelread(Model model, MultipartFile file, MultipartHttpServletRequest req) throws Exception {
-    	
-       logger.info("excelread");
        System.out.println("filename : " + file.getName());
        
        MemberDto dto = new MemberDto();
@@ -259,7 +257,6 @@ public class LoginController {
        String orgFileName;
        
        path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
-       
        FileUpload fileUpload = new FileUpload(file, path);
 	   orgFileName = fileUpload.getOrgFileName();
 	   

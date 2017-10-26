@@ -68,6 +68,7 @@ td, th {
 			<tr>
 			<td>이메일 </td>
 			<td><input type="email" name="user_email" required="required"></td>
+			
 		</tr>
 		<tr>
 			<td>핸드폰번호 </td>
