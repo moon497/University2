@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="kh.com.model.I_StudentGradeDTO"%>
 <%@page import="kh.com.model.ProfEvaluationDTO"%>
 <%@page import="java.util.List"%>
@@ -13,6 +12,10 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <fmt:requestEncoding value="utf-8"/> 
 <style>
+#studentGrade_table {
+	width:100%;
+}
+
 #studentGrade_table * {
 	font-size: 12px;
 }
@@ -146,6 +149,7 @@
 	</c:forEach>
 	</tbody>
 </table>
+
 <div>
 <button id="gradeConfirmBtn">성적확인 완료</button>
 </div>
@@ -182,9 +186,6 @@ $('#gradeConfirmBtn').click(function () {
      });
 });
 </script>
-
-
-
 
 
 </section> <!-- layout.xml 상 꼭 있어야함 지우지마세요! -->

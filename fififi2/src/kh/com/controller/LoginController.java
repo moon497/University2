@@ -246,8 +246,6 @@ public class LoginController {
        return "regiAf.tiles";
     }
    
-   
-   
    @RequestMapping(value="excelread.do",method={RequestMethod.GET, RequestMethod.POST})
    public String excelread(Model model, MultipartFile file, MultipartHttpServletRequest req) throws Exception {
        System.out.println("filename : " + file.getName());
@@ -257,6 +255,7 @@ public class LoginController {
        String orgFileName;
        
        path = req.getSession().getServletContext().getRealPath("/") + "upload/reg/"; //파일 저장경로
+
        FileUpload fileUpload = new FileUpload(file, path);
 	   orgFileName = fileUpload.getOrgFileName();
 	   
@@ -455,6 +454,8 @@ public class LoginController {
              }
          }
       }
-      return "redirect:/gradeinput.do";
+
+      return "regiAf.tiles";
    }   
+
 }
