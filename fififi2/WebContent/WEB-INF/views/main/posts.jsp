@@ -20,27 +20,21 @@ section#posts div.box p {
 <section id="posts" class="boxes_area">
     <div class="container">
         <div class="row">
+            <c:set var="doneLoop" value="false"/>	
+        	<c:forEach items="${noticeList }" var="notice" varStatus="status"> 
+              	<c:if test="${not doneLoop}">       	
             <div class="col-sm-4">
                 <div class="box">
-                    <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/notice/detail.do?seq=${notice1.bbsSeq}">${notice1.bbsTitle }</a></h3>
-                    <p class="col-sm-12">${notice1.bbsContent }</p>
-                    <i class="fa fa-cogs"></i>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="box">
-                    <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/notice/detail.do?seq=${notice2.bbsSeq}">${notice2.bbsTitle }</a></h3>
-                    <p class="col-sm-12">${notice2.bbsContent }</p>
-                    <i class="fa fa-exclamation-triangle"></i>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="box">
-                    <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/notice/detail.do?seq=${notice3.bbsSeq}">${notice3.bbsTitle }</a></h3>
-                    <p class="col-sm-12">${notice3.bbsContent }</p>
+                    <h3 class="col-sm-11"><a href="${pageContext.request.contextPath }/notice/detail.do?seq=${notice.bbsSeq}">${notice.bbsTitle }</a></h3>
+                    <p class="col-sm-12">${notice.bbsContent }</p>                    
                     <i class="fa fa-clipboard"></i>
                 </div>
             </div>
+                </c:if>
+	            <c:if test="${status.count == 3 }">
+	            	<c:set var="doneLoop" value="true"/>
+	            </c:if>
+        	</c:forEach>
         </div>
     </div>
 </section>
