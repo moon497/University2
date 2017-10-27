@@ -66,12 +66,7 @@ public class MemberController {
 			logger.info(mainBbs.toString());
 		}
 		
-		//요소 추가		
-		if (noticeList.isEmpty() == false && noticeList.size() >= 3) {
-			model.addAttribute("notice1", noticeList.get(0));
-			model.addAttribute("notice2", noticeList.get(1));
-			model.addAttribute("notice3", noticeList.get(2));
-		}
+		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("todayList", todayList);
 		
 		return "index.tiles";

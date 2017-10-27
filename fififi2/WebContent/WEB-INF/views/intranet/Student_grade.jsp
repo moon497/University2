@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <fmt:requestEncoding value="utf-8"/> 
 <style>
+#studentGrade_table {
+	width:100%;
+}
+
 #studentGrade_table * {
 	font-size: 12px;
 }
@@ -66,6 +70,13 @@
 <table id="studentGrade_table">
 	<tr>
 		<td colspan="7">아직 등록되지 않은 평가과목이 존재합니다.</td>
+	</tr>
+</table>
+</c:if>
+<c:if test="${confirm == 'notseason' }">
+<table id="studentGrade_table">
+	<tr>
+		<td colspan="7">성적확인기간이 아닙니다.</td>
 	</tr>
 </table>
 </c:if>
@@ -145,6 +156,7 @@
 	</c:forEach>
 	</tbody>
 </table>
+
 <div>
 <button id="gradeConfirmBtn">성적확인 완료</button>
 </div>
@@ -181,9 +193,6 @@ $('#gradeConfirmBtn').click(function () {
      });
 });
 </script>
-
-
-
 
 
 </section> <!-- layout.xml 상 꼭 있어야함 지우지마세요! -->

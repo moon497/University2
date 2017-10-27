@@ -11,22 +11,22 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <fmt:requestEncoding value="utf-8"/> 
 <style>
-#studentGrade_table * {
+#studentGrade_table *, #totalGradeTable * {
 	font-size: 12px;
 }
 
-#studentGrade_table th, td {
+#studentGrade_table th, td, #totalGradeTable th, td {
 	color: #404040;
 	border-collapse: collapse;
 	border: 1px solid #e7e7e7;
 	text-align: center;
 }
 
-#studentGrade_table th {
+#studentGrade_table th, #totalGradeTable th {
 	font-size: 13px;
 }
 
-#studentGrade_table tr {
+#studentGrade_table tr, #totalGradeTable tr {
 	height: 35px;
 }
 
@@ -97,10 +97,12 @@ $('.year').change(function () {
 	}; 
 });
 
-// 학기선택
+/*
+ * 학기선택
+ */
 $('.semester').change(function () {
 $('#studentGrade_table > tbody').empty();
-// 클릭 후 이벤트
+// 클릭 후 이벤트 - Ajax로 semesterGradechoice.do 호출
 $.ajax({
        type : "POST",
        dataType : "json",
@@ -116,42 +118,57 @@ $.ajax({
     	   dataCount(data);
     	   $.each(data, function(i, item) {
                console.log(data[i]);
-               $('#studentGrade_table > tbody').prepend(setHtml(data[i]));
+               $('#totalGradeTable > tbody').prepend(setHtml(data[i]));
            }); 
     	   var TotalstudentScore = getTotalStudentScore(totalStudentScore); // 총 학점
-           $('#studentGrade_table > tbody > tr > td:nth-child(7)').text(getTotalStudentScore(totalStudentScore));
+           $('#totalGradeTable > tbody > tr:nth-child(1) > td').text(getTotalStudentScore(totalStudentScore));
        },
        error : function(xhr, status, error) {
           alert("통신불가");
        }
     });
     
+// ------------------ 변수 선언 --------------------
 var totalStudentScore = 0; 		//총점수
 var totalStudentSubScore; 		// 이수학점
+//---------------------------------------------
+
+/*
+ * semesterGradechoice.do 에서 
+ * 성공적으로 리스트를 가져오게 되면 아래 함수를 호출
+ */
 function setHtml(comment) {
-	var totalStudentscore; 		// 점수
+	// ------------------ 변수 선언 ------------------
+	var totalStudentscore;	// 점수
 	var sub_category; 		// 전공 & 비전공
+	// -------------------------------------------
 	if(comment.sub_category == 100){
 		sub_category = "전공";
 	}else{
 		sub_category = "비전공";
-	};	
-	// 총학점
-	var StudentScore = parseInt(comment.student_score);
-	totalStudentScore = totalStudentScore + parseInt(StudentScore);
+	};
+	
+	// --------------- 총학점을 구하기 위한 변수 선언 ---------------
+	var StudentScore = parseInt(comment.student_score); 			// 학생점수 가져오기
+	totalStudentScore = totalStudentScore + parseInt(StudentScore); // 받은 점수를 더하기
+	// ---------------------------------------------------
+	// 첫 번째 테이블에 그리기 (학년, 학기, 과목이름, 구분, 점수, 학점, 이수학점)
 	$('#studentGrade_table > tbody').append('<tr><td>'+comment.sub_semester +'</td>' +
 												'<td>'+comment.sub_semester +'</td>' + 
 												'<td>'+comment.sub_info +'</td>' +
 												'<td>'+sub_category +'</td>' + 
 												'<td>'+comment.student_score +'</td>' + 
 												'<td>'+getStudentScore(comment) +'</td>' + 
-												'<td>'+ totalStudentScore +'</td>' + 
-												'<td>'+comment.sub_point +'</td>' + 
-												'<td>'+comment.sub_point +'</td></tr>' 
+												'<td>'+comment.sub_point +'</td></tr>'
 												);
+	// 두 번째 테이블에 그리기(총 학점, 총 이수학점)
+	$('#totalGradeTable > tbody > th').append('<td>' + totalStudentScore +'</td>');
 }
 });
 
+/*
+ * 총학점 계산을 위해 총 과목수를 알기 위한 함수
+ */
 var dataCounts = 0; // 총 갯수
 function dataCount(data){
 	var data_length = data.length ; //json의 length
@@ -160,9 +177,10 @@ function dataCount(data){
 	}
 }
 
-// 총학점
+/*
+ * 학생 학점 
+ */
 function getStudentScore(comment) {
-	// 학점
 	var student_score; 
 	if(comment.student_score <= 100 && comment.student_score >= 95){
 		student_score = "A+";
@@ -186,8 +204,10 @@ function getStudentScore(comment) {
 	return student_score;
 };
 
+/*
+ * 학생 총학점 
+ */
 function getTotalStudentScore(totalStudentScore) {
-	// 학점
 	totalStudentScore = totalStudentScore / dataCounts;
 	var student_final;
 	if(totalStudentScore <= 100 && totalStudentScore >= 95){
@@ -214,7 +234,7 @@ function getTotalStudentScore(totalStudentScore) {
 </script>
 
 <form>
-	<table id="studentGrade_table">
+	<table id="studentGrade_table" style="width:100%;">
 	 <colgroup>
 	 	<col width="50">
 	 	<col width="50">
@@ -235,7 +255,9 @@ function getTotalStudentScore(totalStudentScore) {
 			<th>구분</th>
 			<th>점수</th>
 			<th>학점</th>
+			<!-- <th>총학점</th> -->
 			<th>이수학점</th>
+			<!-- <th>총이수학점</th> -->
 		</tr>
 	</thead>
 	<!-- --------------------------------------------------------------- 총 점수 및 학점을 위한 영역  -->
@@ -326,7 +348,8 @@ function getTotalStudentScore(totalStudentScore) {
 	</c:forEach>
 	</tbody>
 	</table>
-	<table id="studentGrade_table" style="width:100%; margin-top: 10px;">
+	
+	<table id="totalGradeTable" style="width:100%; margin-top: 10px;">
 	<colgroup>
 		<col width="35">
 		<col width="180">

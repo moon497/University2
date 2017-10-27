@@ -69,9 +69,7 @@ public class IntroController implements Serializable {
 			dto.setFilename(storedFileName);
 			dto.setOrg_filename(orgFileName);
 			
-			System.out.println("introBbswriteAf.do"+dto.toString());
 			introService.IntroBbsWrite(dto);
-			System.out.println("IntroBbsWrite 111 > " + dto.toString());
 			
 			return "redirect:/introBbs.do";
 	}
@@ -81,6 +79,7 @@ public class IntroController implements Serializable {
 		logger.info("introBbsDetail.do :" + seq);
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "학교소개");	
+		
 		introService.introReadCount(seq);
 		IntroBbsDto dto = introService.introBbsDetail(seq);
 		model.addAttribute("dto", dto);

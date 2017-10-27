@@ -21,8 +21,7 @@ var param = '${param.t}';
 	}
 })
 </script>
-<section class="category-content col-sm-9">
-  
+  <section class="category-content col-sm-9">
 
 <div class="row">	
    <c:if test="${t==1}">
@@ -38,13 +37,14 @@ var param = '${param.t}';
    </c:if> 
 </div>
 
-<div class="row">
-<ul id="nav-tap-regi" class="nav nav-tabs">
-  <li><a href="regiview.do?t=1">학생등록</a></li>
-  <li><a href="regiview.do?t=2">교수등록</a></li>
-  <li><a href="regiview.do?t=3">교직원등록</a></li>
-</ul>
-</div>
+	<div class="row">
+	<ul id="nav-tap-regi" class="nav nav-tabs">
+	  <li><a href="regiview.do?t=1">학생등록</a></li>
+	  <li><a href="regiview.do?t=2">교수등록</a></li>
+	  <li><a href="regiview.do?t=3">교직원등록</a></li>
+	</ul>
+	</div>
+	
 <div class="row">
 <!-- 버튼 눌렀을때 regiview.do 갔다가 돌아 온 값  -->
    <c:if test="${t==1}">

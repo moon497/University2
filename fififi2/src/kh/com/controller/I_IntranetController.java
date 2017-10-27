@@ -134,6 +134,10 @@ public class I_IntranetController {
 					model.addAttribute("StudentGrade", sdto);
 				}
 			}
+			
+			if(sdto.size() == 0) {
+				model.addAttribute("confirm", "notseason");
+			}
 		}
 		return "studentGrade.tiles";
 	}
