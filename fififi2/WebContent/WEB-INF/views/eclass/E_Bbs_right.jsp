@@ -12,7 +12,7 @@
 		<ul>
 			<li><a href="E_Bbslist.do?sub_seq=${param.sub_seq }" title="">공지사항</a></li>
 			<li><a href="E_Pdslist.do?sub_seq=${param.sub_seq }" title="">과제</a></li>
-			<li><a href="E_QnAlist.do?sub_seq=${param.sub_seq }" title="">질의 응답</a></li>
+			<li><a href="E_Qnalist.do?sub_seq=${param.sub_seq }" title="">질의 응답</a></li>
 		</ul>
 	</div>
 </aside>

@@ -23,9 +23,7 @@ public class E_QnaDto implements Serializable{
 	private int sub_seq;
 	private int del;
 	
-	
 	public E_QnaDto() {}
-	
 	
 	
 	public String getUser_name() {
@@ -35,8 +33,6 @@ public class E_QnaDto implements Serializable{
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-
-
 
 	public int getDel() {
 		return del;
@@ -135,21 +131,43 @@ public class E_QnaDto implements Serializable{
 		this.sub_seq = sub_seq;
 	}
 
+	public E_QnaDto(String user_id, String user_name, String title, String content) {
+		super();
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.title = title;
+		this.content = content;
+	}
+
+	public E_QnaDto(int eclass_qna_bbs_seq, String user_id, String user_name, int ref, int step, int depth,
+			String title, String content, String wdate, int parent, int readcount, int sub_seq, int del) {
+		super();
+		this.eclass_qna_bbs_seq = eclass_qna_bbs_seq;
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.ref = ref;
+		this.step = step;
+		this.depth = depth;
+		this.title = title;
+		this.content = content;
+		this.wdate = wdate;
+		this.parent = parent;
+		this.readcount = readcount;
+		this.sub_seq = sub_seq;
+		this.del = del;
+	}
+
+
 	@Override
 	public String toString() {
-		return "E_QnADto [eclass_qna_bbs_seq=" + eclass_qna_bbs_seq + ", user_id=" + user_id + ", user_name="
+		return "E_QnaDto [eclass_qna_bbs_seq=" + eclass_qna_bbs_seq + ", user_id=" + user_id + ", user_name="
 				+ user_name + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", title=" + title + ", content="
 				+ content + ", wdate=" + wdate + ", parent=" + parent + ", readcount=" + readcount + ", sub_seq="
-				+ sub_seq + ", del=" + del + ", getUser_name()=" + getUser_name() + ", getDel()=" + getDel()
-				+ ", getEclass_qna_bbs_seq()=" + getEclass_qna_bbs_seq() + ", getUser_id()=" + getUser_id()
-				+ ", getRef()=" + getRef() + ", getStep()=" + getStep() + ", getDepth()=" + getDepth() + ", getTitle()="
-				+ getTitle() + ", getContent()=" + getContent() + ", getWdate()=" + getWdate() + ", getParent()="
-				+ getParent() + ", getReadcount()=" + getReadcount() + ", getSub_seq()=" + getSub_seq()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ sub_seq + ", del=" + del + "]";
 	}
+
+	
 	
 	
 	
 }
-

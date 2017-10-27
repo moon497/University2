@@ -170,22 +170,108 @@ WHERE C_SEQ = #{c_seq}
 <!-- ************************************************************
     *                      질의 게시판 
     * **********************************************************/ -->
-<!-- <select id="getQnAList" resultType="E_QnADto" parameterType="kh.com.util.Pagination">
-SELECT 
-         E.ECLASS_QNA_BBS_SEQ, E.USER_ID,E.REF,E.STEP,E.DEPTH, E.TITLE , E.CONTENT ,E.READCOUNT,
+    
+<select id="getQnalist" resultType="kh.com.model.E_QnaDto" parameterType="kh.com.util.Pagination">
+	SELECT 
+	         E.ECLASS_QNA_BBS_SEQ, E.USER_ID,E.REF,E.STEP,E.DEPTH, E.TITLE , E.CONTENT ,E.READCOUNT,
+	         E.WDATE,E.PARENT,E.SUB_SEQ,E.DEL, U.USER_NAME
+	FROM (
+	           SELECT ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
+	           CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL,
+	           ROW_NUMBER() OVER (ORDER BY REF DESC, STEP ASC) R
+	        FROM ECLASS_QNA_BBS
+	      ) E,USERS U
+	WHERE SUB_SEQ= #{sub_seq} AND E.USER_ID = U.USER_ID
+	AND R BETWEEN #{startArticle} AND #{endArticle} AND DEL = 0
+</select>
+
+<select id="getQnaCount" parameterType="kh.com.model.E_QnaDto" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM ECLASS_QNA_BBS
+	WHERE SUB_SEQ=#{sub_seq}
+</select>
+
+<select id="getQna" resultType="kh.com.model.E_QnaDto" parameterType="java.lang.Integer">
+SELECT E.ECLASS_QNA_BBS_SEQ, E.USER_ID,E.REF,E.STEP,E.DEPTH, E.TITLE , E.CONTENT ,E.READCOUNT,
          E.WDATE,E.PARENT,E.SUB_SEQ,E.DEL, U.USER_NAME
-    FROM (
-            SELECT ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
-            CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL,
-                  ROW_NUMBER() OVER (ORDER BY ECLASS_QNA_BBS_SEQ desc) R
-            FROM ECLASS_QNA_BBS
-      ) E,USERS U
-    WHERE SUB_SEQ= #{sub_seq} AND E.USER_ID = U.USER_ID
-    AND R BETWEEN #{startArticle} and #{endArticle}
-    ORDER BY ECLASS_QNA_BBS_SEQ DESC
-</select> -->
+FROM ECLASS_QNA_BBS E, USERS U
+WHERE ECLASS_QNA_BBS_SEQ= #{eclass_qna_bbs_seq} AND E.USER_ID = U.USER_ID
+</select>
 
+<insert id="uploadQna" parameterType="kh.com.model.E_QnaDto" useGeneratedKeys="false">
+	INSERT INTO ECLASS_QNA_BBS
+	(ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
+            CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL)
+	VALUES(ECLASS_QNA_BBS_SEQ.NEXTVAL, #{user_id},(SELECT NVL(MAX(REF), 0)+1 FROM ECLASS_QNA_BBS),0,0,#{title},#{content},
+	0,SYSDATE,0,#{sub_seq},0)
+</insert>
 
+<update id="QnaaddReadcount" parameterType="java.lang.Integer">
+   UPDATE ECLASS_QNA_BBS
+   SET READCOUNT=READCOUNT+1
+   WHERE ECLASS_QNA_BBS_SEQ=#{eclass_qna_bbs_seq}
+</update>
+
+<update id="updatQna" parameterType="kh.com.model.E_QnaDto">
+   UPDATE ECLASS_QNA_BBS
+   SET TITLE=#{title},
+       CONTENT=#{content}
+   WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq}
+</update>
+
+<!-- reple : 새로운 답글 위로가는 방식 -->
+<update id="replyBbsUpdate" parameterType="kh.com.model.E_QnaDto" useGeneratedKeys="false">
+	UPDATE ECLASS_QNA_BBS
+	SET STEP=STEP+1
+	WHERE REF=(SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})
+	  AND STEP>(SELECT STEP FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})
+</update>
+	
+<insert id="replyBbsInsert" parameterType="kh.com.model.E_QnaDto" useGeneratedKeys="false">
+	INSERT INTO ECLASS_QNA_BBS
+		(ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
+            CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL)
+	VALUES(ECLASS_QNA_BBS_SEQ.NEXTVAL, #{user_id},
+		(SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq}),
+		(SELECT STEP FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})+1,
+		(SELECT DEPTH FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})+1,
+		#{title}, #{content},0,SYSDATE,0,#{sub_seq},0)
+</insert> 
+	
+<!-- 답글 달기 -->
+<!-- answer 1. get step -->
+<select id="answer_getstep" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	SELECT NVL(MIN(STEP),0) MINSTEP FROM ECLASS_QNA_BBS
+	WHERE REF = (SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})             <!-- REF   = 부모 REF -->
+	AND STEP &gt; (SELECT STEP FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})          <!-- STEP  = 부모STEP -->
+	AND DEPTH &lt;= (SELECT DEPTH+1 FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})     <!-- DEPTH = 부모 DEPTH -->
+</select>
+
+<!-- answer 2-1 if. get maxstep -->
+<select id="answer_getmaxstep" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	SELECT MAX(STEP)+1 STEP
+	FROM ECLASS_QNA_BBS
+	WHERE REF = (SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})
+</select>
+
+<!-- answer 2-2 else. update other bbs -->
+<update id="answer_update" parameterType="java.util.Map">
+	UPDATE ECLASS_QNA_BBS
+	SET STEP = STEP+1
+	WHERE REF = (SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq}) <!--  현재와 같은 그룹 번호 찾는다. -->
+	AND STEP &gt;= #{step} <!-- 현재 스텝보다 큰 스탭 -->
+</update>
+	<!-- answer 3. insert answer -->
+<insert id="answer_insert" parameterType="kh.com.model.E_QnaDto" useGeneratedKeys="false">
+	INSERT INTO ECLASS_QNA_BBS
+	(ECLASS_QNA_BBS_SEQ,USER_ID,REF,STEP,DEPTH, TITLE,
+            CONTENT, READCOUNT,WDATE,PARENT,SUB_SEQ,DEL) 
+	VALUES(ECLASS_QNA_BBS_SEQ.NEXTVAL, #{user_id}, 						
+		(SELECT REF FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq}),			
+		#{step},										
+		(SELECT DEPTH+1 FROM ECLASS_QNA_BBS WHERE ECLASS_QNA_BBS_SEQ = #{eclass_qna_bbs_seq})+1, 
+		#{title}, #{content}, 0, SYSDATE, #{eclass_qna_bbs_seq}, #{sub_seq}, 0) 		
+</insert>
 
 
 </mapper>

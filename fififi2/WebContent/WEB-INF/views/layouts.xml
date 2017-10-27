@@ -263,11 +263,40 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsupdate.jsp"/>
 </definition>
 
+
 <!-- 질의응답 게시판 -->
 <definition name="E_Qnalist.tiles" extends="sub.tiles">
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_QnaList.jsp"/>
 </definition>
+
+<definition name="E_Qnadetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnadetail.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+</definition>
+
+<definition name="E_Qnawrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnawrite.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+</definition>
+
+<definition name="E_Qnaupdate.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnaupdate.jsp"/>
+</definition>
+
+<definition name="E_Qnareply.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
+</definition>
+
+<definition name="E_Qnaanswer.tiles" extends="sub.tiles">
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
+</definition>
+
+
+
 
 
 </tiles-definitions>

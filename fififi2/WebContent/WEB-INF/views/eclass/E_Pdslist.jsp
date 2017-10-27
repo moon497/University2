@@ -6,12 +6,12 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 <fmt:requestEncoding value="utf-8"/>
+
 <style>
 .th{
    text-align: center;
    }
 </style>
-
 
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />

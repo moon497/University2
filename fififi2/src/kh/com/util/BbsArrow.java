@@ -8,7 +8,7 @@ public class BbsArrow {
 	}
 
 	public String getArrow(){
-		String rs = "<img src='image/arrow.png' width='20px' height='20px' />";
+		String rs = "<img src='img/arrow.png' width='20px' height='20px' />";
 		/*String rs = "<i class='fa fa-arrow-right'></i>";*/
 		String nbsp = "&nbsp;&nbsp;";
 		String ts="";

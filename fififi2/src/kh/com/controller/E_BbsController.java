@@ -138,12 +138,9 @@ public class E_BbsController {
 	}
 	
 	@RequestMapping(value="E_Bbsupdate.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String E_Bbsupdate(int seq,int sub_seq,Model model) throws Exception{
+	public String E_Bbsupdate(int seq,Model model) throws Exception{
 		logger.info("E_BbsController E_Bbsupdate");
-		
 		E_BbsDto edto = e_BbsService.getBbs(seq);
-		System.out.println("seq : " + seq);
-		System.out.println("subseq : " + sub_seq);
 		model.addAttribute("edto",edto);
 		return "E_Bbsupdate.tiles";
 	}

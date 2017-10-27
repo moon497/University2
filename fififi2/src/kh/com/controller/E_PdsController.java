@@ -59,7 +59,7 @@ public class E_PdsController {
    }
    
    @RequestMapping(value="E_Pdsdetail.do", method={RequestMethod.GET, RequestMethod.POST})
-   public String E_Pdsdetail(int seq,Model model,int sub_seq,HttpServletRequest req) throws Exception{
+   public String E_Pdsdetail(int seq,Model model,HttpServletRequest req) throws Exception{
       logger.info("E_PdsController E_Pdsdetail");
       
       e_PdsService.addPdsReadcount(seq);
@@ -81,11 +81,10 @@ public class E_PdsController {
    }
    
    @RequestMapping(value="E_Pdswrite.do", method={RequestMethod.GET, RequestMethod.POST})
-   public String E_Pdswrite(Model model,HttpServletRequest req,int sub_seq) throws Exception{
+   public String E_Pdswrite(Model model,HttpServletRequest req) throws Exception{
       logger.info("E_PdsController E_Pdswrite");            
       MemberDto dto = (MemberDto) req.getSession().getAttribute("login");
       model.addAttribute("login",dto);      
-      System.out.println(sub_seq);
       
       return "E_Pdswrite.tiles";
    }
