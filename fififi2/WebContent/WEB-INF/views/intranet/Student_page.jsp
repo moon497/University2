@@ -131,7 +131,13 @@ input {
 <button id="successStudentInfoBtn">수정완료</button>
 
 <script>
+/*
+ * 수정완료버튼 초기 숨김
+ */
 $('#successStudentInfoBtn').hide();
+/*
+ * 정보수정 클릭시 readOnly
+ */
 $('#updateStudentInfoBtn').click(function () {
 	// 전화번호
 	$('input[name=user_phone]').removeAttr("readonly");
@@ -148,9 +154,10 @@ $('#updateStudentInfoBtn').click(function () {
 	// 정보수정 최종버튼 보여주기
 	$('#successStudentInfoBtn').show();
 });
-
+/*
+ * 정보변경 클릭시 정보변경Controller .do 부르기
+ */
 $('#successStudentInfoBtn').click(function () {
-	// action="updateStudentInfo.do"
 	// 클릭 후 이벤트
 	$.ajax({
 	       type : "POST",
@@ -172,7 +179,6 @@ $('#successStudentInfoBtn').click(function () {
 });
 
 </script>
-
 </c:if>
 
 

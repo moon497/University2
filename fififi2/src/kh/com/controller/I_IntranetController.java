@@ -108,7 +108,6 @@ public class I_IntranetController {
 		
 		//init
 		MemberDto login;
-		
 		ProfEvaluationDTO info = new ProfEvaluationDTO();
 		String id = "";
 		
@@ -143,7 +142,7 @@ public class I_IntranetController {
 	}
 	
 	/**
-	 * 내정보 수정
+	 * 내정보
 	 */
 	@RequestMapping(value="updateInfo.do", 
 					method={RequestMethod.GET, RequestMethod.POST})
@@ -165,8 +164,9 @@ public class I_IntranetController {
 		} else {// 로그인
 			login = ((MemberDto)req.getSession().getAttribute("login"));
 			id = login.getUser_id();
-			I_StudentBasicInfoDTO basicInfo 
-								= khIntraService.studentBasicInfo(id);
+			
+			// 내정보 DTO에 담기
+			I_StudentBasicInfoDTO basicInfo = khIntraService.studentBasicInfo(id);
 			model.addAttribute("basicinfo", basicInfo);
 		}
 		return "updateInfo.tiles";
