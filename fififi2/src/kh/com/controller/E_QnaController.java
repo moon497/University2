@@ -57,6 +57,14 @@ public class E_QnaController {
 		return "E_Qnadetail.tiles";
 	}
 	
+	@RequestMapping(value="E_Qnadelete.do", method={RequestMethod.GET, RequestMethod.POST})
+	   public String E_Qnadelete(E_QnaDto eqna,int seq,Model model,HttpServletRequest req) throws Exception{
+	      logger.info("E_PdsController E_Qnadelete");
+	      e_QnaService.deleteQna(seq);
+	      return "redirect:/E_Qnalist.do?sub_seq="+eqna.getSub_seq();
+	   }	
+
+	
 	@RequestMapping(value="E_Qnawrite.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String E_Qnawrite(HttpServletRequest req, Model model) throws Exception{
 		logger.info("E_QnaController E_Qnawrite");
@@ -97,39 +105,6 @@ public class E_QnaController {
 		return "redirect:/E_Qnalist.do?sub_seq="+eqna.getSub_seq();
 	}
 	
-	/*@RequestMapping(value="E_Qnareply.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String E_Qnareply(int seq, Model model) throws Exception {
-		logger.info("E_QnaController E_Qnareply");
-		E_QnaDto eqna = e_QnaService.getQna(seq);
-		model.addAttribute("eqna", eqna);
-		return "E_Qnareply.tiles";
-	}
-	
-	@RequestMapping(value="E_QnareplyAf.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String E_QnareplyAf(E_QnaDto eqna, Model model) throws Exception {
-		logger.info("E_QnaController E_QnareplyAf");
-		e_QnaService.reply(eqna);
-		return "redirect:/E_Qnalist.do?sub_seq="+eqna.getSub_seq();
-	}
-	
-	@RequestMapping(value="E_Qnaanswer.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String E_Qnaanswer(int seq, Model model) throws Exception {
-		logger.info("E_QnaController E_Qnaanswer");
-		E_QnaDto eqna = e_QnaService.getQna(seq);
-		model.addAttribute("eqna", eqna);
-		return "E_Qnaanswer.tiles";
-	}
-	
-	@RequestMapping(value="E_QnaanswerAf.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String E_QnaanswerAf(E_QnaDto eqna, Model model) throws Exception {
-		logger.info("E_QnaController E_QnaanswerAf");
-
-		e_QnaService.answerBbs(eqna);
-		System.out.println(eqna.toString());
-
-		return "redirect:/E_Qnalist.do?sub_seq="+eqna.getSub_seq();
-	}*/
-	
 	@RequestMapping(value="E_Qnareply.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String E_Qnareply(int seq, Model model) throws Exception {
 		logger.info("E_QnaController E_Qnareply");
@@ -139,7 +114,7 @@ public class E_QnaController {
 		return "E_Qnareply.tiles";
 	}
 	
-	@RequestMapping(value="E_QnareplyAf.do", method={RequestMethod.GET, RequestMethod.POST})
+	/*@RequestMapping(value="E_QnareplyAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String bbsreplyAf(E_QnaDto eqna, Model model) throws Exception {
 		logger.info("E_QnaController E_QnareplyAf");
 		System.out.println(eqna.toString());
@@ -154,7 +129,7 @@ public class E_QnaController {
 		E_QnaDto eqna = e_QnaService.getQna(seq);
 		model.addAttribute("eqna", eqna);
 		return "bbsanswer.tiles";
-	}
+	}*/
 	
 	@RequestMapping(value="E_QnaanswerAf.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String bbsanswerAf(E_QnaDto eqna, Model model) throws Exception {

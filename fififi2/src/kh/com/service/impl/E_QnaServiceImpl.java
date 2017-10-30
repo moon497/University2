@@ -61,4 +61,9 @@ public class E_QnaServiceImpl implements E_QnaService{
 		eqna.setStep(step);
 		return e_QnaDao.answerInsert(eqna);
 	}
+
+	@Override
+	public int deleteQna(int seq) throws Exception {
+		return e_QnaDao.deleteQna(seq);
+	}
 }

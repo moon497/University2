@@ -12,6 +12,9 @@ public interface E_QnaService {
 	public void uploadQna(E_QnaDto eqna) throws Exception;
 	public boolean QnaaddReadcount(int seq) throws Exception;
 	public boolean updatQna(E_QnaDto eqna) throws Exception;
+	public int deleteQna(int seq) throws Exception;
+
+	
 	
 	public void reply(E_QnaDto eqna) throws Exception;
 	public boolean answerBbs(E_QnaDto eqna) throws Exception;

@@ -24,6 +24,7 @@
 
 <div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
+		<input type="checkbox" name="secret" value="1" id="secret">비밀 글
 		<textarea class="form-control" cols="40" id="content" name="content" rows="10"></textarea>
 </div>
 

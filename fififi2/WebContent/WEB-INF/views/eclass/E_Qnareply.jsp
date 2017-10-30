@@ -5,7 +5,6 @@
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/NoticeBbsWrite.js' ></script>
 <link rel="stylesheet" href='${pageContext.request.contextPath }/css/NoticeBbsWrite.css' />
 <fmt:requestEncoding value="utf-8"/>
-
 <section class="category-content col-sm-9">
 	<div id="postlist">        
         <div class="panel">
@@ -38,10 +37,11 @@
 
 <section>
 <form method="post" action="E_QnaanswerAf.do">
-<input type="hidden" name="eclass_qna_bbs_seq" value="${eqna.eclass_qna_bbs_seq}" />
+<input type="text" name="eclass_qna_bbs_seq" value="${eqna.eclass_qna_bbs_seq}" />
 <input type="hidden" id="sub_seq" name="sub_seq" value="${param.sub_seq }"> 
 <input type="hidden" id="ref" name="ref" value="${eqna.ref }">
 <input type="hidden" id="user_name " name="user_name" value="${login.user_name }">
+<input type="text" id="answer_id" name="answer_id" value="${eqna.answer_id}">
 
 <div class="col-md-9">
 <div class="form-group"> <!-- userId field -->
@@ -56,15 +56,15 @@
 
 <div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
+		<input type="checkbox" name="secret" value="1" id="secret">비밀 글
 		<textarea class="form-control" cols="40" id="content" name="content" rows="10"></textarea>
 </div>
 
 	<div class="form-group pull-right">
     	<button class="btn btn-primary " name="submit" type="submit">글 작성</button>
-	    <span><a href="./E_Qnalist.do?seq=${eqna.eclass_qna_bbs_seq }&sub_seq=${param.sub_seq}"><img src="${pageContext.request.contextPath}/img/list.png"></a></span>
+	    <span><a href="./E_Qnalist.do?seq=${param.seq }&sub_seq=${param.sub_seq}"><img src="${pageContext.request.contextPath}/img/list.png"></a></span>
 	</div>
 
 </div>
-	
 </form>
 </section>

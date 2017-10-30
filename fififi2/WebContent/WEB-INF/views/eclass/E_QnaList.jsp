@@ -32,7 +32,7 @@
         <col class="col-sm-2" />
      </colgroup>
     <thead>
-    <tr>
+    <tr class="active">
 		<th>번호</th><th>제목</th><th>글쓴이</th><th>작성일</th>
 	</tr>
 	</thead>
@@ -50,10 +50,24 @@
 		<td>${qnaS.count }</td>
 		<td style="text-align: left">
 			<jsp:getProperty property="arrow" name="ubbs"/>
-			<c:if test="${qna.del eq 0}">
-				<a href="E_Qnadetail.do?seq=${qna.eclass_qna_bbs_seq }&sub_seq=${qna.sub_seq}"> ${qna.title}</a>
-			</c:if>
-			<c:if test="${qna.del eq 1}">삭제된 글입니다.</c:if>
+			<c:choose>
+				<c:when test="${qna.del eq 1}">
+					<i class="fa fa-eraser" aria-hidden="true" style="margin-right: 5px;"></i>삭제된 글입니다.
+				</c:when>
+				<c:when test="${login.user_auth eq 200 and qna.del eq 0}">				
+					<a href="E_Qnadetail.do?seq=${qna.eclass_qna_bbs_seq }&sub_seq=${qna.sub_seq}"> ${qna.title}</a>
+				</c:when>
+				<c:when test="${qna.answer_id eq login.user_id}">				
+					<a href="E_Qnadetail.do?seq=${qna.eclass_qna_bbs_seq }&sub_seq=${qna.sub_seq}"> ${qna.title}</a>
+				</c:when>
+				<c:when test="${qna.secret eq 1}">
+					<i class="fa fa-lock" aria-hidden="true" style="margin-right: 5px;"></i>비밀 글입니다.
+				</c:when>
+				
+				<c:otherwise>
+					<a href="E_Qnadetail.do?seq=${qna.eclass_qna_bbs_seq }&sub_seq=${qna.sub_seq}"> ${qna.title}</a>
+				</c:otherwise>
+			</c:choose>					
 		</td>
 		<td>${qna.user_name}</td>
 		<td>${fn:substring(qna.wdate,0,10)}</td>
@@ -70,5 +84,59 @@
 </div>
 </div>
 </div>
+</div>
+<!-- 페이징 -->
+    <div style="text-align: center;">
+    <ul class="pagination pagination-lg">
+       <!-- 10페이지 이전 -->
+       <c:choose>
+        <c:when test="${pagination.currPage <= pagination.pageLimit }">
+           <li class="disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>        
+        </c:when>
+        <c:otherwise>
+           <li><a href="./E_Qnalist.do?page=${pagination.currPage - pagination.pageLimit }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-double-left"></i></a></li>            
+        </c:otherwise>
+     </c:choose> 
+     <!-- 1페이지 이전 -->
+     <c:choose>
+        <c:when test="${pagination.currPage == 1 }">
+           <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>        
+        </c:when>
+        <c:otherwise>
+           <li><a href="./E_Qnalist.do?page=${pagination.currPage - 1 }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-left"></i></a></li>            
+        </c:otherwise>
+     </c:choose>
+     <!-- 페이징 설정만큼 돌리기 -->
+     <c:forEach var="i" begin="${pagination.startPage }" end="${pagination.endPage }" step="1">
+        <c:choose>
+           <c:when test="${i == pagination.currPage }">
+             <li class="active">
+                <a href="./E_Qnalist.do?page=${i }&sub_seq=${param.sub_seq}">${i }</a>
+             </li>           
+           </c:when>
+           <c:otherwise>
+              <li><a href="./E_Qnalist.do?page=${i }&sub_seq=${param.sub_seq}">${i }</a></li>           
+           </c:otherwise>
+        </c:choose>
+     </c:forEach>
+     <!-- 1페이지 이후 -->
+     <c:choose>
+        <c:when test="${pagination.currPage == pagination.finalEndPage }">
+           <li class="disabled"><a href="#"><i class="fa fa-angle-right"></i></a></li>        
+        </c:when>
+        <c:otherwise>
+           <li><a href="./E_Qnalist.do?page=${pagination.currPage + 1 }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-right"></i></a></li>            
+        </c:otherwise>
+     </c:choose>
+     <!-- 10페이지 이후 -->
+     <c:choose>
+        <c:when test="${pagination.currPage + pagination.pageLimit > pagination.finalEndPage }">
+           <li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>        
+        </c:when>
+        <c:otherwise>
+           <li><a href="./E_Qnalist.do?page=${pagination.currPage + pagination.pageLimit }&sub_seq=${param.sub_seq}"><i class="fa fa-angle-double-right"></i></a></li>            
+        </c:otherwise>
+     </c:choose>
+   </ul>
 </div>
 </section>

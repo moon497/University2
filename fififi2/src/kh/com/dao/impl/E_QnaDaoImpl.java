@@ -69,8 +69,8 @@ public class E_QnaDaoImpl implements E_QnaDao{
 	@Override
 	public boolean answerUpdate(int seq, int step) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put( "seq", seq);
-		map.put( "step", step );
+		map.put("seq", seq);
+		map.put("step", step );
 		int n = sqlSession.update(ns+"answer_update", map);
 		return n>0;
 	}
@@ -79,6 +79,10 @@ public class E_QnaDaoImpl implements E_QnaDao{
 	public boolean answerInsert(E_QnaDto eqna) throws Exception {
 		int n = sqlSession.insert(ns+"answer_insert", eqna);
 		return n>0?true:false;
+	}
+	@Override
+	public int deleteQna(int seq) throws Exception {
+		return sqlSession.update(ns+"deleteQna",seq);
 	}
 
 }

@@ -9,11 +9,12 @@ public class E_QnaDto implements Serializable{
 	
 	private int eclass_qna_bbs_seq;	
 	private String user_id;
+	private String answer_id;
 	private String user_name;
 	
-	private int ref;	// 그룹 글 번호
-	private int step;   // 답글의 순서
-	private int depth;  // 글의 깊이
+	private int ref;	
+	private int step;   
+	private int depth; 
 	
 	private String title;
 	private String content;
@@ -22,10 +23,29 @@ public class E_QnaDto implements Serializable{
 	private int readcount;
 	private int sub_seq;
 	private int del;
+	private int secret;
 	
 	public E_QnaDto() {}
 	
 	
+	
+	
+	public String getAnswer_id() {
+		return answer_id;
+	}
+
+	public void setAnswer_id(String answer_id) {
+		this.answer_id = answer_id;
+	}
+
+	public int getSecret() {
+		return secret;
+	}
+
+	public void setSecret(int secret) {
+		this.secret = secret;
+	}
+
 	public String getUser_name() {
 		return user_name;
 	}
@@ -160,10 +180,10 @@ public class E_QnaDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "E_QnaDto [eclass_qna_bbs_seq=" + eclass_qna_bbs_seq + ", user_id=" + user_id + ", user_name="
-				+ user_name + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", title=" + title + ", content="
-				+ content + ", wdate=" + wdate + ", parent=" + parent + ", readcount=" + readcount + ", sub_seq="
-				+ sub_seq + ", del=" + del + "]";
+		return "E_QnaDto [eclass_qna_bbs_seq=" + eclass_qna_bbs_seq + ", user_id=" + user_id + ", answer_id="
+				+ answer_id + ", user_name=" + user_name + ", ref=" + ref + ", step=" + step + ", depth=" + depth
+				+ ", title=" + title + ", content=" + content + ", wdate=" + wdate + ", parent=" + parent
+				+ ", readcount=" + readcount + ", sub_seq=" + sub_seq + ", del=" + del + ", secret=" + secret + "]";
 	}
 
 	
