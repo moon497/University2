@@ -8,7 +8,7 @@
 <!-- js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> 
 
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;subset=latin-ext"

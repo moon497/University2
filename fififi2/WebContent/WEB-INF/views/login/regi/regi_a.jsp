@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="<%=request.getContextPath()%>/jquery/jquery-1.11.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 td, th {
@@ -27,6 +27,7 @@ td, th {
 <form action="regiAf.do" id ="regiform"  method="POST" enctype="multipart/form-data"> 
 			<input type="hidden" value="100" name="user_status">
 			<input type="hidden" value="300" name="user_auth">
+			
 		<table class="table table-bordered table-hover">
 		<tr>
 			<td>사진</td>
@@ -49,7 +50,7 @@ td, th {
 		</tr>
 		<tr>
 			<td>사번 </td>
-			<td><input type="text" name="user_id" required="required" pattern="\d{8}">(학번8자리입력)</td>
+			<td><input type="text" name="user_id" required="required">(학번8자리입력)</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>

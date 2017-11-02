@@ -8,7 +8,6 @@
 
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
-
 <!-- body -->
 <h2 class="category-title">${boardName }</h2>
 
