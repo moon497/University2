@@ -60,9 +60,6 @@ public class LoginController {
    
    @RequestMapping(value="login.do", method={RequestMethod.GET, RequestMethod.POST})
    public String login(Model model) throws Exception{
-	  System.out.println("재현이가 수정한 소스코드");
-	  System.out.println("재현이가 수정한 소스코드2");
-	   
       logger.info("login.do");
       model.addAttribute("doc_title", "기타");
       model.addAttribute("doc_title_sub", "로그인");
@@ -142,7 +139,7 @@ public class LoginController {
 
          System.out.println(findpw.getUser_email()  +  " : email");
          
-         String setfrom = "junghyejunghye@gmail.com";  // 보내는사람       
+          String setfrom = "junghyejunghye@gmail.com";  // 보내는사람       
           String tomail  = findpw.getUser_email();     // 받는 사람 이메일
           String title   = "KH대학교 비밀번호 입니다";      // 제목
           String content = "KH대학교 찾으시는 해당 비밀번호는 : " + findpw.getUser_pw() + " 입니다";    // 내용
@@ -229,6 +226,7 @@ public class LoginController {
         logger.info("경로 : " + path);
         
         for(int i = 0; i<file.size(); i++) { 
+          
           FileUpload fileUpload = new FileUpload(file.get(i), path);
 	      storedFileName = fileUpload.getStoredFileName();
 	      orgFileName = fileUpload.getOrgFileName();
@@ -363,8 +361,8 @@ public class LoginController {
       }else if(orgFileName.toUpperCase().endsWith(".XLSX")) {
          
          XSSFWorkbook workbook=new XSSFWorkbook(file.getInputStream());
-          XSSFSheet sheet=workbook.getSheetAt(0);
-          int rows=sheet.getPhysicalNumberOfRows();
+         XSSFSheet sheet=workbook.getSheetAt(0);
+         int rows=sheet.getPhysicalNumberOfRows();
          for(rowindex=1;rowindex<rows;rowindex++){
              
             //행을읽는다

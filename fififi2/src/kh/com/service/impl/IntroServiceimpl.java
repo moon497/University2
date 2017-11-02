@@ -12,7 +12,7 @@ import kh.com.service.IntroService;
 
 @Service
 public class IntroServiceimpl implements IntroService {
-	
+
 	@Autowired
 	IntroDaoImpl introDao;
 
@@ -21,10 +21,17 @@ public class IntroServiceimpl implements IntroService {
 		System.out.println("IntroBbsWrite 서비스임플" +dto.toString());
 		return introDao.IntroBbsWrite(dto);
 	}
+	
+	
+	@Override
+	public int getIntroCount(IntroBbsDto dto) throws Exception {
+		return introDao.getIntroCount(dto);
+	}
+
 
 	@Override
-	public List<IntroBbsDto> IntroBbsList() throws Exception{
-		return introDao.IntroBbsList();
+	public List<IntroBbsDto> IntroBbsList(IntroBbsDto dto) throws Exception{
+		return introDao.IntroBbsList(dto);
 	}
 
 	@Override

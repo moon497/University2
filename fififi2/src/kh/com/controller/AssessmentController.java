@@ -35,7 +35,6 @@ public class AssessmentController {
 	// 수강신청 
 	@RequestMapping(value="addSub.do", method= {RequestMethod.GET, RequestMethod.POST,})
 	public @ResponseBody String addSub(HttpServletRequest req)throws Exception {
-		
 		int seq = Integer.parseInt(req.getParameter("sub_seq"));		
 		System.out.println("sub_seq : " + req.getParameter("sub_seq"));
 		

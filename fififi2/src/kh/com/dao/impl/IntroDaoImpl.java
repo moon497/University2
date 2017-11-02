@@ -14,6 +14,7 @@ import kh.com.model.IntroBbsDto;
 
 @Repository
 public class IntroDaoImpl implements IntroDao {
+
 	private static final Logger logger = LoggerFactory.getLogger(IntroDaoImpl.class);
 	
 	@Autowired
@@ -29,10 +30,18 @@ public class IntroDaoImpl implements IntroDao {
 		return sqlSession.insert(ns + "IntroBbsWrite", dto) > 0 ? true : false;
 	}
 
+	
 	@Override
-	public List<IntroBbsDto> IntroBbsList() throws Exception{
+	public int getIntroCount(IntroBbsDto dto) throws Exception {
+		return sqlSession.selectOne(ns+"getIntroCount", dto);
+	}
+
+	
+	
+	@Override
+	public List<IntroBbsDto> IntroBbsList(IntroBbsDto dto) throws Exception{
 		List<IntroBbsDto> list = new ArrayList<IntroBbsDto>();
-		list = (List<IntroBbsDto>)(Object)sqlSession.selectList(ns + "IntroBbsList");
+		list = (List<IntroBbsDto>)(Object)sqlSession.selectList(ns + "IntroBbsList", dto);
 		return list;
 	}
 

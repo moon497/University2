@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,29 @@ public class IntroController implements Serializable {
 	
 	
 	@RequestMapping(value="introBbs.do", method=RequestMethod.GET)
-	public String introBbs(Model model, HttpServletRequest req) throws Exception {
+	public String introBbs(Model model, HttpServletRequest req, IntroBbsDto dto) throws Exception {
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "학교소개");	
+	
+		
+		int sn = dto.getPageNumber();
+		int start = (sn) * dto.getRecordCountPerPage() + 1;
+		int end = (sn + 1) * dto.getRecordCountPerPage();
+		
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		int totalRecordCount = introService.getIntroCount(dto);
+		List<IntroBbsDto> list = introService.IntroBbsList(dto);
+		model.addAttribute("list", list);
 		
 		MemberDto login = ((MemberDto)req.getSession().getAttribute("login"));
-		model.addAttribute("login", login);
 		
-		List<IntroBbsDto> list = introService.IntroBbsList();
-		model.addAttribute("list", list);
+		model.addAttribute("login", login);
+		model.addAttribute("pageNumber", sn);
+		model.addAttribute("pageCountPerScreen", 3);
+		model.addAttribute("recordCountPerPage", dto.getRecordCountPerPage());
+		model.addAttribute("totalRecordCount", totalRecordCount);
 		
 		return "introBbs.tiles";
 	}	
@@ -131,7 +146,6 @@ public class IntroController implements Serializable {
 	public String introBbsDelete(Model model, int seq ) throws Exception {
 		logger.info("introBbsDelete : " + seq);
 		introService.introBbsDelete(seq);
-	
 		
 		return "redirect:/introBbs.do";
 	}
@@ -143,6 +157,21 @@ public class IntroController implements Serializable {
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "오시는길");
 		return "introLocation.tiles";
+	}
+	
+	
+	/************************************************************
+	 * 							Util Method 
+	 * **********************************************************/
+	private int getCurrPage(HttpServletRequest req) {
+		int currPage;
+		
+		if (req.getParameter("page") == null) {
+			currPage = 1;
+		} else {
+			currPage = Integer.parseInt(req.getParameter("page"));
+		}
+		return currPage;
 	}
 
 }
