@@ -7,11 +7,15 @@
 <script type="text/javascript" src='${pageContext.request.contextPath }/js/NoticeBbsWrite.js' ></script>
 <link rel="stylesheet" href='${pageContext.request.contextPath }/css/NoticeBbsWrite.css' />
 
+
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/lang/summernote-ko-KR.js"></script>
+
+
+
 
 <script type="text/javascript">
 /* summerNote */
@@ -22,7 +26,8 @@ $(document).ready(function() {
 		maxHeight: null,			// set maximum height of editor
 		focus: true,				// set focus to editable area after initializing summernote
 		lang : 'ko-KR',				// 기본 메뉴언어 US->KR로 변경
-		callbacks: {
+		// image upload  
+	    callbacks: {
           onImageUpload: function(files, editor, welEditable) {
             for (var i = files.length - 1; i >= 0; i--) {
               sendFile(files[i], this);
@@ -31,6 +36,7 @@ $(document).ready(function() {
         }
 	});
 });
+
 function sendFile(file, el) {
 	//formdata == image file
     var form_data = new FormData();
@@ -53,77 +59,63 @@ function sendFile(file, el) {
     });
 }
 
-function bbsWrite() {
+function suggestWrite(seq) {
 	var content = $('#summernote').summernote("code");
 	
-	$('#content').val(content);
+	$('#Content').val(content);
  
-	$('#bbsWrite').submit();
+	$('#suggestWrite').submit();
 	
 }
 </script>
 
-<section class="write">
-<form id="bbsWrite" action="./write.do" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="bbsSeq" value="${param.seq }" />
-<input type="hidden" id="content" name="content" value="" />
-<input type="hidden" id="userId" name="userId" value="${login.user_id }"/>
 
 
-<div class="row">
+
+
+<form id="suggestWrite" action="./suggestwriteAf.do" method="POST" enctype="multipart/form-data">
+<input type="hidden" id="Content" name="Content" value="" />
+
+<div class="col-md-12">
 	<div class="form-group"> <!-- userId field -->
-		<label class="control-label " for="userName">아이디</label>
-		<input class="form-control" id="userName" name="userName" type="text" value="${login.user_name }" readonly="readonly"/>
+		<label class="control-label " for="user_id">아이디</label>
+		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id }" readonly="readonly"/>
 	</div>
-</div>
-<div class="row">
-	<div class="col-sm-2">
-		<div class="form-group"> <!-- "category" field -->
+	
+	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		  <select class="form-control" id="category" name="category">
-		    <option value="도서">도서</option>
-		    <option value="전자기기">전자기기</option>
-		    <option value="생활용품">생활용품</option>
-		    <option value="기타">기타</option>
-		  </select>
-		</div>
+		<input class="form-control" id="title" name="title" type="text" />
 	</div>
-	<div class="col-sm-9">		
-		<div class="form-group" style="margin-top: 2em;"> <!-- "title" field -->
-			<input class="form-control" id="title" name="title" type="text" value=""/>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-4">
-		<div class="form-group"> <!-- 가격 field -->
-			<label class="control-label " for="price">가격</label>
-			<input class="form-control" id="price" name="price" type="text" value=""/>
-		</div>
-	</div>	
-	<div class="col-sm-4">
-		<div class="form-group"> <!-- 주소 field -->
-			<label class="control-label " for="address">주소</label>
-			<input class="form-control" id="address" name="address" type="text" value=""/>
-		</div>
-	</div>
-	<div class="col-sm-4">
-		<div class="form-group"> <!-- 전화번호 field -->
-			<label class="control-label " for="phone">전화번호</label>
-			<input class="form-control" id="phone" name="phone" type="text" value=""/>
-		</div>
-	</div>
-</div>
-<div class="row">
+	
 	<div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
 		<div id="summernote"></div>
 	</div>
-</div>
-<div class="row">
+	
+	
+	<!-- 파일 업로드
+	<div class="form-group"> File field
+	   <input type="file" id="file" name="file" class="file" style="visibility: hidden;position: absolute;">
+	   <div class="input-group col-xs-12">
+	     <span class="input-group-addon"><i class="fa fa-file"></i></span>
+	     <input type="text" class="form-control input-lg" disabled placeholder="파일 업로드">
+	     <span class="input-group-btn">
+	       <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> 파일</button>
+	     </span>
+	   </div>
+	</div>	
+	 -->
+	 
 	<div class="form-group pull-right">
-		<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">글쓰기</button>
+		<button class="btn btn-primary " name="button" type="button" onclick="suggestWrite();">글쓰기</button>
 	</div>
+	
 </div>
 </form>
-</section>
+
+
+
+
+
+
+

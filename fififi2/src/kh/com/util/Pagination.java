@@ -9,8 +9,8 @@ public class Pagination {
 	private int startPage;						//리스트 시작 번호
 	private int endPage;						//리스트 종료 번호
 	private int finalEndPage;					//최종 페이지 번호
-	private final int articleLimit = 10;		//한 페이지 당 게시물 제한
-	private final int pageLimit = 5;			//한 리스트 당 페이지 수 제한
+	private final int articleLimit = 3;		//한 페이지 당 게시물 제한
+	private final int pageLimit = 3;			//한 리스트 당 페이지 수 제한
 	
 	//종희
 	private int sub_seq;						//??

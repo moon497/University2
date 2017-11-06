@@ -92,6 +92,11 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
+<definition name="introCalendar.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introCalendar.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+</definition>
+
 
 
 <!-- *************** 지윤  ***************-->
@@ -201,6 +206,16 @@
 <definition name="upReg.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/regiUpdate.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+</definition>
+
+<definition name="suggestlist.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_list.jsp"/>
+</definition>
+<definition name="suggestWrite.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_write.jsp"/>
+</definition>
+<definition name="suggestDetail.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_detail.jsp"/>
 </definition>
 
 <!-- 학생 시간표 -->

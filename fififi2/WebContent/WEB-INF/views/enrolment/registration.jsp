@@ -19,7 +19,7 @@ int e_class = 0;
 <input type="hidden" value="${user.user_id }" id="professor_id" name="professor_id">
 <input type="hidden" id="professor_name" name="professor_name" value="${user.user_name }" readonly="readonly">
 <section class="category-content col-sm-9">
-	<form action="registrationAf.do" method="post">
+	<form action="#" method="post" id="_frmForm">
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
 				<colgroup>
@@ -152,5 +152,19 @@ function startclass(me){
    $("#sub_e_class").val(num);
    
 }
+
+$("#addBtn").click(function(){
+	
+	if($("#sub_name").val()==null || $("#sub_name").val()==""
+		|| $("#sub_room").val()==null || $("#sub_room").val()==""
+		|| $("#sub_info").val()==null || $("#sub_info").val()==""){		
+		alert("빈칸을 모두 채워 주세요");
+	}else{
+		$("#_frmForm").attr({"target":"_self", "action":"registrationAf.do"}).submit();
+	}
+	
+	
+	
+});
 
 </script>

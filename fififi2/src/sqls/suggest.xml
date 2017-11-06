@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="suggest">
+
+<select id="getSuggestList" parameterType="kh.com.model.SuggestDto" resultType="kh.com.model.SuggestDto">	
+	SELECT 
+		SUGGEST_SEQ, USER_ID, REF, STEP, DEPTH,
+		TITLE, CONTENT, READCOUNT, WDATE, PARENT,
+		DEL, FILENAME, ORG_FILENAME
+	FROM (
+				SELECT SUGGEST_SEQ, USER_ID, REF, STEP, DEPTH,
+					TITLE, CONTENT, READCOUNT, WDATE, PARENT,
+					DEL, FILENAME, ORG_FILENAME,
+					ROW_NUMBER() OVER (ORDER BY REF DESC, STEP ASC) AS R
+				FROM SUGGEST				
+	)
+	WHERE R BETWEEN #{start_post} and #{end_post}
+</select>
+
+<select id="getCount" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0)
+	FROM SUGGEST
+</select>
+
+<insert id="suggestWrite" parameterType="Suggest" useGeneratedKeys="false">
+	INSERT INTO SUGGEST(SUGGEST_SEQ, USER_ID, REF, STEP, DEPTH,
+						TITLE, CONTENT, READCOUNT, WDATE, PARENT,
+						DEL, FILENAME, ORG_FILENAME)
+	VALUES(SUGGEST_SEQ.NEXTVAL, #{user_id}, 
+			(SELECT NVL(MAX(REF), 0)+1 FROM SUGGEST), #{step}, #{depth},
+			#{title}, #{content}, 0, sysdate, #{parent},
+			0, #{filename}, #{org_filename})
+</insert>
+
+<select id="getSuggest" parameterType="java.lang.Integer" resultType="Suggest">
+	SELECT SUGGEST_SEQ, USER_ID, REF, STEP, DEPTH,
+		   TITLE, CONTENT, READCOUNT, WDATE, PARENT,
+		   DEL, FILENAME, ORG_FILENAME
+	FROM SUGGEST
+	WHERE SUGGEST_SEQ=#{suggest_seq}
+</select>
+
+
+</mapper>

@@ -5,7 +5,7 @@
 <mapper namespace="Files">
 
 	<!-- 						CREATE 						-->
-	<!-- 게시물 입력 -->
+	<!-- 파일 입력 -->
 	<insert id="insertFile" parameterType="File" useGeneratedKeys="false">
 		INSERT INTO files(
 			seq,originalFileName,storedFileName,fileSize,contentType

@@ -31,6 +31,8 @@ REFERENCES USERS(USER_ID);
  */
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+@Alias("Suggest")
 public class SuggestDto implements Serializable {
 
 	private int suggest_seq;		        //시퀀스
@@ -47,8 +49,14 @@ public class SuggestDto implements Serializable {
 	private String filename;                // 파일명
 	private String org_filename;            // 오리지날 파일명
 	
+	private int start_post;					// 시작 글
+	private int end_post;					// 끝 글
+	
+	public SuggestDto() {}
+
 	public SuggestDto(int suggest_seq, String user_id, int ref, int step, int depth, String title, String content,
-			int readcount, String wdate, int parent, int del, String filename, String org_filename) {
+			int readcount, String wdate, int parent, int del, String filename, String org_filename, int start_post,
+			int end_post) {
 		super();
 		this.suggest_seq = suggest_seq;
 		this.user_id = user_id;
@@ -63,7 +71,33 @@ public class SuggestDto implements Serializable {
 		this.del = del;
 		this.filename = filename;
 		this.org_filename = org_filename;
+		this.start_post = start_post;
+		this.end_post = end_post;
 	}
+
+	public int getStart_post() {
+		return start_post;
+	}
+
+
+
+	public void setStart_post(int start_post) {
+		this.start_post = start_post;
+	}
+
+
+
+	public int getEnd_post() {
+		return end_post;
+	}
+
+
+
+	public void setEnd_post(int end_post) {
+		this.end_post = end_post;
+	}
+
+
 
 	public int getSuggest_seq() {
 		return suggest_seq;
@@ -174,7 +208,7 @@ public class SuggestDto implements Serializable {
 		return "SuggestDto [suggest_seq=" + suggest_seq + ", user_id=" + user_id + ", ref=" + ref + ", step=" + step
 				+ ", depth=" + depth + ", title=" + title + ", content=" + content + ", readcount=" + readcount
 				+ ", wdate=" + wdate + ", parent=" + parent + ", del=" + del + ", filename=" + filename
-				+ ", org_filename=" + org_filename + "]";
+				+ ", org_filename=" + org_filename + ", start_post=" + start_post + ", end_post=" + end_post + "]";
 	}
 
 	
