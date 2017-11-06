@@ -1,11 +1,12 @@
 package kh.com.controller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.com.model.IntroBbsDto;
+import kh.com.model.IntroCalendarDto;
 import kh.com.model.MemberDto;
 import kh.com.service.IntroService;
+import kh.com.util.CalendarUtil;
 import kh.com.util.FileUpload;
 
 @Controller
@@ -79,6 +82,7 @@ public class IntroController implements Serializable {
 	        FileUpload fileUpload = new FileUpload(file, path);
 			storedFileName = fileUpload.getStoredFileName();
 			orgFileName = fileUpload.getOrgFileName();
+			
 			System.out.println("파일경로 : ---  : " + path );
 			
 			dto.setFilename(storedFileName);
@@ -157,6 +161,28 @@ public class IntroController implements Serializable {
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "오시는길");
 		return "introLocation.tiles";
+	}
+	
+	
+	@RequestMapping(value="introCalendar.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String calendar(HttpServletRequest req, Model model) throws Exception{
+		logger.info("KhCalendarController calendar.do " + new Date());	
+		
+		model.addAttribute("doc_title", "소개");
+		model.addAttribute("doc_title_sub", "달력");
+
+		Date d = new Date();
+		
+		SimpleDateFormat today = new SimpleDateFormat("yyyyMM");
+		String yyyymm = today.format(d);
+		
+		IntroCalendarDto caldto = new IntroCalendarDto();
+		caldto.setRdate(yyyymm);
+		List<IntroCalendarDto> list = introService.getCalendarList(caldto);
+		model.addAttribute("flist", list);
+		
+		
+		return "introCalendar.tiles";
 	}
 	
 	

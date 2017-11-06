@@ -57,6 +57,7 @@
 						<ul class="dropdown-menu">
 					     <li><a href="${pageContext.request.contextPath }/introBbs.do" title="">학교소개</a></li>
                      <li><a href="${pageContext.request.contextPath }/introLocation.do" title="">오시는길</a></li>
+                     <li><a href="${pageContext.request.contextPath }/introCalendar.do" title="">학사일정</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -69,6 +70,11 @@
 							<li><a href="${pageContext.request.contextPath }/free/list.do" title="">자유게시판</a></li>
 						</ul>
 					</li>
+					
+					<li><a href="${pageContext.request.contextPath }/good/list.do" title="벼룩시장">벼룩시장</a></li>
+					
+					
+					
 					<!-- 학생용 메뉴 -->
 					<c:if test="${login != null && login.user_auth == '100' }">					
 					<li><a href="${pageContext.request.contextPath }/E_Classlist.do" title="">e-class</a></li>
@@ -86,6 +92,14 @@
 					</li>
 					<li><a href="${pageContext.request.contextPath }/enrolment.do" title="수강신청">수강신청</a></li>
 					</c:if>
+					
+					<c:if test="${login == null}">					
+					<li><a href="${pageContext.request.contextPath }/login.do">e-class</a></li>
+					<li><a href="${pageContext.request.contextPath }/login.do">학사인트라넷 </a>	</li>
+					<li><a href="${pageContext.request.contextPath }/login.do">수강신청</a></li>
+					</c:if>
+					
+					
 					<!-- 교직원용 메뉴 -->
 			        <c:if test="${login != null && login.user_auth == '200' || login.user_auth =='300'}">
 					<li class="dropdown">
@@ -106,7 +120,15 @@
 						</ul>
 					</li>
 					</c:if>
-					<li><a href="${pageContext.request.contextPath }/good/list.do" title="벼룩시장">벼룩시장</a></li>
+					
+					<c:if test="${login == null }">
+					<li><a href="${pageContext.request.contextPath }/login.do" >교직원</a></li>
+					</c:if>
+					
+					
+					
+					
+	
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.dao.IntroDao;
 import kh.com.model.IntroBbsDto;
+import kh.com.model.IntroCalendarDto;
 
 @Repository
 public class IntroDaoImpl implements IntroDao {
@@ -67,6 +68,16 @@ public class IntroDaoImpl implements IntroDao {
 		int n = sqlSession.delete(ns+"introBbsDelete", seq);
 		return n>0?true:false;
 	}
+
+
+	@Override
+	public List<IntroCalendarDto> getCalendarList(IntroCalendarDto fcal) throws Exception {
+		List<IntroCalendarDto> list = new ArrayList<IntroCalendarDto>();
+		list = sqlSession.selectList(ns + "getCalendarList", fcal);		
+		return list;
+	}
+	
+	
 	
 	
 	

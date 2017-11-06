@@ -13,6 +13,8 @@ $(document).ready(function() {
    
    if (url.indexOf('introLocation.do') != -1) {
       $('#sidebar-intro > li:nth-child(2)').attr('class','current');      
+   } else if(url.indexOf('introCalendar.do') != -1) {
+      $('#sidebar-intro > li:nth-child(3)').attr('class','current');      
    } else {
       $('#sidebar-intro > li:nth-child(1)').attr('class','current');      
    } 
@@ -25,6 +27,7 @@ $(document).ready(function() {
 		<ul id="sidebar-intro">
 			<li><a href="./introBbs.do" title="">학교 소개</a></li>
 			<li><a href="./introLocation.do" title="">오시는 길</a></li>
+			<li><a href="./introCalendar.do" title="">학사일정</a></li>
 		</ul>
 	</div>
 </aside>

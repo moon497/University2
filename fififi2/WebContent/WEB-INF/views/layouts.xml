@@ -92,6 +92,11 @@
 	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
 	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
+<definition name="introCalendar.tiles" extends="sub.tiles">
+	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introCalendar.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+</definition>
+
 
 
 <!-- *************** 지윤  ***************-->
