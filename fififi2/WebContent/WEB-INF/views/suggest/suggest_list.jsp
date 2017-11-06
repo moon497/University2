@@ -10,7 +10,9 @@
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 <!-- body -->
-
+	
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2> 
 <div class="row">
 <div class="col-sm-12">
 <div class="table-responsive">     
@@ -57,7 +59,6 @@
 </div>
 </div>
 </div>
-
 
 <!-- 페이징 -->
 <div class="row" style="text-align: center;">
@@ -130,7 +131,7 @@
 	</div>
 </div>
 
-
+</section>
 
 
 

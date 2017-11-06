@@ -15,7 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/lang/summernote-ko-KR.js"></script>
 
 
-
+	
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2> 
+      
 
 <script type="text/javascript">
 /* summerNote */
@@ -79,7 +82,7 @@ function suggestWrite(seq) {
 <div class="col-md-12">
 	<div class="form-group"> <!-- userId field -->
 		<label class="control-label " for="user_id">아이디</label>
-		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id }" readonly="readonly"/>
+		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id }" />
 	</div>
 	
 	<div class="form-group"> <!-- "title" field -->

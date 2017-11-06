@@ -58,6 +58,7 @@
 					     <li><a href="${pageContext.request.contextPath }/introBbs.do" title="">학교소개</a></li>
                      <li><a href="${pageContext.request.contextPath }/introLocation.do" title="">오시는길</a></li>
                      <li><a href="${pageContext.request.contextPath }/introCalendar.do" title="">학사일정</a></li>
+                     <li><a href="${pageContext.request.contextPath }/suggestlist.do" title="">건의사항</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
