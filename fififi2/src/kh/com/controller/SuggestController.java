@@ -37,6 +37,7 @@ public class SuggestController {
 		SuggestDto suggest;
 		Pagination pagination;
 		
+		MemberDto login = (MemberDto)req.getSession().getAttribute("login");
 			
 		// 총 게시물 수 
 		int totalArticle = suggestService.getCount();
@@ -56,7 +57,7 @@ public class SuggestController {
 			System.out.println("suggestlist(" + i + ") : " + suggestlist.get(i).toString());
 		}
 		
-				
+		model.addAttribute("login", login);		
 		model.addAttribute("pagination" ,pagination);
 		model.addAttribute("suggestlist", suggestlist);
 		model.addAttribute("doc_title", "건의사항");

@@ -28,9 +28,11 @@
 							<span>첨부파일:</span>
 						</div>
 						<div class="col-sm-10">
-							<span><a
-								href="${pageContext.request.contextPath }/upload/file/${sug.filename}"
-								download="${sug.org_filename }">${sug.org_filename }</a></span>
+							<span>
+								<a href="${pageContext.request.contextPath }/upload/file/${sug.filename}" download="${sug.org_filename }">
+								${sug.org_filename }
+								</a>
+								</span>
 						</div>
 					</div>
 				</c:if>

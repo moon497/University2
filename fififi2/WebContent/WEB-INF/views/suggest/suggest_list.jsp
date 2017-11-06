@@ -1,3 +1,4 @@
+<%@page import="kh.com.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,6 +11,9 @@
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 <!-- body -->
+
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2>
 
 <div class="row">
 <div class="col-sm-12">
@@ -29,8 +33,7 @@
         <th>번호</th>
         <th>제목</th>
         <th>글쓴이</th>
-        <th>날짜</th>
-        <th>조회수</th>
+        <th>날짜</th>        
       </tr>
     </thead>
     
@@ -45,8 +48,7 @@
   	<%-- <c:if test="${sug.totalComment != 0 }"><i class="fa fa-comment"></i> ${sug.totalComment }</c:if> --%>
         </td>
         <td>${sug.user_id }</td>
-        <td>${fn:substring(sug.wdate,0,10) }</td>
-        <td>${sug.readcount }</td>
+        <td>${fn:substring(sug.wdate,0,10) }</td>        
       </tr>
    	</c:forEach>   
    	   
@@ -120,6 +122,7 @@
   
 
 <!-- 글쓰기 버튼  -->
+<c:if test="${null ne login.user_name }">
 <div class="row" style="text-align: right;">
 	<div class="col-sm-12">
 		<div class="button-group">
@@ -129,9 +132,8 @@
 		</div>
 	</div>
 </div>
+</c:if>
 
 
-
-
-
+</section>
 
