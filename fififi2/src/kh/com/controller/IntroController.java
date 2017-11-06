@@ -1,6 +1,8 @@
 package kh.com.controller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kh.com.model.IntroBbsDto;
+import kh.com.model.IntroCalendarDto;
 import kh.com.model.MemberDto;
 import kh.com.service.IntroService;
+import kh.com.util.CalendarUtil;
 import kh.com.util.FileUpload;
 
 @Controller
@@ -31,15 +35,29 @@ public class IntroController implements Serializable {
 	
 	
 	@RequestMapping(value="introBbs.do", method=RequestMethod.GET)
-	public String introBbs(Model model, HttpServletRequest req) throws Exception {
+	public String introBbs(Model model, HttpServletRequest req, IntroBbsDto dto) throws Exception {
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "학교소개");	
+	
+		
+		int sn = dto.getPageNumber();
+		int start = (sn) * dto.getRecordCountPerPage() + 1;
+		int end = (sn + 1) * dto.getRecordCountPerPage();
+		
+		dto.setStart(start);
+		dto.setEnd(end);
+		
+		int totalRecordCount = introService.getIntroCount(dto);
+		List<IntroBbsDto> list = introService.IntroBbsList(dto);
+		model.addAttribute("list", list);
 		
 		MemberDto login = ((MemberDto)req.getSession().getAttribute("login"));
-		model.addAttribute("login", login);
 		
-		List<IntroBbsDto> list = introService.IntroBbsList();
-		model.addAttribute("list", list);
+		model.addAttribute("login", login);
+		model.addAttribute("pageNumber", sn);
+		model.addAttribute("pageCountPerScreen", 3);
+		model.addAttribute("recordCountPerPage", dto.getRecordCountPerPage());
+		model.addAttribute("totalRecordCount", totalRecordCount);
 		
 		return "introBbs.tiles";
 	}	
@@ -64,6 +82,7 @@ public class IntroController implements Serializable {
 	        FileUpload fileUpload = new FileUpload(file, path);
 			storedFileName = fileUpload.getStoredFileName();
 			orgFileName = fileUpload.getOrgFileName();
+			
 			System.out.println("파일경로 : ---  : " + path );
 			
 			dto.setFilename(storedFileName);
@@ -131,7 +150,6 @@ public class IntroController implements Serializable {
 	public String introBbsDelete(Model model, int seq ) throws Exception {
 		logger.info("introBbsDelete : " + seq);
 		introService.introBbsDelete(seq);
-	
 		
 		return "redirect:/introBbs.do";
 	}
@@ -143,6 +161,43 @@ public class IntroController implements Serializable {
 		model.addAttribute("doc_title", "소개");
 		model.addAttribute("doc_title_sub", "오시는길");
 		return "introLocation.tiles";
+	}
+	
+	
+	@RequestMapping(value="introCalendar.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String calendar(HttpServletRequest req, Model model) throws Exception{
+		logger.info("KhCalendarController calendar.do " + new Date());	
+		
+		model.addAttribute("doc_title", "소개");
+		model.addAttribute("doc_title_sub", "달력");
+
+		Date d = new Date();
+		
+		SimpleDateFormat today = new SimpleDateFormat("yyyyMM");
+		String yyyymm = today.format(d);
+		
+		IntroCalendarDto caldto = new IntroCalendarDto();
+		caldto.setRdate(yyyymm);
+		List<IntroCalendarDto> list = introService.getCalendarList(caldto);
+		model.addAttribute("flist", list);
+		
+		
+		return "introCalendar.tiles";
+	}
+	
+	
+	/************************************************************
+	 * 							Util Method 
+	 * **********************************************************/
+	private int getCurrPage(HttpServletRequest req) {
+		int currPage;
+		
+		if (req.getParameter("page") == null) {
+			currPage = 1;
+		} else {
+			currPage = Integer.parseInt(req.getParameter("page"));
+		}
+		return currPage;
 	}
 
 }

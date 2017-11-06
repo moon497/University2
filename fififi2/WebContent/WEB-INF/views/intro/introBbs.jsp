@@ -21,6 +21,7 @@ body > main > div > div > section > ul > li > div.media-body > p {
 </style>
 
 <section class="category-content col-sm-9">
+<form id="_frmFormSearch">
     <h2 class="category-title">학교소개</h2>		    
     <ul class="media-list">
     	
@@ -54,6 +55,9 @@ body > main > div > div > section > ul > li > div.media-body > p {
         
                         
     </ul>
+    <input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }"/>
+	<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage" value="${(empty recordCountPerPage)?10:recordCountPerPage }">	
+    </form>
     
     <!-- 버튼 목록 -->
     <c:if test="${login.user_auth == 300}">
@@ -67,4 +71,20 @@ body > main > div > div > section > ul > li > div.media-body > p {
 		</div>
 	</div>
 	</c:if>
+
+	<jsp:include page="/WEB-INF/views/intro/paging.jsp" flush="false">
+		<jsp:param value="${pageNumber }" name="pageNumber"/>
+		<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
+		<jsp:param value="${pageCountPerScreen }" name="pageCountPerScreen"/>
+		<jsp:param value="${recordCountPerPage }" name="recordCountPerPage"/>
+	</jsp:include>
+		
+
+	<script type="text/javascript">
+	function goPage(pageNumber) {
+		$("#_pageNumber").val(pageNumber);
+		$("#_frmFormSearch").attr("target","_self").attr("action", "introBbs.do").submit();
+	}
+	</script>
+	
 </section>

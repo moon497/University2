@@ -9,10 +9,28 @@
 	VALUES (intro_bbs_seq.nextval, #{user_id}, #{title}, #{content}, 0, #{filename}, #{org_filename}, SYSDATE)
 	</insert>
 	
-	<select id="IntroBbsList" resultType="introBbs">
-		SELECT *
+	
+	
+	<select id="getIntroCount" parameterType="introBbs" resultType="java.lang.Integer">
+	   SELECT NVL(COUNT(*), 0) AS CNT
+	   FROM INTRO_BBS
+	</select>
+	
+	
+	
+	<select id="IntroBbsList" resultType="introBbs" parameterType="introBbs" >
+<!-- 		SELECT *
 		FROM INTRO_BBS
-		ORDER BY INTRO_BBS_SEQ DESC
+		ORDER BY INTRO_BBS_SEQ DESC -->
+		
+	    SELECT INTRO_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, WDATE, ORG_FILENAME, FILENAME
+		FROM
+			(
+			SELECT ROW_NUMBER() OVER(ORDER BY INTRO_BBS_SEQ DESC) as rnum, 
+			INTRO_BBS_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, WDATE, ORG_FILENAME, FILENAME
+			FROM INTRO_BBS
+            )A
+		 WHERE rnum BETWEEN ${start} AND ${end}	
 	</select>
 			
 	<select id="introBbsDetail" resultType="introBbs" parameterType="java.lang.Integer">
@@ -40,5 +58,20 @@
 		DELETE FROM INTRO_BBS
 		WHERE INTRO_BBS_SEQ=#{seq}
 	</delete>
+	
+	<select id="getCalendarList" parameterType="IntroCalendar" resultType="IntroCalendar">
+	SELECT SEQ, ID, TITLE, CONTENT, RDATE, WDATE 
+	FROM ( SELECT ROW_NUMBER() OVER(PARTITION BY SUBSTR(RDATE, 1, 8) 	
+				ORDER BY RDATE ASC) RN, 
+				SEQ, ID, TITLE, CONTENT, RDATE, WDATE 
+			FROM INTRO_CALENDAR 
+			WHERE SUBSTR(RDATE, 1, 6)=#{rdate} )
+	WHERE RN BETWEEN 1 AND 5
+	</select>	
+	
+	
+	
+	
+	
 
 </mapper>

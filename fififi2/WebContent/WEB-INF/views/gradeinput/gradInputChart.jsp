@@ -39,11 +39,9 @@ String F_charts="";
 		if(score>=90){
 				A ++;
 				A_charts +="[ '"+ list.get(i).getStudent_name() +"',"  + list.get(i).getStudent_score() +"], ";
-				
 		}else if(90>score && score>=80){
 				B ++;
 				B_charts +="[ '"+ list.get(i).getStudent_name() +"',"  + list.get(i).getStudent_score() +"], ";
-				
 		}else if(80>score && score>=70){
 				C ++;
 				C_charts +="[ '"+ list.get(i).getStudent_name() +"',"  + list.get(i).getStudent_score() +"], ";

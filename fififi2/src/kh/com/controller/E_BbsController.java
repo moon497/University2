@@ -53,7 +53,7 @@ public class E_BbsController {
 	public String E_Bbslist(int sub_seq,HttpServletRequest req, E_BbsDto edto, Model model) throws Exception{
 		logger.info("E_BbsController E_Bbslist");		
 		
-		int currPage = getCurrPage(req);
+		int currPage = getCurrPage(req); 
 		int totalArticle = e_BbsService.getBbsCount(edto);
 		
 		Pagination pagination = new Pagination(totalArticle, currPage);
@@ -195,7 +195,6 @@ public class E_BbsController {
 		} else {
 			currPage = Integer.parseInt(req.getParameter("page"));
 		}
-		
 		return currPage;
 	}
 	

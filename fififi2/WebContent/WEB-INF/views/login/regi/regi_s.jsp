@@ -89,7 +89,7 @@ td, th {
 		</tr>
 		<tr>
 			<td>생년월일</td>
-				<td>
+			<td>
 			<input type="date" name="user_birth" required="required" max="2017-01-01" min=1950-12-31">
 			</td>
 		</tr>

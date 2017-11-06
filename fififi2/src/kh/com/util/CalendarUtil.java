@@ -43,10 +43,12 @@ public class CalendarUtil {
 		cal.set(year, month-1, day);
 		return cal;
 	}
+	
 	// 오늘 Date
 	public static Date toDate(int year, int month, int day){
 		return toCalendar(year,month,day).getTime();
 	}
+	
 	// yyyy-MM-dd
 	public static java.sql.Date toSqlDate(int year, int month, int day){
 		//SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");

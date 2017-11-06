@@ -110,7 +110,6 @@ $("#_btnLogin").click(function() {
 		$("#user_pw").focus();
 	}else{  
 	
-	
 	$.ajax({
 	    type : "POST",
 	    data : { 
