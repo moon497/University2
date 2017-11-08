@@ -137,4 +137,3 @@
 		</div>
 	</nav>
 </header>
->>>>>>> branch 'master' of https://github.com/typoholic01/University2.git
