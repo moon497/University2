@@ -13,9 +13,11 @@ $(document).ready(function() {
    
    if (url.indexOf('introLocation.do') != -1) {
       $('#sidebar-intro > li:nth-child(2)').attr('class','current');      
-   } else if(url.indexOf('introCalendar.do') != -1) {
+   }
+   else if(url.indexOf('introCalendar.do') != -1) {
       $('#sidebar-intro > li:nth-child(3)').attr('class','current');      
-   } else if(url.indexOf('introLocation.do') != -1) {
+   }
+   else if(url.indexOf('suggestlist.do') != -1) {
       $('#sidebar-intro > li:nth-child(4)').attr('class','current');      
    } else {
       $('#sidebar-intro > li:nth-child(1)').attr('class','current');      

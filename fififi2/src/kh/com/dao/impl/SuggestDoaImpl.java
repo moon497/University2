@@ -38,6 +38,18 @@ public class SuggestDoaImpl implements SuggestDao {
 	public SuggestDto getSuggest(int seq) throws Exception {		
 		return sqlSession.selectOne(ns+"getSuggest", seq);
 	}
+
+	@Override
+	public boolean suggestDelete(int seq) throws Exception {		
+		int n = sqlSession.update(ns+"suggestDelete", seq);
+		return n>0?true:false;
+	}
+
+	@Override
+	public boolean suggestUpdate(SuggestDto sug) throws Exception {
+		int n = sqlSession.update(ns+"suggestUpdate", sug);
+		return n>0?true:false;
+	}
 	
 	
 

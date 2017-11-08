@@ -59,12 +59,12 @@ function sendFile(file, el) {
     });
 }
 
-function suggestWrite(seq) {
+function suggestUpdate(seq) {
 	var content = $('#summernote').summernote("code");
 	
 	$('#Content').val(content);
  
-	$('#suggestWrite').submit();
+	$('#suggestUpdate').submit();
 	
 }
 </script>
@@ -74,23 +74,24 @@ function suggestWrite(seq) {
     <h2 class="category-title">건의사항</h2>
 
 
-<form id="suggestWrite" action="./suggestwriteAf.do" method="POST" enctype="multipart/form-data">
+<form id="suggestUpdate" action="./suggestUpdateAf.do" method="POST" enctype="multipart/form-data">
 <input type="hidden" id="Content" name="Content" value="" />
 
 <div class="col-md-12">
 	<div class="form-group"> <!-- userId field -->
+		<input type="hidden" id="suggest_seq" name="suggest_seq" value="${suggest.suggest_seq }">
 		<label class="control-label " for="user_id">아이디</label>
 		<input class="form-control" id="user_id" name="user_id" type="text" value="${login.user_id }" readonly="readonly"/>
 	</div>
 	
 	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text" />
+		<input class="form-control" id="title" name="title" type="text" value="${suggest.title }" />
 	</div>
 	
 	<div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
-		<div id="summernote"></div>
+		<div id="summernote">${suggest.content }</div>
 	</div>
 	
 	
@@ -108,7 +109,7 @@ function suggestWrite(seq) {
 	 -->
 	 
 	<div class="form-group pull-right">
-		<button class="btn btn-primary " name="button" type="button" onclick="suggestWrite();">글쓰기</button>
+		<button class="btn btn-primary " name="button" type="button" onclick="suggestUpdate();">수정</button>
 	</div>
 	
 </div>
@@ -116,7 +117,3 @@ function suggestWrite(seq) {
 
 
 </section>
-
-
-
-

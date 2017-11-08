@@ -40,7 +40,8 @@
     <tbody>    
  	<!-- 				게시물 불러오기				 -->
  	<c:forEach items="${suggestlist }" var="sug">
-      <tr>
+ 	  <c:if test="${sug.del eq 0 }">
+ 	  	<tr>
         <td>${sug.suggest_seq }</td>
         <td>
         	<a href="./suggestdetail.do?seq=${sug.suggest_seq }&page=${pagination.currPage}">${sug.title } </a> 
@@ -50,6 +51,13 @@
         <td>${sug.user_id }</td>
         <td>${fn:substring(sug.wdate,0,10) }</td>        
       </tr>
+ 	  </c:if>
+ 	  <c:if test="${sug.del eq 1 }">
+ 	  	<tr>
+ 	  		<td colspan="4">삭제된 글 입니다.</td>
+ 	  	</tr>
+ 	  </c:if>
+      
    	</c:forEach>   
    	   
     </tbody>

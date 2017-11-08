@@ -11,5 +11,6 @@ public interface SuggestDao {
 
 	public boolean suggestWrite(SuggestDto sug) throws Exception;					// 글 쓰기 
 	public SuggestDto getSuggest(int seq)throws Exception;							// 글 정보 가져오기
-	
+	public boolean suggestDelete(int seq) throws Exception;							// 글 삭제
+	public boolean suggestUpdate(SuggestDto sug)throws Exception;					// 글 수정
 }

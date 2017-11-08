@@ -6,6 +6,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:requestEncoding value="utf-8"/>
 
+
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2>
+    
+    
 <div id="postlist">
 	<div class="panel">
 		<div class="panel-heading">
@@ -53,5 +58,5 @@
 </div>
 
 
-
+</section>
 

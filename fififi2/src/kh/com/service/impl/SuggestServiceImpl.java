@@ -34,6 +34,17 @@ public class SuggestServiceImpl implements SuggestService {
 	public SuggestDto getSuggest(int seq) throws Exception {
 		return suggestDao.getSuggest(seq);
 	}
+
+	@Override
+	public boolean suggestDelete(int seq) throws Exception {		
+		return suggestDao.suggestDelete(seq);
+	}
+
+	@Override
+	public boolean suggestUpdate(SuggestDto sug) throws Exception {		
+		return suggestDao.suggestUpdate(sug);
+	}
+	
 	
 	
 }
