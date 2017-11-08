@@ -12,12 +12,12 @@
 		<c:if test="${boardUrl == 'notice' }">
 			<li><a href="../today/list.do" title="">오늘의 KH</a></li>
 			<li class="current"> <a href="../notice/list.do" title="">공지사항</a></li>		
-			<li><a href="../free/list.do" title="">자유게시판</a></li>	
+			<li><a href="../free/list.do" title="">자유게시판</a></li>					
 		</c:if>
 		<c:if test="${boardUrl == 'free' }">
 			<li><a href="../today/list.do" title="">오늘의 KH</a></li>
 			<li> <a href="../notice/list.do" title="">공지사항</a></li>		
-			<li class="current"><a href="../free/list.do" title="">자유게시판</a></li>				
+			<li class="current"><a href="../free/list.do" title="">자유게시판</a></li>			
 		</c:if>
 		<c:if test="${boardUrl == 'today' }">
 			<li class="current"><a href="../today/list.do" title="">오늘의 KH</a></li>

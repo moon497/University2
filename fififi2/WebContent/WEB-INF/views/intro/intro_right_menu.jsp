@@ -26,6 +26,7 @@ $(document).ready(function() {
 });
 </script>
 <aside class="sidebar col-sm-3">
+<<<<<<< HEAD
    <div class="widget">
       <h4> 소개 </h4>
       <ul id="sidebar-intro">
@@ -35,4 +36,15 @@ $(document).ready(function() {
          <li><a href="./suggestlist.do" title="">건의 사항</a></li>
       </ul>
    </div>
+=======
+	<div class="widget">
+		<h4> 소개 </h4>
+		<ul id="sidebar-intro">
+			<li><a href="./introBbs.do" title="">학교 소개</a></li>
+			<li><a href="./introLocation.do" title="">오시는 길</a></li>
+			<li><a href="./introCalendar.do" title="">학사 일정</a></li>
+			<li><a href="./suggestlist.do" title="">건의 사항</a></li>
+		</ul>
+	</div>
+>>>>>>> branch 'master' of https://github.com/typoholic01/University2.git
 </aside>
