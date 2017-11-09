@@ -62,19 +62,16 @@ function sendFile(file, el) {
     });
 }
 
-function suggestWrite(seq) {
+function suggestWrite() {
 	var content = $('#summernote').summernote("code");
 	
 	$('#Content').val(content);
  
-	$('#suggestWrite').submit();
+	/* $('#suggestWrite').submit(); */
+	document.getElementById('hiddenBtn').click();
 	
 }
 </script>
-
-
-<section class="category-content col-sm-9">
-    <h2 class="category-title">건의사항</h2>
 
 
 <form id="suggestWrite" action="./suggestwriteAf.do" method="POST" enctype="multipart/form-data">
@@ -88,7 +85,7 @@ function suggestWrite(seq) {
 	
 	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text" />
+		<input class="form-control" id="title" name="title" type="text" required="required"/>
 	</div>
 	
 	<div class="form-group"> <!-- content field -->
@@ -112,6 +109,7 @@ function suggestWrite(seq) {
 	 
 	<div class="form-group pull-right">
 		<button class="btn btn-primary " name="button" type="button" onclick="suggestWrite();">글쓰기</button>
+		<button id="hiddenBtn" type="submit" style="display: none;"></button>
 	</div>
 	
 </div>
