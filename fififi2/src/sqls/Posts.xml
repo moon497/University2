@@ -9,8 +9,14 @@
 	<!-- 게시물 입력 -->
 	<insert id="insertBbs" parameterType="post" useGeneratedKeys="false">
 		INSERT INTO Posts(
-			board_seq, REF, POST_SEQ, USER_ID, TITLE, 
-			CONTENT, STORED_FILENAME, ORG_FILENAME
+			board_seq, 
+			REF, 
+			POST_SEQ, 
+			USER_ID, 
+			TITLE, 
+			CONTENT, 
+			STORED_FILENAME,
+			ORG_FILENAME
 		)
 		VALUES(
 			#{boardSeq}, POSTS_SEQ.NEXTVAL, POSTS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
@@ -32,13 +38,16 @@
 			STORED_FILENAME as bbsStoredFileName, 
 			ORG_FILENAME as bbsOrgFileName, 
 			STATUS as bbsStatus, 
-			WDATE as bbsWdate
+			WDATE as bbsWdate,
+			USER_NAME as userName
 		FROM (
-				SELECT REF, REPLY, POST_SEQ, USER_ID, TITLE, CONTENT, READCOUNT, STORED_FILENAME, ORG_FILENAME, STATUS, WDATE, 
+				SELECT p.REF, p.REPLY, p.POST_SEQ, p.USER_ID, p.TITLE, p.CONTENT, p.READCOUNT, p.STORED_FILENAME, p.ORG_FILENAME, p.STATUS, p.WDATE, 
+						u.USER_NAME,
 				ROW_NUMBER() OVER (ORDER BY REF desc, REPLY ASC) R
-				FROM POSTS
-				WHERE BOARD_SEQ = #{boardSeq}
-				AND STATUS != '삭제'
+				FROM POSTS p, Users u
+				WHERE p.USER_ID = u.USER_ID
+				AND p.BOARD_SEQ = #{boardSeq}
+				AND p.STATUS != '삭제'
 		)
 		WHERE R BETWEEN #{startArticle} and #{endArticle}
 	</select>

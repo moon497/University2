@@ -39,7 +39,7 @@
         	<c:if test="${bbs.bbsStoredFileName != '-1' }"><i class="fa fa-file"></i> </c:if>
         	<c:if test="${bbs.totalComment != 0 }"><i class="fa fa-comment"></i> ${bbs.totalComment }</c:if>
         </td>
-        <td>${bbs.userId }</td>
+        <td>${bbs.userName }</td>
         <td>${fn:substring(bbs.bbsWdate,0,10) }</td>
       </tr>
    	</c:forEach>      
