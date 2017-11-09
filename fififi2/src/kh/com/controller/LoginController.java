@@ -75,7 +75,7 @@ public class LoginController {
       MemberDto login = new MemberDto();
       login = loginservice.login(dto);
       
-      if (login != null && !login.getUser_id().equals("")) {
+      if (login != null) {
          req.getSession().setAttribute("login", login);
          return "로그인 성공";
       }else {

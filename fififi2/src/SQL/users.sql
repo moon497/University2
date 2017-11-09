@@ -24,3 +24,14 @@ WHERE s.sub_seq = a.SUB_SEQ_NUM(+)
 
 and MAJOR_NUMBER= '100' and a.student_id = 'jiyuns'
 ORDER BY SUB_REF ASC, SUB_MAX_STUDENT DESC;
+
+--데이터 삭제
+DELETE FROM USERS;
+
+--더미데이터 넣기
+INSERT INTO USERS(
+USER_ID, USER_PW, USER_NAME, USER_EMAIL, USER_PHONE, USER_ADDRESS, USER_AUTH,  USER_STATUS, USER_BIRTH, USER_PHOTO
+)
+VALUES(
+'root', 'secret', '운영자', 'admin@admin.com', '000-0000-0000', '없음', 300, 0, 100, ''
+)
