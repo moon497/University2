@@ -11,16 +11,9 @@
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 <!-- body -->
-<<<<<<< HEAD
-
 <section class="category-content col-sm-9">
     <h2 class="category-title">건의사항</h2>
 
-=======
-	
-<section class="category-content col-sm-9">
-    <h2 class="category-title">건의사항</h2> 
->>>>>>> branch 'master' of https://github.com/typoholic01/University2.git
 <div class="row">
 <div class="col-sm-12">
 <div class="table-responsive">     
