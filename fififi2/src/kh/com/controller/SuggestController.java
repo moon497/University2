@@ -37,6 +37,7 @@ public class SuggestController {
 		SuggestDto suggest;
 		Pagination pagination;
 		
+		MemberDto login = (MemberDto)req.getSession().getAttribute("login");
 			
 		// 총 게시물 수 
 		int totalArticle = suggestService.getCount();
@@ -56,7 +57,7 @@ public class SuggestController {
 			System.out.println("suggestlist(" + i + ") : " + suggestlist.get(i).toString());
 		}
 		
-				
+		model.addAttribute("login", login);		
 		model.addAttribute("pagination" ,pagination);
 		model.addAttribute("suggestlist", suggestlist);
 		model.addAttribute("doc_title", "건의사항");
@@ -85,14 +86,12 @@ public class SuggestController {
 	public String suggestwriteAf(SuggestDto sug, Model model, MultipartHttpServletRequest req, MultipartFile file)throws Exception {
 		logger.info("suggestWriteAf");
 		
-		
-		
-		String path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
-	    logger.info(path);
-	    FileUpload fileUpload = new FileUpload(file, path);
-	    
-	    sug.setFilename(fileUpload.getStoredFileName());
-	    sug.setOrg_filename(fileUpload.getOrgFileName());	   
+//		String path = req.getSession().getServletContext().getRealPath("/") + "upload/file/"; //파일 저장경로
+//	    logger.info(path);
+//	    FileUpload fileUpload = new FileUpload(file, path);
+//	    
+	    sug.setFilename("-1");
+	    sug.setOrg_filename("-1");	   
 	    System.out.println("sug : " + sug.toString());
 		
 		suggestService.suggestWrite(sug);
@@ -115,9 +114,43 @@ public class SuggestController {
 		return "suggestDetail.tiles";
 	}
 	
+	// 글 삭제 
+	@RequestMapping(value="suggestDelete.do", method= {RequestMethod.GET, RequestMethod.POST,})
+	public String suggestDelete(int seq, Model model, HttpServletRequest req)throws Exception {
+		logger.info("suggestDelete");	
+		
+		suggestService.suggestDelete(seq);		
+		
+		return "redirect:/suggestlist.do";
+	}
 	
 	
+	@RequestMapping(value="suggestUpdate.do", method= {RequestMethod.GET, RequestMethod.POST,})
+	public String suggestUpdate(int seq, Model model, HttpServletRequest req)throws Exception {
+		logger.info("suggestUpdate");	
+		MemberDto login = (MemberDto)req.getSession().getAttribute("login");		
+		SuggestDto suggest = suggestService.getSuggest(seq);
+		
+		System.out.println(suggest.toString());
+		
+		model.addAttribute("login", login);
+		model.addAttribute("suggest", suggest);
+		
+		return "suggestUpdate.tiles";
+	}
 	
+	@RequestMapping(value="suggestUpdateAf.do", method= {RequestMethod.GET, RequestMethod.POST,})
+	public String suggestUpdateAf(SuggestDto sug, Model model)throws Exception {
+		logger.info("suggestUpdateAf");	
+		sug.setFilename("-1");
+		sug.setOrg_filename("-1");	   
+		System.out.println("sug 수정 : " + sug.toString());
+		    
+		suggestService.suggestUpdate(sug);    
+		
+		
+		return "redirect:/suggestlist.do";
+	}
 	
 	
 	

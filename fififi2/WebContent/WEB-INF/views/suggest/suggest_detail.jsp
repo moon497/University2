@@ -5,6 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:requestEncoding value="utf-8"/>
+	
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2> 
+      
 
 <div id="postlist">
 	<div class="panel">
@@ -28,9 +32,11 @@
 							<span>첨부파일:</span>
 						</div>
 						<div class="col-sm-10">
-							<span><a
-								href="${pageContext.request.contextPath }/upload/file/${sug.filename}"
-								download="${sug.org_filename }">${sug.org_filename }</a></span>
+							<span>
+								<a href="${pageContext.request.contextPath }/upload/file/${sug.filename}" download="${sug.org_filename }">
+								${sug.org_filename }
+								</a>
+								</span>
 						</div>
 					</div>
 				</c:if>
@@ -51,5 +57,5 @@
 </div>
 
 
-
+</section>
 

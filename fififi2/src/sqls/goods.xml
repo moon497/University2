@@ -12,7 +12,7 @@
 			content, price, address, phone
 		)
 		VALUES(
-			MAIN_BBS_SEQ.NEXTVAL, #{category}, #{userId}, #{userName}, #{title}, 
+			GOODS_SEQ.NEXTVAL, #{category}, #{userId}, #{userName}, #{title}, 
 			#{content}, #{price}, #{address}, #{phone}
 		)
 	</insert>

@@ -75,7 +75,7 @@ public class LoginController {
       MemberDto login = new MemberDto();
       login = loginservice.login(dto);
       
-      if (login != null && !login.getUser_id().equals("")) {
+      if (login != null) {
          req.getSession().setAttribute("login", login);
          return "로그인 성공";
       }else {
@@ -259,7 +259,7 @@ public class LoginController {
 	   
 	   int rowindex=0;
 	   int columnindex=0;
-	   
+	  
       if(orgFileName.toUpperCase().endsWith(".XLS")) {
          HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
          HSSFSheet sheet = workbook.getSheetAt(0);

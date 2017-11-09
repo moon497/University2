@@ -356,7 +356,6 @@
 		     <artifactId>mail</artifactId>
 		     <version>1.4.3</version>
   		</dependency>
-	  	
 	
   </dependencies>
   

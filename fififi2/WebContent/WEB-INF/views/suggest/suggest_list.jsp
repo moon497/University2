@@ -1,3 +1,4 @@
+<%@page import="kh.com.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,6 +11,8 @@
 <!-- list-style -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/list-style.css" />
 <!-- body -->
+<section class="category-content col-sm-9">
+    <h2 class="category-title">건의사항</h2>
 
 <div class="row">
 <div class="col-sm-12">
@@ -29,15 +32,15 @@
         <th>번호</th>
         <th>제목</th>
         <th>글쓴이</th>
-        <th>날짜</th>
-        <th>조회수</th>
+        <th>날짜</th>        
       </tr>
     </thead>
     
     <tbody>    
  	<!-- 				게시물 불러오기				 -->
  	<c:forEach items="${suggestlist }" var="sug">
-      <tr>
+ 	  <c:if test="${sug.del eq 0 }">
+ 	  	<tr>
         <td>${sug.suggest_seq }</td>
         <td>
         	<a href="./suggestdetail.do?seq=${sug.suggest_seq }&page=${pagination.currPage}">${sug.title } </a> 
@@ -45,9 +48,15 @@
   	<%-- <c:if test="${sug.totalComment != 0 }"><i class="fa fa-comment"></i> ${sug.totalComment }</c:if> --%>
         </td>
         <td>${sug.user_id }</td>
-        <td>${fn:substring(sug.wdate,0,10) }</td>
-        <td>${sug.readcount }</td>
+        <td>${fn:substring(sug.wdate,0,10) }</td>        
       </tr>
+ 	  </c:if>
+ 	  <c:if test="${sug.del eq 1 }">
+ 	  	<tr>
+ 	  		<td colspan="4">삭제된 글 입니다.</td>
+ 	  	</tr>
+ 	  </c:if>
+      
    	</c:forEach>   
    	   
     </tbody>
@@ -57,7 +66,6 @@
 </div>
 </div>
 </div>
-
 
 <!-- 페이징 -->
 <div class="row" style="text-align: center;">
@@ -120,6 +128,7 @@
   
 
 <!-- 글쓰기 버튼  -->
+<c:if test="${null ne login.user_name }">
 <div class="row" style="text-align: right;">
 	<div class="col-sm-12">
 		<div class="button-group">
@@ -129,9 +138,5 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
+</c:if>
+</section>

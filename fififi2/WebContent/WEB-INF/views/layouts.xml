@@ -8,20 +8,20 @@
 
 <!-- 메인영역  : 메인안에서 이루어지는 영역은 main.tiles를 extends 하시면되요 -->
 <definition name="main.tiles" template="/WEB-INF/views/main_layouts-tiles.jsp">
-	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
-	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
-	<put-attribute name="main" value="/WEB-INF/views/common/main.jsp"/>
-	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+   <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+   <put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/common/main.jsp"/>
+   <put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
 <!-- 서브영역 : 서브 안에서 이루어지는 영역응ㄴ sub.tiles를 extends 하시면되요 -->
 <definition name="sub.tiles" template="/WEB-INF/views/sub_layouts-tiles.jsp">
-	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
-	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
-	<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/common/sub_section.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/common/sub_right_menu.jsp"/>
-	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+   <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+   <put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+   <put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/common/sub_section.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/common/sub_right_menu.jsp"/>
+   <put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
 
@@ -34,67 +34,67 @@
 
 <!-- 1.로그인 -->
 <definition name="login.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/login.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/login.jsp"/>
 </definition>
 
 <!-- 2.아이디,비밀번호찾기 -->
 <definition name="findId.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/findId.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/findId.jsp"/>
 </definition>
 <definition name="findPw.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/findPw.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/findPw.jsp"/>
 </definition>
 <definition name="findIdPwAf.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/findIdPwAf.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/findIdPwAf.jsp"/>
 </definition>
 
 <!-- 3.회원가입 -->
 <definition name="regi.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/regi.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 <definition name="regiview.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiview.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiview.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 <definition name="regiAf.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiAf.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/login/regi/regiAf.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 
 <!-- 성적입력 -->
 <definition name="pwcheck.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInput_pwCheck.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInput_pwCheck.jsp"/>
 </definition>
 <definition name="gradeinputlist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInputList.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/gradeinput/gradeInputList.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 
 <!-- 소개 -->
 <definition name="introBbs.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introBbs.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introBbs.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbswrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introwrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introwrite.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbsDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introDetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introDetail.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introBbsUpdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introUpdate.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introLocation.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introLocation.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="introCalendar.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/intro/introCalendar.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intro/introCalendar.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 
 
@@ -102,211 +102,219 @@
 <!-- *************** 지윤  ***************-->
 <!-- 교수평가 -->
 <definition name="assessment.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/professor_assessment.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intranet/professor_assessment.jsp"/>
 </definition>
 
 <!-- 학생 : 성적확인 -->
 <definition name="studentGrade.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_grade.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_grade.jsp"/>
 </definition>
 
 <!-- 내정보(학생) -->
 <definition name="updateInfo.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_page.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intranet/Student_page.jsp"/>
 </definition>
 
 <!-- 내정보(학생) -->
 <definition name="semesterGrade.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/intranet/semesterGrade.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intranet/sub_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/intranet/semesterGrade.jsp"/>
 </definition>
 
 
-<!--  *****************성환 ***************	-->
+<!--  *****************성환 ***************   -->
 <!-- ****** 메인 ****** -->
 <definition name="index.tiles" template="/WEB-INF/views/index-layouts-tiles.jsp">
-	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
-	<put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
-	<put-attribute name="cover" value="/WEB-INF/views/main/cover.jsp"/>
-	<put-attribute name="posts" value="/WEB-INF/views/main/posts.jsp"/>
-	<put-attribute name="service" value="/WEB-INF/views/main/service.jsp"/>
-	<put-attribute name="home" value="/WEB-INF/views/main/home.jsp"/>
-	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+   <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+   <put-attribute name="top_inc" value="/WEB-INF/views/common/top.jsp"/>
+   <put-attribute name="cover" value="/WEB-INF/views/main/cover.jsp"/>
+   <put-attribute name="posts" value="/WEB-INF/views/main/posts.jsp"/>
+   <put-attribute name="service" value="/WEB-INF/views/main/service.jsp"/>
+   <put-attribute name="home" value="/WEB-INF/views/main/home.jsp"/>
+   <put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
 <!-- ********BBS********  -->
 <!-- 글 목록 -->
 <definition name="bbsList.tiles" template="/WEB-INF/views/bbs-layouts-tiles.jsp">
-	<put-attribute name="head" value="/WEB-INF/views/common/header.jsp"/>
-	<put-attribute name="navbar" value="/WEB-INF/views/common/top.jsp"/>
-	<put-attribute name="footer" value="/WEB-INF/views/common/bottom.jsp"/>
-	<put-attribute name="sidebar" value="/WEB-INF/views/bbs/common/bbsRightMenu.jsp"/>
-	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsList.jsp"/>
+   <put-attribute name="head" value="/WEB-INF/views/common/header.jsp"/>
+   <put-attribute name="navbar" value="/WEB-INF/views/common/top.jsp"/>
+   <put-attribute name="footer" value="/WEB-INF/views/common/bottom.jsp"/>
+   <put-attribute name="sidebar" value="/WEB-INF/views/bbs/common/bbsRightMenu.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsList.jsp"/>
 </definition>
 <!-- 글쓰기 -->
 <definition name="bbsWrite.tiles" extends="bbsList.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsWrite.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsWrite.jsp"/>
 </definition>
 <!-- 글수정 -->
 <definition name="bbsUpdate.tiles" extends="bbsList.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsUpdate.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsUpdate.jsp"/>
 </definition>
 <!-- 디테일 -->
 <definition name="bbsDetail.tiles" extends="bbsList.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/bbs/controller/bbsDetail.jsp"/>
 </definition>
 
 <!--********************
 
-	체크 처리 페이지
+   체크 처리 페이지
 
 ************************-->
 <definition name="checkLogin.tiles" extends="main.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/check/checkLogin.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/check/checkLogin.jsp"/>
 </definition>
 <definition name="checkStudent.tiles" extends="main.tiles">
-	<put-attribute name="main" value="/WEB-INF/views/check/checkStudent.jsp"/>
+   <put-attribute name="main" value="/WEB-INF/views/check/checkStudent.jsp"/>
 </definition>
 
 <!--********************
 
-	장터 페이지
+   장터 페이지
 
 ************************-->
 <definition name="goodWrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/goods/write.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/goods/write.jsp"/>
 </definition>
 <definition name="goodList.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/goods/list.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/goods/list.jsp"/>
 </definition>
 <definition name="goodDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/goods/controller/detail.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/goods/controller/detail.jsp"/>
 </definition>
 
 
-<!--  ***************** 재현 ***************	-->
+<!--  ***************** 재현 ***************   -->
 <definition name="enrolment.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/enrolment.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/enrolment.jsp"/>
 </definition>
 <definition name="registration.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registration.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registration.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 <definition name="registrationlist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registrationlist.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/registrationlist.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 <definition name="addReg.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/addReg.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/addReg.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
 <definition name="upReg.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/regiUpdate.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/regiUpdate.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/login/regi_right_menu.jsp"/>
 </definition>
+
 
 <definition name="suggestlist.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_list.jsp"/>
+    <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="suggestWrite.tiles" extends="sub.tiles">
 	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_write.jsp"/>
+	<put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 <definition name="suggestDetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_detail.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_detail.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
+</definition>
+<definition name="suggestUpdate.tiles" extends="sub.tiles">
+   <put-attribute name="sub_section" value="/WEB-INF/views/suggest/suggest_update.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/intro/intro_right_menu.jsp"/>
 </definition>
 
 <!-- 학생 시간표 -->
 <definition name="schedule.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/schedule.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/schedule.jsp"/>
 </definition>
 
 <!-- 교수 정보 -->
 <definition name="Pro.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/enrolment/professor_page.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/enrolment/professor_page.jsp"/>
 </definition>
 
 
 
 
-<!--  ***************** 종희  ***************	-->
+<!--  ***************** 종희  ***************   -->
 
 <!-- 수강 eclass 목록 -->
 <definition name="E_Classlist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Classlist.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Classlist.jsp"/>
 </definition>
 
 <!-- 공지 게시판 -->
 <definition name="E_Bbslist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_BbsList.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_BbsList.jsp"/>
 </definition>
 <definition name="E_Bbswrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbswrite.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbswrite.jsp"/>
 </definition>
 <definition name="E_Bbsdetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsdetail.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsdetail.jsp"/>
 </definition>
 <definition name="E_Bbsupdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsupdate.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Bbsupdate.jsp"/>
 </definition>
 
 <!-- 과제 게시판 -->
 <definition name="E_Pdslist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdslist.jsp"/>
-	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdslist.jsp"/>
+   <put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
 
 <definition name="E_Pdsdetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsdetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsdetail.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 </definition>
 
 <definition name="E_Pdswrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdswrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdswrite.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 </definition>
 
 <definition name="E_Pdsupdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsupdate.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Pdsupdate.jsp"/>
 </definition>
 
 
 <!-- 질의응답 게시판 -->
 <definition name="E_Qnalist.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_QnaList.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_QnaList.jsp"/>
 </definition>
 
 <definition name="E_Qnadetail.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnadetail.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnadetail.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 </definition>
 
 <definition name="E_Qnawrite.tiles" extends="sub.tiles">
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnawrite.jsp"/>
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnawrite.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
 </definition>
 
 <definition name="E_Qnaupdate.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnaupdate.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnaupdate.jsp"/>
 </definition>
 
 <definition name="E_Qnareply.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
 </definition>
 
 <definition name="E_Qnaanswer.tiles" extends="sub.tiles">
-	<put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
-	<put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
+   <put-attribute name="sub_right_menu" value="/WEB-INF/views/eclass/E_Bbs_right.jsp"/>
+   <put-attribute name="sub_section" value="/WEB-INF/views/eclass/E_Qnareply.jsp"/>
 </definition>
 </tiles-definitions>

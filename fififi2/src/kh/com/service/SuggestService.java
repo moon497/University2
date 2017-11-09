@@ -11,4 +11,6 @@ public interface SuggestService {
 	
 	public boolean suggestWrite(SuggestDto sug) throws Exception;
 	public SuggestDto getSuggest(int seq) throws Exception;	
+	public boolean suggestDelete(int seq) throws Exception;
+	public boolean suggestUpdate(SuggestDto sug)throws Exception;
 }

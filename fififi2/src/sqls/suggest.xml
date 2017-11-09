@@ -43,5 +43,17 @@
 	WHERE SUGGEST_SEQ=#{suggest_seq}
 </select>
 
+<update id="suggestDelete" parameterType="java.lang.Integer">
+	UPDATE SUGGEST
+	SET DEL = 1
+	WHERE SUGGEST_SEQ=#{suggest_seq}
+</update>
+
+<update id="suggestUpdate" parameterType="Suggest">
+	UPDATE SUGGEST
+	SET TITLE=#{title}, CONTENT=#{content}
+	WHERE SUGGEST_SEQ=#{suggest_seq}
+</update>
+
 
 </mapper>
