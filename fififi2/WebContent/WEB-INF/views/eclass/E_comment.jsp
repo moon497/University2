@@ -30,7 +30,6 @@
 <div class="panel panel-default">
 		<div class="panel-heading">
 			<strong>${comments.user_name }</strong>
-<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${comments.filename != '-1' and login.user_id eq comments.user_id}">
 					<div class="row" style="text-align: -webkit-auto;">
