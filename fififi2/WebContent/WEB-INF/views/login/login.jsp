@@ -57,7 +57,7 @@
 	</tr>
 	<tr>
 		<td>비밀번호</td>
-		<td> <input type="text" name="user_pw" id="user_pw" data-msg="비밀번호" class="inputtextcss"></td>
+		<td> <input type="password" name="user_pw" id="user_pw" data-msg="비밀번호" class="inputtextcss"></td>
 	</tr>
 	</table>
 </form>

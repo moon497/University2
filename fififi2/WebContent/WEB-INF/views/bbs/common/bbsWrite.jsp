@@ -49,10 +49,10 @@ $(document).ready(function() {
 
 function bbsWrite(bbsSeq) {
 	var content = $('#summernote').summernote("code");
-	
-	$('#bbsContent').val(content);
- 
-	$('#bbsWrite').submit();
+		
+	$('#bbsContent').val(content);	 
+	/* $('#bbsWrite').submit(); */
+	document.getElementById('hiddenBtn').click();
 	
 }
 </script>
@@ -68,7 +68,7 @@ function bbsWrite(bbsSeq) {
 	
 	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="bbsTitle" name="bbsTitle" type="text" value="${bbs.bbsTitle }"/>
+		<input class="form-control" id="bbsTitle" name="bbsTitle" type="text" value="${bbs.bbsTitle }" required="required"/>
 	</div>
 	
 	<div class="form-group"> <!-- content field -->
@@ -88,6 +88,7 @@ function bbsWrite(bbsSeq) {
 	
 	<div class="form-group pull-right">
 		<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">글쓰기</button>
+		<button id="hiddenBtn" type="submit" style="display: none;"></button>
 	</div>
 	
 </div>

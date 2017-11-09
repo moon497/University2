@@ -41,7 +41,8 @@ function postUpdate() {
 	
 	$('#bbsContent').val(content);
  
-	$('#postUpdate').submit();
+	/* $('#postUpdate').submit(); */
+	document.getElementById('hiddenBtn').click();
 	
 }
 </script>
@@ -79,7 +80,9 @@ function postUpdate() {
 	
 	<div class="form-group pull-right">
 		<button class="btn btn-warning " name="button" type="button" onclick="postUpdate();">수정하기</button>
+	<button id="hiddenBtn" type="submit" style="display: none;"></button>
 	</div>
+	
 	
 </div>
 </form>

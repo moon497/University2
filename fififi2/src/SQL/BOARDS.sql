@@ -23,5 +23,17 @@ INSERT INTO boards(
 	board_seq, BOARD_URL
 )
 VALUES(
-	boards_SEQ.NEXTVAL,'free'
+	1,'notice'
+)
+INSERT INTO boards(
+	board_seq, BOARD_URL
+)
+VALUES(
+	2,'today'
+)
+INSERT INTO boards(
+	board_seq, BOARD_URL
+)
+VALUES(
+	3,'free'
 )

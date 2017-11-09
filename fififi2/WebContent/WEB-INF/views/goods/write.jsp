@@ -58,7 +58,8 @@ function bbsWrite() {
 	
 	$('#content').val(content);
  
-	$('#bbsWrite').submit();
+/* 	$('#bbsWrite').submit(); */
+	document.getElementById('hiddenBtn').click();
 	
 }
 </script>
@@ -90,7 +91,7 @@ function bbsWrite() {
 	</div>
 	<div class="col-sm-9">		
 		<div class="form-group" style="margin-top: 2em;"> <!-- "title" field -->
-			<input class="form-control" id="title" name="title" type="text" value=""/>
+			<input class="form-control" id="title" name="title" type="text" value="" required="required"/>
 		</div>
 	</div>
 </div>
@@ -98,19 +99,19 @@ function bbsWrite() {
 	<div class="col-sm-4">
 		<div class="form-group"> <!-- 가격 field -->
 			<label class="control-label " for="price">가격</label>
-			<input class="form-control" id="price" name="price" type="text" value=""/>
+			<input class="form-control" id="price" name="price" type="number" pattern="[0-9]+" value="" title="숫자를 입력해주세요" required="required"/>
 		</div>
 	</div>	
 	<div class="col-sm-4">
 		<div class="form-group"> <!-- 주소 field -->
 			<label class="control-label " for="address">주소</label>
-			<input class="form-control" id="address" name="address" type="text" value=""/>
+			<input class="form-control" id="address" name="address" type="text" value="" required="required"/>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="form-group"> <!-- 전화번호 field -->
 			<label class="control-label " for="phone">전화번호</label>
-			<input class="form-control" id="phone" name="phone" type="text" value=""/>
+			<input class="form-control" id="phone" name="phone" type="text" pattern="\d{2,3}[\-]\d{3,4}[\-]\d{4}" title="000-0000-0000 형식으로 해주세요" value="" required="required"/>
 		</div>
 	</div>
 </div>
@@ -123,6 +124,7 @@ function bbsWrite() {
 <div class="row">
 	<div class="form-group pull-right">
 		<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">글쓰기</button>
+	<button id="hiddenBtn" type="submit" style="display: none;"></button>
 	</div>
 </div>
 </form>

@@ -22,12 +22,12 @@
 	
 	<div class="form-group"> <!-- "title" field -->
 		<label class="control-label " for="title">제목</label>
-		<input class="form-control" id="title" name="title" type="text"/>
+		<input class="form-control" id="title" name="title" type="text" required="required"/>
 	</div>
 	
 	<div class="form-group"> <!-- content field -->
 		<label class="control-label " for="content">내용</label>
-		<textarea class="form-control" cols="40" id="content" name="content" rows="10"></textarea> 
+		<textarea class="form-control" cols="40" id="content" name="content" rows="10" required="required"></textarea> 
 	</div>
 	
 	<div class="form-group"> <!-- File field -->
@@ -42,8 +42,16 @@
 	</div>
 	
 	<div class="form-group pull-right">
-		<button class="btn btn-primary " name="submit" type="submit" id="submit" >글쓰기</button>
+		<button class="btn btn-primary " name="submit" type="submit" id="introWrite()" >글쓰기</button>
+		<button id="hiddenBtn" type="submit" style="display: none;"></button>
 	</div>
 	
 	</div>
 </form>
+
+<script>
+function introWrite() {	
+	document.getElementById('hiddenBtn').click();
+	
+}
+</script>
