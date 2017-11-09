@@ -62,6 +62,31 @@ SELECT
 		)
 		WHERE R BETWEEN #{startArticle} and #{endArticle}
 		
+-- 데이터 조회 수정
+SELECT 
+			REF as bbsRef, 
+			REPLY as bbsReply, 
+			POST_SEQ as bbsSeq, 
+			USER_ID as userId, 
+			TITLE as bbsTitle, 
+			CONTENT as bbsContent, 
+			READCOUNT as bbsReadCount, 
+			STORED_FILENAME as bbsStoredFileName, 
+			ORG_FILENAME as bbsOrgFileName, 
+			STATUS as bbsStatus, 
+			WDATE as bbsWdate,
+			USER_NAME as userName
+		FROM (
+				SELECT p.REF, p.REPLY, p.POST_SEQ, p.USER_ID, p.TITLE, p.CONTENT, p.READCOUNT, p.STORED_FILENAME, p.ORG_FILENAME, p.STATUS, p.WDATE, 
+						u.USER_NAME,
+				ROW_NUMBER() OVER (ORDER BY REF desc, REPLY ASC) R
+				FROM POSTS p, Users u
+				WHERE p.USER_ID = u.USER_ID
+				AND p.BOARD_SEQ = 1
+				AND p.STATUS != '삭제'
+		)
+		WHERE R BETWEEN 1 and 10
+		
 --더미데이터 넣기
 INSERT INTO MAIN_BBS(
 	BOARD_NAME, BBS_REF, BBS_SEQ, USER_ID, BBS_TITLE, 
@@ -71,6 +96,9 @@ VALUES(
 	#{boardName}, MAIN_BBS_SEQ.NEXTVAL, MAIN_BBS_SEQ.NEXTVAL, #{userId}, #{bbsTitle}, 
 	#{bbsContent}, #{bbsStoredFileName}, #{bbsOrgFileName}
 )
+
+--데이터 삭제
+DELETE FROM POSTS;
 
 --테이블 이름 바꾸기
 ALTER TABLE POSTS RENAME TO BOARDS_TO_POSTS;

@@ -36,6 +36,9 @@ public class FileController {
 		
 		//init
 		path = req.getSession().getServletContext().getRealPath("/") + "upload/image/"; //파일 저장경로
+//		path = "C:\\Users\\user2\\git\\fififi2\\fififi2\\WebContent\\upload\\image\\";
+		
+		
 		fileUpload = new FileUpload(file, path);
 
 		//file
@@ -49,6 +52,8 @@ public class FileController {
 		
 		//return
 		url = req.getContextPath() + "/upload/image/" + fileUpload.getStoredFileName();
+		
+		logger.info("url: {}", url);
 		
 		return url;
 	}
