@@ -111,13 +111,13 @@
 
 	</div>
 </div>
-
+<%-- 
 <div style="float: left; width: 4%; text-align: center;">
 	<span style="font-size: 1em; color: #000000">
 		<%=pageNumber+1 %>/<%=totalPageCount %>
 	</span>
 </div>
-
+ --%>
 
 
 
