@@ -18,7 +18,7 @@
 
 <section class="category-content col-sm-9">
 <!-- body -->
-<h2 class="category-title">과제</h2>
+<h2 class="category-title">QnA</h2>
 
 <div class="row">
 <div class="col-sm-11">

@@ -72,7 +72,6 @@ td{
 
 <script type="text/javascript">
 function seqSumit(sub_seq) {
-	alert(sub_seq);
 	location.href = 'E_Bbslist.do?sub_seq=' + sub_seq;
 }
 </script>
